@@ -11,5 +11,6 @@ public enum RunesmithHoverTip
     Break,
     Charge,
     Potency,
-    Elements
+    Elements,
+    Improved
 }

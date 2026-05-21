@@ -60,12 +60,13 @@ internal class CardModelEndOfTurnCleanupPatch
 internal class CardModelSpendResourcesPatch
 {
     [HarmonyPostfix]
-    private static async Task Postfix(Task results, CardModel __instance)
+    private static async Task<(int, int)> Postfix(Task<(int, int)> results, CardModel __instance)
     {
-        await results;
-        if (__instance is not Runesmith2Card card) return;
+        var ret = await results;
+        if (__instance is not Runesmith2Card card) return ret;
         var elementsToSpend = card.GetElementsCostWithModifiers().ClampZero();
         await card.SpendElements(elementsToSpend);
+        return ret;
     }
 }
 

@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using Runesmith2.Runesmith2Code.Commands;
+using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Powers;
 
@@ -17,8 +18,7 @@ public class AugmentedBody : Runesmith2Card
 {
     public AugmentedBody() : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
-        WithTip(RunesmithHoverTip.Enhance);
-        WithTip(RunesmithHoverTip.Stasis);
+        WithTip(RunesmithHoverTip.Improved);
         WithTip(new TooltipSource(_ => HoverTipFactory.FromKeyword(CardKeyword.Retain)));
     }
 
@@ -30,7 +30,7 @@ public class AugmentedBody : Runesmith2Card
         await CommonActions.ApplySelf<AugmentedBodyPower>(choiceContext, this, 1);
         if (IsUpgraded)
         {
-            var cards = PileType.Hand.GetPile(Owner).Cards;
+            var cards = PileType.Hand.GetPile(Owner).Cards.Where(c => c.CanStasis());
             foreach (var card in cards) RunesmithCardCmd.Stasis(card);
         }
     }

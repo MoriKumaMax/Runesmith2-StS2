@@ -15,7 +15,7 @@ public class ParticleAccelerator : Runesmith2Card
 {
     public ParticleAccelerator() : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
-        WithCostUpgradeBy(-1);
+        WithVar("Amount", 2, 2);
         WithTip(RunesmithHoverTip.Charge);
     }
 
@@ -24,6 +24,6 @@ public class ParticleAccelerator : Runesmith2Card
         CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        await CommonActions.ApplySelf<ParticleAcceleratorPower>(choiceContext, this, 1);
+        await CommonActions.ApplySelf<ParticleAcceleratorPower>(choiceContext, this, DynamicVars["Amount"].IntValue);
     }
 }

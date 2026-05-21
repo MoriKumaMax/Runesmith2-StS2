@@ -27,8 +27,10 @@ public class Superposition : Runesmith2Card, IAfterRuneCrafted, IAfterRuneBroken
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        ArgumentNullException.ThrowIfNull(play.Target);
+        
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
-            .TargetingAllOpponents(CombatState)
+            .Targeting(play.Target)
             .SpawningHitVfxOnEachCreature()
             .WithHitFx("vfx/vfx_attack_blunt")
             .Execute(choiceContext);

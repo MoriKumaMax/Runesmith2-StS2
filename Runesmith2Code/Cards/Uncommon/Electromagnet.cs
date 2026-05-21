@@ -17,8 +17,7 @@ public class Electromagnet : Runesmith2Card
     public Electromagnet() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
         WithBlock(2, 4);
-        WithTip(RunesmithHoverTip.Enhance);
-        WithTip(RunesmithHoverTip.Stasis);
+        WithTip(RunesmithHoverTip.Improved);
     }
 
     protected override async Task OnPlay(
@@ -29,7 +28,7 @@ public class Electromagnet : Runesmith2Card
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
         var pile = PileType.Discard.GetPile(Owner);
         var cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext,
-            pile.Cards.Where(c => c.IsEnhanced() || c.IsStasis()).ToList(), Owner, prefs)).FirstOrDefault();
+            pile.Cards.Where(c => c.IsImproved()).ToList(), Owner, prefs)).FirstOrDefault();
         if (cardModel != null) await CardPileCmd.Add(cardModel, PileType.Hand);
     }
 }

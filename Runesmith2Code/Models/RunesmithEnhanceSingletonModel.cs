@@ -69,14 +69,4 @@ public class RunesmithEnhanceSingletonModel() : CustomSingletonModel(true, false
 
         return 1 + cardSource.GetEnhanceMultiplier();
     }
-
-    public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
-    {
-        return base.AfterPlayerTurnStart(choiceContext, player);
-    }
-
-    public override Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
-    {
-        return base.BeforeTurnEnd(choiceContext, side);
-    }
 }

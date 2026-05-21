@@ -109,6 +109,11 @@ public static class CardModelExtension
                 modifier.JustEnhanced = false;
         }
 
+        public bool IsImproved()
+        {
+            return cardModel.IsUpgraded || cardModel.IsEnhanced() || cardModel.IsStasis();
+        }
+
         public bool IsEnhanced()
         {
             return cardModel.GetCardModelModifier().Enhanced > 0;

@@ -15,8 +15,7 @@ public class Resupply : Runesmith2Card
     public Resupply() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
         WithCards(3, 1);
-        WithTip(RunesmithHoverTip.Enhance);
-        WithTip(RunesmithHoverTip.Stasis);
+        WithTip(RunesmithHoverTip.Improved);
     }
 
     protected override async Task OnPlay(
@@ -25,7 +24,7 @@ public class Resupply : Runesmith2Card
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
-        var cards = PileType.Discard.GetPile(Owner).Cards.Where(c => c.IsUpgraded || c.IsEnhanced() || c.IsStasis());
+        var cards = PileType.Discard.GetPile(Owner).Cards.Where(c => c.IsImproved());
         await CardPileCmd.Add(cards, PileType.Draw, CardPilePosition.Random, this);
 
         await Cmd.CustomScaledWait(0.1f, 0.2f);

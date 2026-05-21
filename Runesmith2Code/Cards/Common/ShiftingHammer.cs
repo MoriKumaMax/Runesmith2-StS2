@@ -36,7 +36,7 @@ public class ShiftingHammer : Runesmith2Card
             .Execute(choiceContext);
 
         var results = attackCommand.Results;
-        var enhanceBy = results.Count(r => r.UnblockedDamage > 0);
+        var enhanceBy = results.SelectMany(l => l).Count(r => r.UnblockedDamage > 0);
 
         if (enhanceBy > 0)
         {

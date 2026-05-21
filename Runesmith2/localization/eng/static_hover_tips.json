@@ -25,5 +25,7 @@
   "RUNESMITH2-RECIPE.description": "Recipe cards can be played without the required {elements:rs2Icon(all)} to gain {elements:rs2Icon(all)} equals to the cost instead.",
   "RUNESMITH2-RECIPE.title": "Recipe",
   "RUNESMITH2-STASIS.description": "Prevent a card from losing [gold]Enhance[/gold] when played.",
-  "RUNESMITH2-STASIS.title": "Stasis"
+  "RUNESMITH2-STASIS.title": "Stasis",
+  "RUNESMITH2-IMPROVED.description": "Cards that are [gold]Upgraded[/gold], [gold]Enhanced[/gold], or [gold]Stasis[/gold] are considered to be Improved.",
+  "RUNESMITH2-IMPROVED.title": "Improved"
 }

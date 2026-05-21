@@ -15,7 +15,7 @@ public class ParticleAcceleratorPower : Runesmith2Power, IModifyCharge, IAfterMo
 {
     public override PowerType Type => PowerType.Buff;
 
-    public override PowerStackType StackType => PowerStackType.Counter;
+    public override PowerStackType StackType => PowerStackType.Single;
 
     public decimal ModifyCharge(Player player, decimal charge, ValueProp props, CardModel? cardSource)
     {
@@ -32,7 +32,7 @@ public class ParticleAcceleratorPower : Runesmith2Power, IModifyCharge, IAfterMo
 
     public int ModifyRunePassiveTriggerCounts(int triggerCount, Player player)
     {
-        if (player == Owner.Player && triggerCount > 0) return triggerCount + Amount;
+        if (player == Owner.Player && triggerCount > 0) return triggerCount + 1;
 
         return triggerCount;
     }
