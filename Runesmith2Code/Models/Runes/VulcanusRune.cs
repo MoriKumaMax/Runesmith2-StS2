@@ -1,5 +1,6 @@
 #region
 
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -9,6 +10,7 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Cards.Rare;
+using Runesmith2.Runesmith2Code.Nodes.Runes;
 using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
@@ -23,11 +25,17 @@ public class VulcanusRune : RuneModel
 
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;
 
+    public override (bool, bool) ShowTopLabel => (true, true);
+    public override (decimal, decimal) TopValue => (PassiveVal, BreakVal);
+    public override (Color, Color, Color) TopLabelColor => NRune.BlueFontColor;
+
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Vulcanus>();
 
-    public override async Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
+        if (ChargeVal <= 0) return false;
         await Passive(choiceContext);
+        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
@@ -57,7 +65,7 @@ public class VulcanusRune : RuneModel
         PlayPassiveSfx();
         await CreatureCmd.Damage(choiceContext, targets, amount, ValueProp.Unpowered, Owner.Creature);
     }
-    
+
     private async Task GainBlock(PlayerChoiceContext _, decimal amount)
     {
         PlayPassiveSfx();

@@ -29,7 +29,7 @@ public class CompleteCircuit : Runesmith2Card
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .TargetingAllOpponents(CombatState)
             .Execute(choiceContext);
-        
+
         RuneCmd.ChargeAll(choiceContext, Owner, DynamicVars[ChargeGainVar.defaultName].IntValue);
     }
 }

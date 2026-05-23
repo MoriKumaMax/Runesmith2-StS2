@@ -18,6 +18,7 @@ public static class RunesmithResource
     public const string NElementsCounterPath = "res://Runesmith2/scenes/combat/energy_counters/elements_counter.tscn";
     public const string NElementsIconPath = "res://Runesmith2/scenes/cards/elements_icon.tscn";
     public const string NCreatureVisualsRunesmithPath = "res://Runesmith2/scenes/creature_visuals/runesmith.tscn";
+
     public const string NCharSelectBgRunesmithPath =
         "res://Runesmith2/scenes/screens/char_select/char_select_bg_runesmith.tscn";
 

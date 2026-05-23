@@ -13,12 +13,13 @@ public class Lucky7 : Runesmith2Card
 {
     public Lucky7() : base(1, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
     {
-        WithDamage(35,14);
+        WithDamage(35, 14);
     }
-    
+
     protected override bool ShouldGlowGoldInternal => IsPlayable;
 
-    protected override bool IsPlayable {
+    protected override bool IsPlayable
+    {
         get
         {
             var runeQueue = Owner.PlayerCombatState?.RuneQueue();

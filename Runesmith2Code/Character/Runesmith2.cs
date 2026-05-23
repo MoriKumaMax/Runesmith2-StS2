@@ -19,7 +19,7 @@ public class Runesmith2 : PlaceholderCharacterModel
 {
     public const string CharacterId = "Runesmith2";
 
-    public static readonly Color Color = new("ffffff");
+    public static readonly Color Color = new("#a87f58");
 
     public override Color NameColor => Color;
     public override CharacterGender Gender => CharacterGender.Feminine;

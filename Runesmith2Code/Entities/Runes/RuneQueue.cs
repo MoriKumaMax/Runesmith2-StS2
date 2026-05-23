@@ -75,24 +75,20 @@ public class RuneQueue
         await RunesmithHook.AfterModifyingRunePassiveTriggerCount(_owner.Creature.CombatState,
             modifyingModels);
 
-        var runeTriggerCount = Runes.Select(rune => new Tuple<RuneModel, int>(rune, Math.Min(rune.ChargeVal, count)))
-            .ToList();
-        foreach (var pair in runeTriggerCount)
-            for (var i = 0; i < pair.Item2; i++)
+        foreach (var rune in Runes)
+            for (var i = 0; i < count; i++)
             {
-                var wait = await pair.Item1.BeforeTurnEndEarlyRuneTrigger(choiceContext);
+                var wait = await rune.BeforeTurnEndEarlyRuneTrigger(choiceContext);
                 if (wait)
                     await SmallWait();
             }
 
-        // refresh count in case the rune charges has changed due to early trigger
-        runeTriggerCount = Runes.Select(rune => new Tuple<RuneModel, int>(rune, Math.Min(rune.ChargeVal, count)))
-            .ToList();
-        foreach (var pair in runeTriggerCount)
-            for (var i = 0; i < pair.Item2; i++)
+        foreach (var rune in Runes)
+            for (var i = 0; i < count; i++)
             {
-                await pair.Item1.BeforeTurnEndRuneTrigger(choiceContext);
-                await SmallWait();
+                var wait = await rune.BeforeTurnEndRuneTrigger(choiceContext);
+                if (wait)
+                    await SmallWait();
             }
     }
 
@@ -105,14 +101,12 @@ public class RuneQueue
         await RunesmithHook.AfterModifyingRunePassiveTriggerCount(_owner.Creature.CombatState,
             modifyingModels);
 
-        var runeTriggerCount = Runes.Select(rune => new Tuple<RuneModel, int>(rune, Math.Min(rune.ChargeVal, count)))
-            .ToList();
-
-        foreach (var pair in runeTriggerCount)
-            for (var i = 0; i < pair.Item2; i++)
+        foreach (var rune in Runes)
+            for (var i = 0; i < count; i++)
             {
-                await pair.Item1.AfterTurnStartRuneTrigger(choiceContext);
-                await SmallWait();
+                var wait = await rune.AfterTurnStartRuneTrigger(choiceContext);
+                if (wait)
+                    await SmallWait();
             }
     }
 

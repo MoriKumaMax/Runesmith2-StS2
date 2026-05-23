@@ -174,10 +174,10 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
 
     // UpgradeStarCostBy - unused
 
-    // GetStarCostWithModifiers - todo patch usages
+    // GetStarCostWithModifiers - done
     public Elements GetElementsCostWithModifiers()
     {
-        if (Pile != null && Pile.IsCombatPile && CombatState != null)
+        if (Pile is { IsCombatPile: true } && CombatState != null)
             return RunesmithHook.ModifyElementsCost(CombatState, this, CurrentElementsCost);
 
         return CurrentElementsCost;
@@ -203,7 +203,7 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
                     IsPlayedWithoutElements = true;
                     return;
                 }
-                
+
                 runesmithCombatState.LoseElements(amount);
                 await RunesmithHook.AfterElementsSpent(Owner.Creature.CombatState, amount, Owner);
             }

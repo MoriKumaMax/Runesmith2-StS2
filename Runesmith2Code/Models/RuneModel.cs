@@ -9,7 +9,6 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -70,7 +69,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
         !HasSmartDescription ? Description : new LocString(LocTable, Id.Entry + ".smartDescription");
 
     // TODO Refactor text stuff to be in one class
-    
+
     public virtual (bool, bool) ShowTopLabel => (false, false);
 
     public virtual (decimal, decimal) TopValue => (PassiveVal, BreakVal);
@@ -84,7 +83,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
     public virtual (bool, bool) ShowBottomLabel => (true, true);
 
     public virtual (decimal, decimal) BottomValue => (PassiveVal, BreakVal);
-    
+
     public virtual (string, string) BottomTextAppend => ("", "");
 
     public virtual (Color, Color, Color) BottomLabelColor => NRune.DefaultFontColor;
@@ -115,7 +114,6 @@ public abstract class RuneModel : AbstractModel, ICustomModel
             if (HasSmartDescription && IsMutable)
             {
                 var smartDescription = SmartDescription;
-                // TODO Fix energy prefix display
                 smartDescription.Add("energyPrefix", GetRuneOwnerPool().EnergyColorName);
                 smartDescription.Add("Passive", PassiveVal);
                 smartDescription.Add("CalculatedPassive", CalculatedPassiveVal);
@@ -184,7 +182,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
         }
     }
 
-    protected ICombatState CombatState => Owner.Creature.CombatState;
+    protected ICombatState CombatState => Owner.Creature.CombatState!;
 
     public override bool ShouldReceiveCombatHooks => true;
 
@@ -212,7 +210,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
         return node2D;
     }
 
-    public RuneModel ToMutable(int initialAmount = 0)
+    public RuneModel ToMutable()
     {
         AssertCanonical();
         var orbModel = (RuneModel)MutableClone();
@@ -220,24 +218,25 @@ public abstract class RuneModel : AbstractModel, ICustomModel
         return orbModel;
     }
 
-    public void Trigger()
+    protected void Trigger()
     {
         Triggered?.Invoke();
     }
 
+    // These triggers should return if it was triggerred or not
     public virtual Task<bool> BeforeTurnEndEarlyRuneTrigger(PlayerChoiceContext choiceContext)
     {
         return Task.FromResult(false);
     }
 
-    public virtual Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public virtual Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        return Task.CompletedTask;
+        return Task.FromResult(false);
     }
 
-    public virtual Task AfterTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
+    public virtual Task<bool> AfterTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        return Task.CompletedTask;
+        return Task.FromResult(false);
     }
 
     public virtual Task Passive(PlayerChoiceContext choiceContext)
@@ -260,7 +259,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
     // Note: Rune value shouldn't get modified after craft but having this just in case
     protected decimal ModifyRuneValue(decimal result)
     {
-        return RunesmithHook.ModifyRuneValue(Owner.Creature.CombatState, Owner, result);
+        return RunesmithHook.ModifyRuneValue(Owner.Creature.CombatState!, Owner, result);
     }
 
     protected override void AfterCloned()

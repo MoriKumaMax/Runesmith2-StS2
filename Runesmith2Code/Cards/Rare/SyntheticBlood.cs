@@ -30,6 +30,6 @@ public class SyntheticBlood : Runesmith2Card
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await RunesmithPlayerCmd.GainElements(new Elements(this), Owner, play);
-        await CommonActions.ApplySelf<SyntheticBloodPower>(choiceContext, this,  DynamicVars["Amount"].IntValue);
+        await CommonActions.ApplySelf<SyntheticBloodPower>(choiceContext, this, DynamicVars["Amount"].IntValue);
     }
 }

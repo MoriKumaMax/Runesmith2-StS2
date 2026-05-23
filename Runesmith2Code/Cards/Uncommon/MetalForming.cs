@@ -18,12 +18,9 @@ namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
 
 public class MetalForming : Runesmith2Card
 {
-    // TODO This card is super jank. Find a better way to calculate preview and gain block.
-
     public MetalForming() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
         var terra = new TerraVar(1);
-        // TODO check if the calc account for additional terra gain from Synthetic Blood
         WithCalculatedBlock(0, 2, (card, _) =>
             {
                 if (card.CombatState == null) return 0;

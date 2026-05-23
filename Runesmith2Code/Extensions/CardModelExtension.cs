@@ -111,7 +111,8 @@ public static class CardModelExtension
 
         public bool IsImproved()
         {
-            return cardModel.IsUpgraded || cardModel.IsEnhanced() || cardModel.IsStasis();
+            return cardModel.IsUpgraded || cardModel.Enchantment != null || cardModel.IsEnhanced() ||
+                   cardModel.IsStasis();
         }
 
         public bool IsEnhanced()

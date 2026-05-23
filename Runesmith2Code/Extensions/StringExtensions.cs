@@ -7,7 +7,7 @@ public static class StringExtensions
     {
         return Path.Join("res://", path);
     }
-    
+
     public static string ImagePath(this string path)
     {
         return Path.Join(MainFile.ModId, "images", path);
@@ -22,12 +22,12 @@ public static class StringExtensions
     {
         return Path.Join(MainFile.ModId, "images", "card_portraits", "big", path);
     }
-    
+
     public static string EnchantmentImagePath(this string path)
     {
         return Path.Join(MainFile.ModId, "images", "enchantments", path);
     }
-    
+
     public static string PowerImagePath(this string path)
     {
         return Path.Join(MainFile.ModId, "images", "powers", path);
@@ -46,6 +46,11 @@ public static class StringExtensions
     public static string BigRelicImagePath(this string path)
     {
         return Path.Join(MainFile.ModId, "images", "relics", "big", path);
+    }
+    
+    public static string PotionImagePath(this string path)
+    {
+        return Path.Join(MainFile.ModId, "images", "potions", path);
     }
 
     public static string CharacterUiPath(this string path)

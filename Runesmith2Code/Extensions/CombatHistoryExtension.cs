@@ -17,8 +17,9 @@ public static class CombatHistoryExtension
     {
         combatHistory.Add(combatState, new ElementsModifiedEntry(amount, player, combatState.RoundNumber,
             combatState.CurrentSide,
-            combatHistory));
+            combatHistory,
+            [player]));
     }
 
-    // TODO history for runes crafted
+    // NOTE history for runes crafted if needed
 }

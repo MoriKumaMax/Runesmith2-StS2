@@ -43,14 +43,13 @@ internal class NCreatureSetOrbManagerPositionPatch
         var runeManager = RunesmithNode.NRuneManager[__instance];
 
         if (runeManager == null) return;
-        runeManager.Scale = (__instance.Visuals.Scale.X > 1f) ? Vector2.One : __instance.Visuals.Scale.Lerp(Vector2.One, 0.5f);
+        runeManager.Scale = __instance.Visuals.Scale.X > 1f
+            ? Vector2.One
+            : __instance.Visuals.Scale.Lerp(Vector2.One, 0.5f);
         runeManager.Position = __instance.Visuals.OrbPosition.Position * Mathf.Min(__instance.Visuals.Scale.X, 1.25f);
     }
 }
 
-
-// TODO Fix async method patch
-//  Rework this to transpiler patch?
 [HarmonyPatch(typeof(NCreature), "AnimDie")]
 internal class NCreatureAnimDiePatch
 {

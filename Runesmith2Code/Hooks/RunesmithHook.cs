@@ -178,8 +178,6 @@ public static class RunesmithHook
         var modifyingModels = new List<AbstractModel>();
         var modifiedPotency = potency;
 
-        //TODO add enchantment modification here if it's implemented
-
         modifiedPotency = Aggregate<IModifyPotencyAdditive, decimal>(combatState, modifiedPotency, (model, current) =>
         {
             var add = model.ModifyPotencyAdditive(player, current, props, cardSource, cardPlay);

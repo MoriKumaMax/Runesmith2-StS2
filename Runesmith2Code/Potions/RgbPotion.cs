@@ -1,3 +1,5 @@
+#region
+
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -10,6 +12,8 @@ using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Structs;
+
+#endregion
 
 namespace Runesmith2.Runesmith2Code.Potions;
 

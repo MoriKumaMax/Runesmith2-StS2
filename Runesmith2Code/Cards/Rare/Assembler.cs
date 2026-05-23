@@ -7,7 +7,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Powers;
-using Runesmith2.Runesmith2Code.Structs;
 using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
@@ -39,6 +38,7 @@ public class Assembler : Runesmith2Card
             var power = (AssemblerPower)ModelDb.Power<AssemblerPower>().MutableClone();
             power.PickCard(cardModel);
             await PowerCmd.Apply(choiceContext, power, Owner.Creature, 1, Owner.Creature, this);
+            await CardCmd.Exhaust(choiceContext, cardModel);
         }
     }
 }

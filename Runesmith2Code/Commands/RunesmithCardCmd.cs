@@ -32,7 +32,7 @@ public static class RunesmithCardCmd
             var combatState = player.Creature.CombatState;
             var cardList = targetCards.ToList();
             if (combatState == null || cardList.Count == 0) return;
-            // TODO Consider adding history for cards enhanced.
+            // NOTE Consider adding history for cards enhanced.
             var modifiedEnhance =
                 RunesmithHook.ModifyEnhanceAmount(combatState, player, enhanceAmount, cardPlay?.Card,
                     out var modifiers);

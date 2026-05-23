@@ -43,7 +43,7 @@ public static class RuneCmd
         {
             var combatState = player.Creature.CombatState!;
             var runeQueue = player.PlayerCombatState?.RuneQueue();
-            if (runeQueue == null) return; // todo log warning/error?
+            if (runeQueue == null) return; // TODO log/throw warning/error? (for all usages of this check)
             rune.AssertMutable();
 
             if (runeQueue.IsFull())
@@ -84,6 +84,35 @@ public static class RuneCmd
         }
     }
 
+    // Only use this to directly add Rune and bypass Craft Hooks
+    public static async Task AddRune(PlayerChoiceContext choiceContext, RuneModel rune, Player player,
+        CardPlay? cardPlay)
+    {
+        var runeQueue = player.PlayerCombatState?.RuneQueue();
+        if (runeQueue == null) return;
+
+        if (runeQueue.IsFull())
+        {
+            var playerDialogueLine = new LocString("combat_messages", "RUNESMITH2-FULL_RUNE_SLOTS");
+            player.Creature.GetVfxContainer()
+                ?.AddChildSafely(NThoughtBubbleVfx.Create(playerDialogueLine.GetFormattedText(), player.Creature,
+                    1.0));
+            return;
+        }
+
+        if (await runeQueue.TryEnqueue(rune))
+        {
+            // TODO add combat history
+            rune.PlayCraftedSfx();
+            var nCreature = NCombatRoom.Instance?.GetCreatureNode(player.Creature);
+            if (nCreature != null)
+            {
+                var runeManager = RunesmithNode.NRuneManager[nCreature];
+                runeManager?.AddRuneAnim();
+            }
+        }
+    }
+
     public static async Task AddPotency(PlayerChoiceContext choiceContext, IEnumerable<RuneModel> runes, Player player,
         CardPlay? cardPlay, decimal potency = 0, ValueProp props = ValueProp.Move)
     {
@@ -91,7 +120,7 @@ public static class RuneCmd
         {
             var combatState = player.Creature.CombatState!;
             var runeQueue = player.PlayerCombatState?.RuneQueue();
-            if (runeQueue == null) return; // todo log warning/error?
+            if (runeQueue == null) return;
 
             var modifiedPotency = potency;
             modifiedPotency = RunesmithHook.ModifyPotency(combatState, player, modifiedPotency, props,
@@ -106,7 +135,7 @@ public static class RuneCmd
     {
         if (CombatManager.Instance.IsOverOrEnding) return;
         var runeQueue = player.PlayerCombatState?.RuneQueue();
-        if (runeQueue == null) return; // todo log warning/error?
+        if (runeQueue == null) return;
 
         foreach (var rune in runes) rune.PassiveVal = (int)Math.Max(0, rune.PassiveVal - potency);
     }
@@ -198,7 +227,6 @@ public static class RuneCmd
         choiceContext.PopModel(brokenRune);
         if (player.Creature.CombatState != null)
         {
-            // TODO consider hook for after rune broken
             await RunesmithHook.AfterRuneBroken(player.Creature.CombatState, choiceContext, player, brokenRune);
             if (removed)
                 brokenRune.RemoveInternal();

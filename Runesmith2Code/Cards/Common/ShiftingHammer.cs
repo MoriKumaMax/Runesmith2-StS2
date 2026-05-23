@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Runesmith2.Runesmith2Code.CardSelection;
 using Runesmith2.Runesmith2Code.Commands;
+using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Utils;
@@ -20,6 +21,7 @@ public class ShiftingHammer : Runesmith2Card
     public ShiftingHammer() : base(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
     {
         WithDamage(7, 3);
+        WithVar(new EnhanceByVar(2));
         WithVar(new CardsVar(1));
         WithTip(RunesmithHoverTip.Enhance);
         WithTags(RunesmithEnum.Hammer);
@@ -35,19 +37,15 @@ public class ShiftingHammer : Runesmith2Card
             .WithHitFx("vfx/vfx_attack_blunt")
             .Execute(choiceContext);
 
-        var results = attackCommand.Results;
-        var enhanceBy = results.SelectMany(l => l).Count(r => r.UnblockedDamage > 0);
-
-        if (enhanceBy > 0)
-        {
-            var enhanceCard = (await CardSelectCmd.FromHand(
-                choiceContext,
-                Owner,
-                new CardSelectorPrefs(RunesmithCardSelectorPrefs.EnhanceSelectionPrompt, DynamicVars.Cards.IntValue),
-                card => card.CanEnhance(),
-                this
-            )).FirstOrDefault();
-            if (enhanceCard != null) await RunesmithCardCmd.Enhance(choiceContext, Owner, enhanceCard, play, enhanceBy);
-        }
+        var enhanceCard = (await CardSelectCmd.FromHand(
+            choiceContext,
+            Owner,
+            new CardSelectorPrefs(RunesmithCardSelectorPrefs.EnhanceSelectionPrompt, DynamicVars.Cards.IntValue),
+            card => card.CanEnhance(),
+            this
+        )).FirstOrDefault();
+        if (enhanceCard != null)
+            await RunesmithCardCmd.Enhance(choiceContext, Owner, enhanceCard, play,
+                DynamicVars[EnhanceByVar.defaultName].IntValue);
     }
 }

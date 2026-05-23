@@ -11,13 +11,13 @@ namespace Runesmith2.Runesmith2Code.Hooks;
 
 public interface IModifyPotencyAdditive
 {
-    public decimal ModifyPotencyAdditive(Player player, decimal block, ValueProp props, CardModel? cardSource,
+    public decimal ModifyPotencyAdditive(Player player, decimal amount, ValueProp props, CardModel? cardSource,
         CardPlay? cardPlay);
 }
 
 public interface IModifyPotencyMultiplicative
 {
-    public decimal ModifyPotencyMultiplicative(Player player, decimal block, ValueProp props,
+    public decimal ModifyPotencyMultiplicative(Player player, decimal amount, ValueProp props,
         CardModel? cardSource,
         CardPlay? cardPlay);
 }

@@ -14,25 +14,21 @@ public static class PlayerCombatStateExtension
 {
     public class RunesmithCombatState(PlayerCombatState combatState, RuneQueue queue)
     {
-        private PlayerCombatState _combatState = combatState;
-
         public Elements Elements
         {
             get;
-            set
+            private set
             {
                 if (field == value) return;
                 var elements = field;
                 field = value;
-                CombatManager.Instance.History.ElementsModified(_combatState._player.Creature.CombatState,
-                    field - elements, _combatState._player);
+                CombatManager.Instance.History.ElementsModified(combatState._player.Creature.CombatState,
+                    field - elements, combatState._player);
                 ElementsChanged?.Invoke(elements, field);
             }
         } = new();
 
-        private RuneQueue _runeQueue = queue;
-
-        public RuneQueue RuneQueue => _runeQueue;
+        public RuneQueue RuneQueue => queue;
 
         public event Action<Elements, Elements>? ElementsChanged;
 

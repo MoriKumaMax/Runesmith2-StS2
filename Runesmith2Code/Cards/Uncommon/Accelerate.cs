@@ -4,9 +4,7 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Runesmith2.Runesmith2Code.Commands;
-using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.HoverTips;
 
 #endregion
@@ -39,7 +37,8 @@ public class Accelerate : Runesmith2Card
         {
             await RuneCmd.BreakOldest(choiceContext, Owner);
             await Cmd.CustomScaledWait(0.1f, 0.2f);
-            await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue + DynamicVars[ExtraCardsKey].IntValue, Owner);
+            await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue + DynamicVars[ExtraCardsKey].IntValue,
+                Owner);
         }
         else
         {

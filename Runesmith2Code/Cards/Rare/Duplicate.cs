@@ -20,7 +20,7 @@ public class Duplicate : Runesmith2Card
         WithTip(RunesmithHoverTip.Craft);
         WithCostUpgradeBy(-1);
     }
-    
+
     protected override void AddExtraArgsToDescription(LocString description)
     {
         base.AddExtraArgsToDescription(description);
@@ -28,7 +28,7 @@ public class Duplicate : Runesmith2Card
     }
 
     protected override bool ShouldGlowRedInternal => IsRuneSlotsFull() && CanPlay();
-    
+
     public override Elements CanonicalElementsCost => new(1);
 
     protected override async Task OnPlay(

@@ -1,6 +1,5 @@
 #region
 
-using System.Diagnostics.CodeAnalysis;
 using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -24,7 +23,10 @@ public class IceColdPower : Runesmith2Power
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DisplayVar<IceColdPower>("Decrement", pow => (pow.Amount - pow.Amount / 2).ToString())];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DisplayVar<IceColdPower>("Decrement", pow => (pow.Amount - pow.Amount / 2).ToString())
+    ];
 
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -45,7 +47,8 @@ public class IceColdPower : Runesmith2Power
         return -Amount;
     }
 
-    public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side,
+        IEnumerable<Creature> participants)
     {
         if (side == Owner.Side) await PowerCmd.ModifyAmount(choiceContext, this, -(Amount - Amount / 2), null, null);
     }

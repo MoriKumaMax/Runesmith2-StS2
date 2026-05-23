@@ -13,7 +13,7 @@ namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
 
 public class EnergySink : Runesmith2Card
 {
-    public EnergySink() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+    public EnergySink() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
         WithVar("ChargeLoss", 1);
         WithVar("PotencyLoss", 2);

@@ -1,7 +1,6 @@
 #region
 
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using Runesmith2.Runesmith2Code.Cards;
@@ -26,9 +25,11 @@ public class FlumenRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Flumen>();
 
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    public override async Task<bool> AfterTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
     {
+        if (ChargeVal <= 0) return false;
         await Passive(choiceContext);
+        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)

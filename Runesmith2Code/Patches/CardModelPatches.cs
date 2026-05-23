@@ -55,7 +55,6 @@ internal class CardModelEndOfTurnCleanupPatch
     }
 }
 
-// TODO Fix async method patch
 [HarmonyPatch(typeof(CardModel), nameof(CardModel.SpendResources))]
 internal class CardModelSpendResourcesPatch
 {

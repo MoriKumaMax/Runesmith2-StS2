@@ -14,7 +14,8 @@ public class ElementsModifiedEntry(
     Player player,
     int roundNumber,
     CombatSide currentSide,
-    CombatHistory history) : CombatHistoryEntry(player.Creature, roundNumber, currentSide, history)
+    CombatHistory history,
+    IEnumerable<Player> players) : CombatHistoryEntry(player.Creature, roundNumber, currentSide, history, players)
 {
     public Elements Amount { get; } = amount;
 

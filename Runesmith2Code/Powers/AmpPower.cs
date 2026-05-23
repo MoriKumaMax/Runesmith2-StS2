@@ -38,15 +38,13 @@ public class AmpPower : Runesmith2Power, IModifyPotencyAdditive
         var internalData = GetInternalData<Data>();
         if (internalData.CardToModify != null || !card.HasPotency() ||
             card is Runesmith2Card { IsPlayedWithoutElements: true })
-        {
             return Task.CompletedTask;
-        }
         internalData.CardToModify = card;
         internalData.AmountWhenCardPlayed = Amount;
         return Task.CompletedTask;
     }
 
-    public decimal ModifyPotencyAdditive(Player player, decimal block, ValueProp props, CardModel? cardSource,
+    public decimal ModifyPotencyAdditive(Player player, decimal amount, ValueProp props, CardModel? cardSource,
         CardPlay? cardPlay)
     {
         if (cardSource != null)

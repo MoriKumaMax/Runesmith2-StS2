@@ -28,6 +28,7 @@ public class AlbusRune : RuneModel
 
     public override async Task<bool> BeforeTurnEndEarlyRuneTrigger(PlayerChoiceContext choiceContext)
     {
+        if (ChargeVal <= 0) return false;
         await Passive(choiceContext);
         return true;
     }

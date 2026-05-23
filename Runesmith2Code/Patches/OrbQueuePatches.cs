@@ -9,7 +9,6 @@ using Runesmith2.Runesmith2Code.Field;
 
 namespace Runesmith2.Runesmith2Code.Patches;
 
-// TODO Fix async method patch
 // Ties the RuneQueue start and end turn triggers to the OrbQueue's triggers
 [HarmonyPatch(typeof(OrbQueue), nameof(OrbQueue.AfterTurnStart))]
 internal class OrbQueueAfterTurnStartPatch

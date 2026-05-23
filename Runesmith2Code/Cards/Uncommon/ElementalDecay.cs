@@ -44,9 +44,7 @@ public class ElementalDecay : Runesmith2Card
             await Cmd.CustomScaledWait(0.1f, 0.2f);
             await RunesmithPlayerCmd.GainElements(new Elements(totalCost), Owner, play);
         }
-        foreach (var card in cards)
-        {
-            await CardCmd.Exhaust(choiceContext, card);
-        }
+
+        foreach (var card in cards) await CardCmd.Exhaust(choiceContext, card);
     }
 }

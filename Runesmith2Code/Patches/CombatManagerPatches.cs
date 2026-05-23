@@ -9,7 +9,6 @@ using Runesmith2.Runesmith2Code.Commands;
 
 namespace Runesmith2.Runesmith2Code.Patches;
 
-// TODO Fix async method patch
 [HarmonyPatch(typeof(CombatManager), nameof(CombatManager.HandlePlayerDeath))]
 public static class CombatManagerHandlePlayerDeathPatch
 {

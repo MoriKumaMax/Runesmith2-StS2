@@ -31,7 +31,8 @@ public class Stabilize : Runesmith2Card
         if (runeQueue != null)
         {
             var amount = DynamicVars[ChargeGainVar.defaultName].IntValue;
-            foreach (var rune in runeQueue.Runes.Where(r => r.ChargeVal > 0)) RuneCmd.SetCharge(choiceContext, rune, amount);
+            foreach (var rune in runeQueue.Runes.Where(r => r.ChargeVal > 0))
+                RuneCmd.SetCharge(choiceContext, rune, amount);
         }
     }
 }

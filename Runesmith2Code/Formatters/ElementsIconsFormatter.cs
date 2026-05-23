@@ -92,7 +92,7 @@ public class ElementsIconsFormatter : IFormatter
     public string Name
     {
         get => "rs2Icon";
-        set => throw new NotImplementedException();
+        set { }
     }
 
     public bool CanAutoDetect { get; set; }

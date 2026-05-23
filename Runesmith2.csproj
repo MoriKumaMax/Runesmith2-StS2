@@ -85,7 +85,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.1.3" PrivateAssets="All" />
+        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.1.5" PrivateAssets="All" />
         <PackageReference Include="Krafs.Publicizer" Version="2.3.0" PrivateAssets="All"/>
         <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="*"/>
         <AdditionalFiles Include="Runesmith2/localization/**/*.json"/> <!-- Used by analyzer -->
@@ -115,9 +115,9 @@
 
     <ItemGroup>
         <Folder Include="Runesmith2Code\Nodes\Runes\" />
-        <Folder Include="Runesmith2Code\Rewards\" />
         <Folder Include="Runesmith2\images\cardui\" />
         <Folder Include="Runesmith2\images\card_portraits\big\"/>
+        <Folder Include="Runesmith2\images\potions\" />
         <Folder Include="Runesmith2\images\relics\big\"/>
         <Folder Include="Runesmith2\scenes\runes\rune_visuals\" />
     </ItemGroup>

@@ -27,6 +27,6 @@ public class ArchitectsForge : Runesmith2Card
         CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        await CommonActions.ApplySelf<ArchitectsForgePower>(choiceContext, this, 1);
+        await CommonActions.ApplySelf<ArchitectsForgePower>(choiceContext, this, DynamicVars["Amount"].IntValue);
     }
 }

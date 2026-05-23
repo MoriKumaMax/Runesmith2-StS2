@@ -39,7 +39,7 @@ public abstract class Runesmith2RecipeCard : Runesmith2Card
             await RunesmithPlayerCmd.GainElements(GetElementsCostWithModifiers().ClampZero(), Owner, cardPlay);
             return;
         }
-        
+
         // Otherwise, use the actual card effects
         await RecipeOnPlayWrapper(choiceContext, cardPlay);
     }

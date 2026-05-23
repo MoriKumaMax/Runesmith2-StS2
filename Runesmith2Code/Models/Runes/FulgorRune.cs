@@ -24,8 +24,8 @@ public class FulgorRune : RuneModel
     public override int ChargeVal { get; set; } = 4;
 
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;
-    
-    
+
+
     public override (bool, bool) ShowTopLabel => (true, true);
     public override (decimal, decimal) TopValue => (PassiveVal, PassiveVal);
     public override (Color, Color, Color) TopLabelColor => NRune.DefaultFontColor;
@@ -40,9 +40,11 @@ public class FulgorRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Fulgor>();
 
-    public override async Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
+        if (ChargeVal <= 0) return false;
         await Passive(choiceContext);
+        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
@@ -61,7 +63,7 @@ public class FulgorRune : RuneModel
         PlayBreakSfx();
         await ApplyFireDamage(choiceContext, PassiveVal, 4);
     }
-    
+
     private async Task ApplyFireDamage(PlayerChoiceContext choiceContext, decimal amount, int count)
     {
         PlayPassiveSfx();
@@ -69,10 +71,10 @@ public class FulgorRune : RuneModel
         {
             var list = CombatState.GetOpponentsOf(Owner.Creature).Where(e => e.IsHittable).ToList();
             if (list.Count == 0) return;
-            
+
             var target = Owner.RunState.Rng.CombatTargets.NextItem(list);
             if (target == null) break; // Should be okay to break when there are no valid targets
-            
+
             NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(target));
             await CreatureCmd.Damage(choiceContext, target, amount, ValueProp.Unpowered, Owner.Creature);
         }

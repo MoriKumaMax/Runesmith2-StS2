@@ -29,7 +29,7 @@ public partial class NRune : NClickableControl
 
     public static readonly (Color, Color, Color) BreakFontColor = (new Color("5effff"), new Color("00000040"),
         new Color("143652e6"));
-    
+
     public static readonly (Color, Color, Color) GreenFontColor = (StsColors.green, new Color("00000040"),
         StsColors.energyGreenOutline);
 
@@ -169,19 +169,13 @@ public partial class NRune : NClickableControl
     public override void _EnterTree()
     {
         base._EnterTree();
-        if (Model != null)
-        {
-            Model.Triggered += Flash;
-        }
+        if (Model != null) Model.Triggered += Flash;
     }
 
     public override void _ExitTree()
     {
         base._ExitTree();
-        if (Model != null)
-        {
-            Model.Triggered -= Flash;
-        }
+        if (Model != null) Model.Triggered -= Flash;
     }
 
     public void ReplaceRune(RuneModel? model)
@@ -307,7 +301,7 @@ public partial class NRune : NClickableControl
 
         for (var i = 1; i < 9; i++) _chargeSeparators[i - 1].Visible = i < charge;
     }
-    
+
     private void Flash()
     {
         _flashParticle.Restart();
@@ -324,7 +318,8 @@ public partial class NRune : NClickableControl
         nHoverTipSet?.SetFollowOwner();
         _labelContainer.Visible = true;
         Modulate = Colors.White;
-        if (NControllerManager.Instance != null && NControllerManager.Instance.IsUsingController) _selectionReticle.OnSelect();
+        if (NControllerManager.Instance != null && NControllerManager.Instance.IsUsingController)
+            _selectionReticle.OnSelect();
     }
 
     protected override void OnUnfocus()
