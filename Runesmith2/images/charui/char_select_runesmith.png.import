@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7ku2pnwh0541"
-path="res://.godot/imported/rs_new2.png-7dfeeecab0b0c7dd61600e4ecf391b2c.ctex"
+uid="uid://frphjyn065f1"
+path="res://.godot/imported/char_select_runesmith.png-d64f31523b822bca2af94cfe85f9b57a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Runesmith2/images/character/rs_new2.png"
-dest_files=["res://.godot/imported/rs_new2.png-7dfeeecab0b0c7dd61600e4ecf391b2c.ctex"]
+source_file="res://Runesmith2/images/charui/char_select_runesmith.png"
+dest_files=["res://.godot/imported/char_select_runesmith.png-d64f31523b822bca2af94cfe85f9b57a.ctex"]
 
 [params]
 

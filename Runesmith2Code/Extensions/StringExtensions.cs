@@ -67,4 +67,14 @@ public static class StringExtensions
     {
         return Path.Join(MainFile.ModId, "scenes", "runes", "rune_visuals", path + ".tscn");
     }
+    
+    public static string TopPanelScenePath(this string path)
+    {
+        return Path.Join(MainFile.ModId, "scenes", "top_panel", path + ".tscn");
+    }
+    
+    public static string MerchantScenePath(this string path)
+    {
+        return Path.Join(MainFile.ModId, "scenes", "merchant", path + ".tscn");
+    }
 }

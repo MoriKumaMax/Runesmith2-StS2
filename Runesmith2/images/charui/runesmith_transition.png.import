@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7ayp7er6rjgx"
-path="res://.godot/imported/char_select_char_name_locked.png-c24ff8e4708f120f6358aca44c29e5c9.ctex"
+uid="uid://ds6uevnlwsopk"
+path="res://.godot/imported/runesmith_transition.png-8a7b65fd14cc630feaa4105df09c860f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Runesmith2/images/charui/char_select_char_name_locked.png"
-dest_files=["res://.godot/imported/char_select_char_name_locked.png-c24ff8e4708f120f6358aca44c29e5c9.ctex"]
+source_file="res://Runesmith2/images/charui/runesmith_transition.png"
+dest_files=["res://.godot/imported/runesmith_transition.png-8a7b65fd14cc630feaa4105df09c860f.ctex"]
 
 [params]
 

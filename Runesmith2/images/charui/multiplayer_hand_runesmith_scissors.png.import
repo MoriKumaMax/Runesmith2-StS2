@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvm54i7ufo22c"
-path="res://.godot/imported/corpse.png-dcdf8d2f2f9f5bf5c26edf496335672c.ctex"
+uid="uid://cfabqhtm5ybmh"
+path="res://.godot/imported/multiplayer_hand_runesmith_scissors.png-f1bcc3ee4db8685f70f19a93d4dd4df8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Runesmith2/images/character/corpse.png"
-dest_files=["res://.godot/imported/corpse.png-dcdf8d2f2f9f5bf5c26edf496335672c.ctex"]
+source_file="res://Runesmith2/images/charui/multiplayer_hand_runesmith_scissors.png"
+dest_files=["res://.godot/imported/multiplayer_hand_runesmith_scissors.png-f1bcc3ee4db8685f70f19a93d4dd4df8.ctex"]
 
 [params]
 

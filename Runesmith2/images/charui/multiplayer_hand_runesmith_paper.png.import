@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tamqwsutp777"
-path="res://.godot/imported/character_icon_char_name.png-f7925d2bb487de948740e11824de8c80.ctex"
+uid="uid://1i4tyqkhg8ik"
+path="res://.godot/imported/multiplayer_hand_runesmith_paper.png-cb44e911b5129798b92074d8631db0b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Runesmith2/images/charui/character_icon_char_name.png"
-dest_files=["res://.godot/imported/character_icon_char_name.png-f7925d2bb487de948740e11824de8c80.ctex"]
+source_file="res://Runesmith2/images/charui/multiplayer_hand_runesmith_paper.png"
+dest_files=["res://.godot/imported/multiplayer_hand_runesmith_paper.png-cb44e911b5129798b92074d8631db0b8.ctex"]
 
 [params]
 

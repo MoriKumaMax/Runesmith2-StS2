@@ -44,8 +44,8 @@ public class ChargedHammer : Runesmith2Card
         if (runeQueue != null && runeQueue.HasAny())
             foreach (var rune in runeQueue.Runes)
             {
-                await RuneCmd.Passive(choiceContext, rune);
                 await Cmd.CustomScaledWait(0.1f, 0.2f);
+                await RuneCmd.Passive(choiceContext, rune);
             }
     }
 }

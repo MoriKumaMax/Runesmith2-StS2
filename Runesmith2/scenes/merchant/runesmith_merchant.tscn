@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqiu8r01v7k6l"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bebhqacx1f5e1" path="res://Runesmith2/images/character/runesmith_skel_data.tres" id="1_ag5r2"]
+[ext_resource type="Script" uid="uid://bgmjkwuk0rpun" path="res://Runesmith2Code/Nodes/NMerchantRunesmith.cs" id="1_vj6i6"]
+
+[node name="RunesmithMerchant" type="Node2D"]
+script = ExtResource("1_vj6i6")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_ag5r2")
+preview_skin = "Default"
+preview_animation = "relaxed_loop"
+preview_frame = false
+preview_time = 0.0
+show_behind_parent = true
+scale = Vector2(0.218, 0.218)

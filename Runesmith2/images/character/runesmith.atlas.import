@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://2b78ftfqiohe"
+path="res://.godot/imported/runesmith.atlas-83c6c9ebad229a20d79328283c851e6f.spatlas"
+
+[deps]
+
+source_file="res://Runesmith2/images/character/runesmith.atlas"
+dest_files=["res://.godot/imported/runesmith.atlas-83c6c9ebad229a20d79328283c851e6f.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

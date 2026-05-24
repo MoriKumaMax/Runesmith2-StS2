@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsyj0hca8vai1"
-path="res://.godot/imported/char_select_char_name.png-e63db67895c98d94c0b7f95e5f403e08.ctex"
+uid="uid://falpq54swi2y"
+path="res://.godot/imported/character_icon_runesmith_outline.png-f65c382f94471e541fe5f157dd9eb714.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Runesmith2/images/charui/char_select_char_name.png"
-dest_files=["res://.godot/imported/char_select_char_name.png-e63db67895c98d94c0b7f95e5f403e08.ctex"]
+source_file="res://Runesmith2/images/charui/character_icon_runesmith_outline.png"
+dest_files=["res://.godot/imported/character_icon_runesmith_outline.png-f65c382f94471e541fe5f157dd9eb714.ctex"]
 
 [params]
 

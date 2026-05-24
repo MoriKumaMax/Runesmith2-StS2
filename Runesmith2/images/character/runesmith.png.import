@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuy0q8hjjh68k"
-path="res://.godot/imported/map_marker_char_name.png-3dc8660f543513c6b0a3b25ae91fed89.ctex"
+uid="uid://bbejo2lsd323k"
+path="res://.godot/imported/runesmith.png-7c57bd34445ff1e60368e1953c6b65f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Runesmith2/images/charui/map_marker_char_name.png"
-dest_files=["res://.godot/imported/map_marker_char_name.png-3dc8660f543513c6b0a3b25ae91fed89.ctex"]
+source_file="res://Runesmith2/images/character/runesmith.png"
+dest_files=["res://.godot/imported/runesmith.png-7c57bd34445ff1e60368e1953c6b65f7.ctex"]
 
 [params]
 

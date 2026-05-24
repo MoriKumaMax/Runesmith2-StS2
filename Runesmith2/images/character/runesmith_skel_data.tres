@@ -1,0 +1,20 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=5 format=3 uid="uid://bebhqacx1f5e1"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://2b78ftfqiohe" path="res://Runesmith2/images/character/runesmith.atlas" id="1_egk0q"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://d2o2llfr1nf43" path="res://Runesmith2/images/character/runesmith.skel" id="2_xyxvk"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_egk0q"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_xyxvk"]
+from = "attack"
+to = "idle_loop"
+mix = 0.05
+
+[resource]
+atlas_res = ExtResource("1_egk0q")
+skeleton_file_res = ExtResource("2_xyxvk")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_egk0q"), SubResource("SpineAnimationMix_xyxvk")]
