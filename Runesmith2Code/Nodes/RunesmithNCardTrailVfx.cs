@@ -19,5 +19,6 @@ public partial class RunesmithNCardTrailVfx : NCardTrailVfx
         sprite2.Texture = ResourceLoader.Load<CompressedTexture2D>("res://images/packed/vfx/small_card_silhouette.png");
         var sprite3 = GetNode<Sprite2D>("%Sprite2D3");
         sprite3.Texture = ResourceLoader.Load<CompressedTexture2D>("res://images/packed/vfx/small_card_silhouette.png");
+        base._Ready();
     }
 }

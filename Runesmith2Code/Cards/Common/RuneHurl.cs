@@ -14,7 +14,7 @@ namespace Runesmith2.Runesmith2Code.Cards.Common;
 
 public class RuneHurl : Runesmith2Card
 {
-    public RuneHurl() : base(0, CardType.Attack, CardRarity.Common, TargetType.Self)
+    public RuneHurl() : base(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
     {
         WithDamage(10, 4);
         WithVar(new CardsVar(1));
@@ -24,8 +24,6 @@ public class RuneHurl : Runesmith2Card
     public override RuneBreakType RuneBreakType => RuneBreakType.Oldest;
 
     protected override bool ShouldGlowGoldInternal => HasRune();
-
-    public override TargetType TargetType => HasRune() ? TargetType.AnyEnemy : TargetType.Self;
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
