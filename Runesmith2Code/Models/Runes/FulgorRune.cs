@@ -69,7 +69,7 @@ public class FulgorRune : RuneModel
         PlayPassiveSfx();
         for (var i = 0; i < count; i++)
         {
-            var list = CombatState.GetOpponentsOf(Owner.Creature).Where(e => e.IsHittable).ToList();
+            var list = GetHittableCreatures();
             if (list.Count == 0) return;
 
             var target = Owner.RunState.Rng.CombatTargets.NextItem(list);

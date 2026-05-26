@@ -39,9 +39,9 @@ public static class RuneCmd
     public static async Task Craft(PlayerChoiceContext choiceContext, RuneModel rune, Player player, CardPlay? cardPlay,
         decimal charge, decimal potency = 0, bool upgraded = false)
     {
-        if (!CombatManager.Instance.IsOverOrEnding)
+        if (!CombatManager.Instance.IsOverOrEnding && player.Creature.CombatState != null)
         {
-            var combatState = player.Creature.CombatState!;
+            var combatState = player.Creature.CombatState;
             var runeQueue = player.PlayerCombatState?.RuneQueue();
             if (runeQueue == null) return; // TODO log/throw warning/error? (for all usages of this check)
             rune.AssertMutable();
@@ -116,9 +116,9 @@ public static class RuneCmd
     public static async Task AddPotency(PlayerChoiceContext choiceContext, IEnumerable<RuneModel> runes, Player player,
         CardPlay? cardPlay, decimal potency = 0, ValueProp props = ValueProp.Move)
     {
-        if (!CombatManager.Instance.IsOverOrEnding)
+        if (!CombatManager.Instance.IsOverOrEnding && player.Creature.CombatState != null)
         {
-            var combatState = player.Creature.CombatState!;
+            var combatState = player.Creature.CombatState;
             var runeQueue = player.PlayerCombatState?.RuneQueue();
             if (runeQueue == null) return;
 

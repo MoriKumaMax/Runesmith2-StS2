@@ -40,6 +40,8 @@ public class ShockTherapy : Runesmith2Card
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        if (CombatState == null) return;
+        
         var cards = await CardSelectCmd.FromHand(choiceContext, Owner,
             new CardSelectorPrefs(RunesmithCardSelectorPrefs.StasisSelectionPrompt, DynamicVars.Cards.IntValue),
             card => card.CanStasis(),
@@ -52,7 +54,7 @@ public class ShockTherapy : Runesmith2Card
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .WithHitCount(stasisCardCount)
             .WithHitFx("vfx/vfx_attack_lightning")
-            .TargetingAllOpponents(CombatState!)
+            .TargetingAllOpponents(CombatState)
             .SpawningHitVfxOnEachCreature()
             .Execute(choiceContext);
     }

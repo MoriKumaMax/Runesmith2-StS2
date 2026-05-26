@@ -43,7 +43,7 @@ public partial class NRuneManager : Control
 
     public bool IsLocal { get; private set; }
 
-    private Player Player => _creatureNode.Entity.Player;
+    private Player Player => _creatureNode.Entity.Player!;
 
     public Control DefaultFocusOwner
     {

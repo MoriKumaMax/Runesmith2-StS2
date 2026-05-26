@@ -22,7 +22,9 @@ public class FissionHammer : Runesmith2Card
         WithDamage(11, 3);
         WithCards(1);
         WithCalculatedVar("CalculatedEnhanceBy", 1,
-            (c, _) => RunesmithHook.ModifyEnhanceAmount(c.CombatState!, c.Owner, c.GetEnhance(), c, out var _), 1);
+            (c, _) => c.CombatState != null
+                ? RunesmithHook.ModifyEnhanceAmount(c.CombatState, c.Owner, c.GetEnhance(), c, out var _)
+                : c.GetEnhance(), 1);
         WithTip(RunesmithHoverTip.Enhance);
         WithTags(RunesmithEnum.Hammer);
     }

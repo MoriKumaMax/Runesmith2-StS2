@@ -24,6 +24,8 @@ public class GrandSlam : Runesmith2Card
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        if (CombatState == null) return;
+        
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .TargetingAllOpponents(CombatState)
             .SpawningHitVfxOnEachCreature()

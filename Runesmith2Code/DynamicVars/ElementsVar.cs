@@ -31,8 +31,8 @@ public class ElementsVar : DynamicVar
     {
         var modifiedValue = BaseValue;
 
-        if (runGlobalHooks)
-            modifiedValue = RunesmithHook.ModifyElementsGain(card.CombatState!, card.Owner, new Elements(IntValue),
+        if (runGlobalHooks && card.CombatState != null)
+            modifiedValue = RunesmithHook.ModifyElementsGain(card.CombatState, card.Owner, new Elements(IntValue),
                 ValueProp.Move, card, out _).Ignis;
 
         PreviewValue = modifiedValue;

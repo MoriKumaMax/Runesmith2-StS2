@@ -57,7 +57,7 @@ public class VulcanusRune : RuneModel
 
     private async Task ApplyAoeFireDamage(PlayerChoiceContext choiceContext, decimal amount)
     {
-        var targets = CombatState.GetOpponentsOf(Owner.Creature).Where(e => e.IsHittable).ToList();
+        var targets = GetHittableCreatures();
         if (targets.Count == 0) return;
 
         foreach (var target in targets)

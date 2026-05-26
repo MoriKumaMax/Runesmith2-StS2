@@ -195,7 +195,7 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
         if (amount.Total > 0 && Owner.PlayerCombatState != null)
         {
             var runesmithCombatState = Owner.PlayerCombatState.Runesmith();
-            if (runesmithCombatState != null)
+            if (runesmithCombatState != null && Owner.Creature.CombatState != null)
             {
                 // Give elements if unable to play Recipe
                 if (Tags.Contains(RunesmithEnum.Recipe) && !runesmithCombatState.Elements.CanSpend(amount))
@@ -205,7 +205,7 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
                 }
 
                 runesmithCombatState.LoseElements(amount);
-                await RunesmithHook.AfterElementsSpent(Owner.Creature.CombatState!, amount, Owner);
+                await RunesmithHook.AfterElementsSpent(Owner.Creature.CombatState, amount, Owner);
             }
         }
     }
@@ -259,6 +259,6 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
 
     protected static decimal GetEnhanceBonus(CardModel c, Creature? _)
     {
-        return RunesmithHook.ModifyEnhanceAmount(c.CombatState!, c.Owner, 0, c, out var _);
+        return c.CombatState != null ? RunesmithHook.ModifyEnhanceAmount(c.CombatState, c.Owner, 0, c, out var _) : 0;
     }
 }

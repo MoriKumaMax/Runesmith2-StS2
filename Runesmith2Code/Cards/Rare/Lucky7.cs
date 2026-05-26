@@ -41,8 +41,10 @@ public class Lucky7 : Runesmith2Card
 
     private async Task RecipeOnPlayWrapper(PlayerChoiceContext choiceContext, CardPlay play)
     {
+        if (CombatState == null) return;
+        
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
-            .TargetingAllOpponents(CombatState!)
+            .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
     }

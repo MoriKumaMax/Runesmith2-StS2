@@ -1,6 +1,7 @@
 #region
 
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using Runesmith2.Runesmith2Code.Cards;
@@ -54,7 +55,7 @@ public class GlaciesRune : RuneModel
 
     private async Task ApplyIceCold(PlayerChoiceContext choiceContext, decimal amount)
     {
-        var targets = CombatState.GetOpponentsOf(Owner.Creature).Where(e => e.IsHittable).ToList();
+        var targets = GetHittableCreatures();
         if (targets.Count == 0) return;
 
         PlayPassiveSfx();

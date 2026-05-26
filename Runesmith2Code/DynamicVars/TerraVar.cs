@@ -31,8 +31,8 @@ public class TerraVar : DynamicVar
     {
         var modifiedValue = BaseValue;
 
-        if (runGlobalHooks)
-            modifiedValue = RunesmithHook.ModifyElementsGain(card.CombatState!, card.Owner,
+        if (runGlobalHooks && card.CombatState != null)
+            modifiedValue = RunesmithHook.ModifyElementsGain(card.CombatState, card.Owner,
                 Elements.WithTerra(IntValue), ValueProp.Move, card, out _).Terra;
 
         PreviewValue = modifiedValue;

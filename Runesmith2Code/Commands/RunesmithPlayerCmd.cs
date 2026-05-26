@@ -16,7 +16,7 @@ public static class RunesmithPlayerCmd
 {
     public static async Task GainElements(Elements amount, Player player, CardPlay? cardPlay = null)
     {
-        if (amount.Total > 0 && !CombatManager.Instance.IsEnding)
+        if (amount.Total > 0 && !CombatManager.Instance.IsEnding && player.Creature.CombatState != null)
         {
             var combatState = player.Creature.CombatState;
             var runesmithCombatState = player.PlayerCombatState?.Runesmith();

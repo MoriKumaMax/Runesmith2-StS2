@@ -87,7 +87,7 @@ public class BallPeenHammer : Runesmith2Relic
         IReadOnlyList<Creature> participants,
         ICombatState combatState)
     {
-        if (!participants.Contains(Owner.Creature) || Owner.PlayerCombatState!.TurnNumber == 1)
+        if (!participants.Contains(Owner.Creature) || Owner.PlayerCombatState is { TurnNumber: 1 })
             return Task.CompletedTask;
         SkillsPlayedThisTurn = 0;
         Status = RelicStatus.Normal;

@@ -39,8 +39,7 @@ public class MorbusRune : RuneModel
         {
             PlayPassiveSfx();
             Trigger();
-            await ApplyVulnerable(choiceContext, 1);
-            await ApplyWeak(choiceContext, 1);
+            await ApplyDebuff(choiceContext, 1);
             UseCharge();
         }
     }
@@ -48,23 +47,15 @@ public class MorbusRune : RuneModel
     public override async Task Break(PlayerChoiceContext choiceContext)
     {
         PlayPassiveSfx();
-        await ApplyVulnerable(choiceContext, 2);
-        await ApplyWeak(choiceContext, 2);
+        await ApplyDebuff(choiceContext, 2);
     }
 
-    private async Task ApplyWeak(PlayerChoiceContext choiceContext, decimal amount)
+    private async Task ApplyDebuff(PlayerChoiceContext choiceContext, decimal amount)
     {
-        var targets = CombatState.GetOpponentsOf(Owner.Creature).Where(e => e.IsHittable).ToList();
+        var targets = GetHittableCreatures();
         if (targets.Count == 0) return;
 
         await PowerCmd.Apply<WeakPower>(choiceContext, targets, amount, Owner.Creature, null);
-    }
-
-    private async Task ApplyVulnerable(PlayerChoiceContext choiceContext, decimal amount)
-    {
-        var targets = CombatState.GetOpponentsOf(Owner.Creature).Where(e => e.IsHittable).ToList();
-        if (targets.Count == 0) return;
-
         await PowerCmd.Apply<VulnerablePower>(choiceContext, targets, amount, Owner.Creature, null);
     }
 }

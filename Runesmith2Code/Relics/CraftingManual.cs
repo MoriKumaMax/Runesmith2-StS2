@@ -18,7 +18,7 @@ public class CraftingManual : Runesmith2Relic
 
     public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
     {
-        if (player != Owner || player.Creature.CombatState!.RoundNumber > 1) return;
+        if (player != Owner || player.Creature.CombatState is { RoundNumber: > 1 }) return;
 
         Flash();
         var prefs = new CardSelectorPrefs(L10NLookup("RUNESMITH2-CRAFTING_MANUAL.selectionScreenPrompt"), 0, 1)

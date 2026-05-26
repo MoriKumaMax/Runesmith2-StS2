@@ -49,7 +49,7 @@ public class FlammaRune : RuneModel
 
     private async Task ApplyFireDamage(PlayerChoiceContext choiceContext, decimal amount)
     {
-        var list = CombatState.GetOpponentsOf(Owner.Creature).Where(e => e.IsHittable).ToList();
+        var list = GetHittableCreatures();
         if (list.Count == 0) return;
 
         var target = Owner.RunState.Rng.CombatTargets.NextItem(list);

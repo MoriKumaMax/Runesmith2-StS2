@@ -31,8 +31,8 @@ public class AquaVar : DynamicVar
     {
         var modifiedValue = BaseValue;
 
-        if (runGlobalHooks)
-            modifiedValue = RunesmithHook.ModifyElementsGain(card.CombatState!, card.Owner, Elements.WithAqua(IntValue),
+        if (runGlobalHooks && card.CombatState != null)
+            modifiedValue = RunesmithHook.ModifyElementsGain(card.CombatState, card.Owner, Elements.WithAqua(IntValue),
                 ValueProp.Move, card, out _).Aqua;
 
         PreviewValue = modifiedValue;

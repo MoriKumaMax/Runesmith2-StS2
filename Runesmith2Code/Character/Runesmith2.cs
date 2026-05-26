@@ -24,7 +24,7 @@ public class Runesmith2 : PlaceholderCharacterModel
 
     public override Color NameColor => Color;
     public override CharacterGender Gender => CharacterGender.Feminine;
-    public override int StartingHp => 70;
+    public override int StartingHp => 75;
 
     public override IEnumerable<CardModel> StartingDeck =>
     [

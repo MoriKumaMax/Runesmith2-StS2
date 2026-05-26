@@ -40,7 +40,7 @@ public class CoreCrystal : Runesmith2Relic
 
     public override async Task AfterPlayerTurnStartLate(PlayerChoiceContext choiceContext, Player player)
     {
-        if (player == Owner && player.Creature.CombatState!.RoundNumber <= 1)
+        if (player == Owner && player.Creature.CombatState is { RoundNumber: <= 1 })
             await RunesmithCardCmd.Enhance(choiceContext, Owner,
                 PileType.Hand.GetPile(Owner).Cards.Where(c => c.CanEnhance()), null, 1);
     }

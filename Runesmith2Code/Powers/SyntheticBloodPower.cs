@@ -17,12 +17,6 @@ namespace Runesmith2.Runesmith2Code.Powers;
 
 public class SyntheticBloodPower : Runesmith2Power
 {
-    private class Data
-    {
-        public CardModel? CardToModify;
-        public int AmountWhenCardPlayed;
-    }
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

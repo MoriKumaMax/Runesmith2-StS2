@@ -32,9 +32,9 @@ public class EnhanceByVar : DynamicVar
     {
         var modifiedValue = BaseValue;
 
-        if (runGlobalHooks)
+        if (runGlobalHooks && card.CombatState != null)
             modifiedValue =
-                RunesmithHook.ModifyEnhanceAmount(card.CombatState!, card.Owner, IntValue, card, out _);
+                RunesmithHook.ModifyEnhanceAmount(card.CombatState, card.Owner, IntValue, card, out _);
 
         PreviewValue = modifiedValue;
     }

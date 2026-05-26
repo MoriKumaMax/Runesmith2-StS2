@@ -32,11 +32,11 @@ public partial class NElementsCounter : Control
 
     private Player? _player;
 
-    private Control _rotationLayers;
+    private Control _rotationLayers = null!;
 
-    private TextureRect _icon;
+    private TextureRect _icon = null!;
 
-    private ShaderMaterial _hsv;
+    private ShaderMaterial _hsv = null!;
 
     private float _lerpingIgnisCount;
 
@@ -52,7 +52,7 @@ public partial class NElementsCounter : Control
 
     private Elements _displayedElementsCount = new();
 
-    private MegaLabel[] _labels;
+    private MegaLabel[] _labels = [];
 
     private Tween? _hsvTween;
 

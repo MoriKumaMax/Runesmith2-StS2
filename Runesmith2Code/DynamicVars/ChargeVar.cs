@@ -32,8 +32,8 @@ public class ChargeVar : DynamicVar
     {
         var modifiedValue = BaseValue;
 
-        if (runGlobalHooks)
-            modifiedValue = RunesmithHook.ModifyCharge(card.CombatState!, card.Owner, BaseValue, ValueProp.Move, card,
+        if (runGlobalHooks && card.CombatState != null)
+            modifiedValue = RunesmithHook.ModifyCharge(card.CombatState, card.Owner, BaseValue, ValueProp.Move, card,
                 null, out _);
 
         PreviewValue = modifiedValue;

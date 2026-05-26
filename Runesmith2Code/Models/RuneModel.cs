@@ -7,6 +7,7 @@ using Godot;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -18,7 +19,6 @@ using Runesmith2.Runesmith2Code.Character;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Hooks;
 using Runesmith2.Runesmith2Code.HoverTips;
-using Runesmith2.Runesmith2Code.Models.Runes;
 using Runesmith2.Runesmith2Code.Nodes.Runes;
 using Runesmith2.Runesmith2Code.Utils;
 
@@ -177,7 +177,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
         }
     }
 
-    protected ICombatState CombatState => Owner.Creature.CombatState!;
+    protected ICombatState? CombatState => Owner.Creature.CombatState;
 
     public override bool ShouldReceiveCombatHooks => true;
 
@@ -254,7 +254,8 @@ public abstract class RuneModel : AbstractModel, ICustomModel
     // Note: Rune value shouldn't get modified after craft but having this just in case
     protected decimal ModifyRuneValue(decimal result)
     {
-        return RunesmithHook.ModifyRuneValue(Owner.Creature.CombatState!, Owner, result);
+        if (Owner.Creature.CombatState == null) return result;
+        return RunesmithHook.ModifyRuneValue(Owner.Creature.CombatState, Owner, result);
     }
 
     protected override void AfterCloned()
@@ -286,5 +287,10 @@ public abstract class RuneModel : AbstractModel, ICustomModel
     public void Upgrade()
     {
         if (IsUpgradeable) Upgraded = true;
+    }
+
+    protected List<Creature> GetHittableCreatures()
+    {
+        return CombatState?.GetOpponentsOf(Owner.Creature).Where(e => e.IsHittable).ToList() ?? [];
     }
 }
