@@ -257,8 +257,8 @@ script = ExtResource("1_t7qk0")
 [node name="OutlineGroup" type="CanvasGroup" parent="."]
 unique_name_in_owner = true
 self_modulate = Color(0.92, 0.92, 0.92, 0.4)
-scale = Vector2(1.055, 0.945)
-skew = -0.2617994
+scale = Vector2(1.1, 0.88)
+skew = -0.34906584
 fit_margin = 40.0
 
 [node name="Outline" type="TextureRect" parent="OutlineGroup"]
@@ -316,6 +316,9 @@ mouse_filter = 1
 
 [node name="Flash" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
+visible = false
+scale = Vector2(1, 0.8)
+skew = -0.34906584
 emitting = false
 amount = 2
 texture = ExtResource("3_indiw")

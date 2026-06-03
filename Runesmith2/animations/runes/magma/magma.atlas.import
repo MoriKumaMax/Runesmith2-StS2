@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cyyn3iq28ctl7"
+path="res://.godot/imported/magma.atlas-f87eac93d2343de36b6dec17bdfaa9e8.spatlas"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/magma/magma.atlas"
+dest_files=["res://.godot/imported/magma.atlas-f87eac93d2343de36b6dec17bdfaa9e8.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

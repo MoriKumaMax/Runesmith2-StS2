@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bsa5bk42cga55"
+path="res://.godot/imported/albus.atlas-48d1142e10ac1833b0a51796da3ac95c.spatlas"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/albus/albus.atlas"
+dest_files=["res://.godot/imported/albus.atlas-48d1142e10ac1833b0a51796da3ac95c.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

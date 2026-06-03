@@ -36,5 +36,5 @@ void fragment() {
 	float erosion_curve_val = texture(erosion_curve, vec2(lifetime)).r;
 	float erosion_val = smoothstep(erosion_curve_val, erosion_curve_val + erosion_offset, texture_color.a);
 
-	COLOR = vec4(lut_color.rgb, erosion_val) * vertex_color;
+	COLOR = vec4(lut_color.rgb, erosion_val * lut_color.a) * vertex_color;
 }

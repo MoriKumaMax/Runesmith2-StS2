@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://trqyd3fehyu2"
+path="res://.godot/imported/saxum.atlas-7a7e921591e603b1bdb9fa5c8e1d3646.spatlas"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/saxum/saxum.atlas"
+dest_files=["res://.godot/imported/saxum.atlas-7a7e921591e603b1bdb9fa5c8e1d3646.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

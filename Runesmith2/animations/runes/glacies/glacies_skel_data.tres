@@ -1,0 +1,20 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=5 format=3 uid="uid://o3sn60i38xxw"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cfx1w04uqxkld" path="res://Runesmith2/animations/runes/glacies/glacies.atlas" id="1_5klxw"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bvqc1xf6wlrp6" path="res://Runesmith2/animations/runes/glacies/glacies.skel" id="2_amr76"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_5klxw"]
+from = "idle_loop"
+to = "trigger"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_amr76"]
+from = "trigger"
+to = "idle_loop"
+mix = 0.2
+
+[resource]
+atlas_res = ExtResource("1_5klxw")
+skeleton_file_res = ExtResource("2_amr76")
+default_mix = 0.1
+animation_mixes = [SubResource("SpineAnimationMix_5klxw"), SubResource("SpineAnimationMix_amr76")]

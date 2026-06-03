@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://dfvj0527b5ir8"
+path="res://.godot/imported/flamma.atlas-ec8dfc9f4dde5ab19766fe4963598825.spatlas"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/flamma/flamma.atlas"
+dest_files=["res://.godot/imported/flamma.atlas-ec8dfc9f4dde5ab19766fe4963598825.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

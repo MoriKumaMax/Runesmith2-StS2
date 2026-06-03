@@ -2,6 +2,7 @@
 
 using BaseLib.Abstracts;
 using BaseLib.Extensions;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -10,6 +11,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Extensions;
+using Runesmith2.Runesmith2Code.Field;
 using Runesmith2.Runesmith2Code.Hooks;
 
 #endregion
@@ -64,5 +66,12 @@ public class RunesmithEnhanceSingletonModel() : CustomSingletonModel(HookType.Co
         if (!cardSource.IsEnhanced()) return 1;
 
         return 1 + cardSource.GetEnhanceMultiplier();
+    }
+    
+    // TODO: Temp solution before placing this inside CombatManager.SetupPlayerTurn
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
+    {
+        var runeQueue = player.PlayerCombatState != null ? RunesmithField.RunesmithCombatState[player.PlayerCombatState]?.RuneQueue : null;
+        if (runeQueue != null) await runeQueue.SetupTurnStart(choiceContext);
     }
 }

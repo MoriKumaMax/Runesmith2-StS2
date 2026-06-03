@@ -199,11 +199,11 @@ public abstract class RuneModel : AbstractModel, ICustomModel
         if (CraftSfx != "") SfxCmd.Play(CraftSfx);
     }
 
-    public Node2D CreateSprite()
+    public NRuneVisuals CreateSprite()
     {
-        var node2D = PreloadManager.Cache.GetScene(SpritePath).Instantiate<Node2D>();
+        var runeVisuals = PreloadManager.Cache.GetScene(SpritePath).Instantiate<NRuneVisuals>();
         // new MegaSprite(node2D.GetNode("SpineSkeleton")).GetAnimationState().SetAnimation("idle_loop");
-        return node2D;
+        return runeVisuals;
     }
 
     public RuneModel ToMutable()
@@ -230,7 +230,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
         return Task.FromResult(false);
     }
 
-    public virtual Task<bool> AfterTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
+    public virtual Task<bool> SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
     {
         return Task.FromResult(false);
     }

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://snmjipiov1pw"
+path="res://.godot/imported/saxum.skel-9ff7ace847690714382e1197d9cc8615.spskel"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/saxum/saxum.skel"
+dest_files=["res://.godot/imported/saxum.skel-9ff7ace847690714382e1197d9cc8615.spskel"]
+
+[params]
+

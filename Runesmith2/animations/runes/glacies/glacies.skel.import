@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bvqc1xf6wlrp6"
+path="res://.godot/imported/glacies.skel-cc63093b0b69a0a390af57d2a3a35375.spskel"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/glacies/glacies.skel"
+dest_files=["res://.godot/imported/glacies.skel-cc63093b0b69a0a390af57d2a3a35375.spskel"]
+
+[params]
+

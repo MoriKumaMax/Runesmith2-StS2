@@ -1,0 +1,30 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://durqvfshxkj3v"]
+
+[ext_resource type="Shader" uid="uid://bir310fvit65u" path="res://Runesmith2/shaders/vfx_common_particle_noise_shader.gdshader" id="1_undhq"]
+[ext_resource type="Texture2D" uid="uid://3afdilsl7gmu" path="res://Runesmith2/images/vfx/noises.png" id="2_xsc6l"]
+
+[sub_resource type="Curve" id="Curve_undhq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.58658344, 0.05028236), -0.004798327, -0.004798327, 0, 0, Vector2(0.84867394, 0.5618509), 2.7042553, 2.7042553, 0, 0, Vector2(1, 0.99999994), 2.0092854, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_xsc6l"]
+curve = SubResource("Curve_undhq")
+
+[sub_resource type="Gradient" id="Gradient_g1apv"]
+offsets = PackedFloat32Array(0, 0.4809287, 1)
+colors = PackedColorArray(0.44, 0.055439994, 0.035199992, 0, 0.5979167, 0.13498321, 0.04714593, 1, 2.2393355, 0.920002, 0.26033512, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vnnko"]
+gradient = SubResource("Gradient_g1apv")
+use_hdr = true
+
+[resource]
+shader = ExtResource("1_undhq")
+shader_parameter/frame_count = 1.0
+shader_parameter/flipbook_size = Vector2(1, 1)
+shader_parameter/lut = SubResource("GradientTexture1D_vnnko")
+shader_parameter/pivot_offset = Vector2(0, 0)
+shader_parameter/erosion_curve = SubResource("CurveTexture_xsc6l")
+shader_parameter/erosion_offset = 0.4
+shader_parameter/noise = ExtResource("2_xsc6l")
+shader_parameter/noise_offset_scale = 0.1

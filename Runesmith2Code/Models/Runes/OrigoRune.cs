@@ -26,9 +26,9 @@ public class OrigoRune : RuneModel
 
     public override (decimal, decimal) TopValue => (0, 2);
 
-    public override (bool, bool) ShowBottomLabel => (false, true);
+    public override (bool, bool) ShowBottomLabel => Upgraded ? (true, true) : (false, false);
 
-    public override (string, string) BottomTextAppend => ("", "+");
+    public override (string, string) BottomTextAppend => Upgraded ? ("+", "+") : ("", "");
 
     public override (decimal, decimal) BottomValue => (-1, -1);
 
@@ -42,7 +42,7 @@ public class OrigoRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Origo>();
 
-    public override async Task<bool> AfterTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task<bool> SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
     {
         if (ChargeVal <= 0) return false;
         await Passive(choiceContext);

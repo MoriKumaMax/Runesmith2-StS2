@@ -1,0 +1,17 @@
+flumen.png
+size:173,42
+filter:Linear,Linear
+flumen
+bounds:2,10,80,30
+flumen1_line
+bounds:84,22,53,18
+flumen2_line
+bounds:2,2,80,6
+flumen3_line
+bounds:84,2,53,18
+flumen_side
+bounds:139,10,30,32
+rotate:90
+flumen_side_line
+bounds:139,2,6,32
+rotate:90

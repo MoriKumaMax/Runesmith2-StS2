@@ -1,10 +1,12 @@
 #region
 
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Cards.Uncommon;
+using Runesmith2.Runesmith2Code.Hooks;
 using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
@@ -25,11 +27,22 @@ public class FlumenRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Flumen>();
 
-    public override async Task<bool> AfterTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
+    private int CardToDraw { set; get; }
+
+    public override decimal ModifyHandDraw(Player player, decimal count)
     {
-        if (ChargeVal <= 0) return false;
-        await Passive(choiceContext);
-        return true;
+        var ret = player != Owner || CardToDraw == 0 ? count : count + CardToDraw;
+        CardToDraw = 0;
+        return ret;
+    }
+
+    public override Task<bool> SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
+    {
+        if (ChargeVal <= 0) return Task.FromResult(false);
+        Trigger();
+        CardToDraw += 1;
+        UseCharge();
+        return Task.FromResult(true);
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)

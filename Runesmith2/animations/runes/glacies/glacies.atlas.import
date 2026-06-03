@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cfx1w04uqxkld"
+path="res://.godot/imported/glacies.atlas-e45978608a03b35cf7a0f1911b3ef0c5.spatlas"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/glacies/glacies.atlas"
+dest_files=["res://.godot/imported/glacies.atlas-e45978608a03b35cf7a0f1911b3ef0c5.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

@@ -30,7 +30,7 @@ public class Fortify : Runesmith2Card
         CardPlay play)
     {
         await CommonActions.CardBlock(this, play);
-
+        
         var card = (await CardSelectCmd.FromHand(choiceContext, Owner,
             new CardSelectorPrefs(RunesmithCardSelectorPrefs.EnhanceSelectionPrompt, 1),
             card => card.CanEnhance(), this

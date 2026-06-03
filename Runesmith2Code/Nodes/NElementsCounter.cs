@@ -13,6 +13,7 @@ using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 
+[GlobalClass]
 public partial class NElementsCounter : Control
 {
     private static readonly StringName _v = new("v");

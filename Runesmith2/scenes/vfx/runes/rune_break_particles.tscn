@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfudt51kp1y4d"]
+
+[ext_resource type="Shader" uid="uid://crhn73wbcubk" path="res://Runesmith2/shaders/vfx_basic_particle_shader.gdshader" id="1_21nxy"]
+[ext_resource type="Texture2D" uid="uid://dhghpltxwjffb" path="res://Runesmith2/images/vfx/rune_pieces.png" id="2_hpklw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_plcpn"]
+shader = ExtResource("1_21nxy")
+shader_parameter/frame_count = 4.0
+shader_parameter/flipbook_size = Vector2(2, 2)
+shader_parameter/pivot_offset = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_21nxy"]
+offsets = PackedFloat32Array(0, 0.8465116, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="BreakParticles" type="CPUParticles2D"]
+self_modulate = Color(0.9098039, 0.8509804, 0.6862745, 1)
+material = SubResource("ShaderMaterial_plcpn")
+emitting = false
+amount = 6
+texture = ExtResource("2_hpklw")
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.1
+draw_order = 1
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector2(0, -1)
+spread = 75.0
+gravity = Vector2(0, 240)
+initial_velocity_min = 70.479996
+initial_velocity_max = 129.22
+angular_velocity_min = -101.05001
+angular_velocity_max = 101.04998
+damping_min = 20.0
+damping_max = 20.0
+angle_min = -19.99999
+angle_max = 20.000011
+scale_amount_min = 0.3
+scale_amount_max = 0.35
+color_ramp = SubResource("Gradient_21nxy")
+anim_offset_max = 1.0

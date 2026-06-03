@@ -145,26 +145,25 @@ public partial class NRuneManager : Control
         TweenLayout();
         UpdateControllerNavigation();
     }
-
+    
     public void BreakRuneAnim(RuneModel rune)
     {
         var breakRune = _runes.Last(n => n.Model == rune);
         var tween = CreateTween();
         _runes.Remove(breakRune);
+        breakRune.OnBreak();
 
         var emptyRune = _runes.FirstOrDefault(n => n.Model == null);
         if (emptyRune != null)
         {
             tween.TweenProperty(emptyRune, "modulate:a", 0, TweenFadeDuration);
-            tween.Parallel().TweenProperty(breakRune, "modulate:a", 0, TweenFadeDuration);
+            tween.Parallel().TweenCallback(Callable.From(breakRune.QueueFreeSafely)).SetDelay(1f);
             tween.Chain().TweenCallback(Callable.From(emptyRune.QueueFreeSafely));
-            tween.Parallel().TweenCallback(Callable.From(breakRune.QueueFreeSafely));
             _runes.Remove(emptyRune);
         }
         else
         {
-            tween.TweenProperty(breakRune, "modulate:a", 0, TweenFadeDuration);
-            tween.Chain().TweenCallback(Callable.From(breakRune.QueueFreeSafely));
+            tween.TweenCallback(Callable.From(breakRune.QueueFreeSafely)).SetDelay(1f);
         }
 
         var newEmptyRune = NRune.Create(LocalContext.IsMe(Player));
@@ -174,6 +173,7 @@ public partial class NRuneManager : Control
         newEmptyRune.Position = position;
         if (breakRune.HasFocus()) _creatureNode.Hitbox.TryGrabFocus();
 
+        // TODO tween layout after tween + break finished?
         TweenLayout();
         UpdateControllerNavigation();
     }

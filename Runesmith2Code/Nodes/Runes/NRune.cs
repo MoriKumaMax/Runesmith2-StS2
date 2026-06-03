@@ -40,39 +40,39 @@ public partial class NRune : NClickableControl
 
     private static readonly Color OverChargeModulateColor = new(1.164f, 1.164f, 1.164f);
 
-    private CanvasGroup _outlineGroup; // empty slot outline
+    private CanvasGroup _outlineGroup = null!; // empty slot outline
 
-    private AnimationPlayer _animationPlayer;
+    private AnimationPlayer _animationPlayer = null!;
 
-    private Panel _chargePanel;
+    private Panel _chargePanel = null!;
 
-    private HSeparator _chargeCross;
+    private HSeparator _chargeCross = null!;
 
-    private Control _visualContainer;
+    private Control _visualContainer = null!;
 
-    private Control _labelContainer;
+    private Control _labelContainer = null!;
 
-    private MegaLabel _topLabel;
+    private MegaLabel _topLabel = null!;
 
-    private MegaLabel _topBreakLabel;
+    private MegaLabel _topBreakLabel = null!;
 
-    private MegaLabel _bottomLabel;
+    private MegaLabel _bottomLabel = null!;
 
-    private MegaLabel _bottomBreakLabel;
+    private MegaLabel _bottomBreakLabel = null!;
 
-    private MegaLabel _chargeLabel;
+    private MegaLabel _chargeLabel = null!;
 
-    private List<VSeparator> _chargeSeparators = new();
+    private readonly List<VSeparator> _chargeSeparators = [];
 
-    private Control _bounds;
+    private Control _bounds = null!;
 
-    private CpuParticles2D _flashParticle;
+    private CpuParticles2D _flashParticle = null!;
 
-    private NSelectionReticle _selectionReticle;
+    private NSelectionReticle _selectionReticle = null!;
 
     private bool _isLocal;
 
-    private Node2D? _sprite;
+    private NRuneVisuals? _sprite;
 
     private Tween? _curTween;
 
@@ -159,7 +159,7 @@ public partial class NRune : NClickableControl
         label.AddThemeConstantOverride("shadow_offset_y", 3);
         label.AddThemeConstantOverride("outline_size", 13);
         label.AddThemeConstantOverride("shadow_outline_size", 0);
-        label.AddThemeFontOverride("font", BaseResourceIndex.FontKreonRegularSpaceOne);
+        label.AddThemeFontOverride("font", BaseResourceIndex.FontKreonBoldShared);
         label.AddThemeFontSizeOverride("font_size", 24);
         label.Text = "";
 
@@ -169,13 +169,13 @@ public partial class NRune : NClickableControl
     public override void _EnterTree()
     {
         base._EnterTree();
-        if (Model != null) Model.Triggered += Flash;
+        if (Model != null) Model.Triggered += Trigger;
     }
 
     public override void _ExitTree()
     {
         base._ExitTree();
-        if (Model != null) Model.Triggered -= Flash;
+        if (Model != null) Model.Triggered -= Trigger;
     }
 
     public void ReplaceRune(RuneModel? model)
@@ -255,9 +255,9 @@ public partial class NRune : NClickableControl
             _topBreakLabel.Visible = false;
             _bottomBreakLabel.Visible = false;
         }
-
-        _sprite.Modulate = Model.ChargeVal <= 0 ? Model.DarkenedColor : Colors.White;
-
+        
+        _sprite.SetChargeStatus(Model.ChargeVal <= 0, Model.DarkenedColor);
+        
         UpdateChargeDisplay(Model.ChargeVal);
     }
 
@@ -302,10 +302,21 @@ public partial class NRune : NClickableControl
         for (var i = 1; i < 9; i++) _chargeSeparators[i - 1].Visible = i < charge;
     }
 
-    private void Flash()
+    private void Trigger()
     {
         _flashParticle.Restart();
         _flashParticle.Emitting = true;
+
+        _sprite?.OnTrigger();
+    }
+
+    public void OnBreak()
+    {
+        _sprite?.OnBreak();
+
+        var tween = CreateTween().SetParallel();
+        tween.TweenProperty(_chargePanel, "modulate", Colors.Transparent, 0.25);
+        tween.TweenProperty(_labelContainer, "modulate", Colors.Transparent, 0.25);
     }
 
     // TODO create and call trigger animation for Runes

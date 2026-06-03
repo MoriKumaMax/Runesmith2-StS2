@@ -1,0 +1,20 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=5 format=3 uid="uid://c616vevymq5pi"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bsa5bk42cga55" path="res://Runesmith2/animations/runes/albus/albus.atlas" id="1_wdqyl"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://indqs5tap77n" path="res://Runesmith2/animations/runes/albus/albus.skel" id="2_r7nnx"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_vcoof"]
+from = "idle/loop_2"
+to = "trigger"
+mix = 0.15
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_hcgt2"]
+from = "trigger"
+to = "idle/loop_2"
+mix = 0.15
+
+[resource]
+atlas_res = ExtResource("1_wdqyl")
+skeleton_file_res = ExtResource("2_r7nnx")
+default_mix = 0.1
+animation_mixes = [SubResource("SpineAnimationMix_vcoof"), SubResource("SpineAnimationMix_hcgt2")]

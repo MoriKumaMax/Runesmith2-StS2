@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bdppcp4k2qubb"
+path="res://.godot/imported/magma.skel-5cefffb2ee522c6e60596cb0ead47b7f.spskel"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/magma/magma.skel"
+dest_files=["res://.godot/imported/magma.skel-5cefffb2ee522c6e60596cb0ead47b7f.spskel"]
+
+[params]
+

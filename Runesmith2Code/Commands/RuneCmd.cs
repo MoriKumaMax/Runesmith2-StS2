@@ -169,6 +169,7 @@ public static class RuneCmd
         Charge(choiceContext, runeQueue.Runes, chargeAmount);
     }
 
+    // TODO Make charge cmd async and await animation.
     public static void Charge(PlayerChoiceContext choiceContext, IEnumerable<RuneModel> runes, int chargeAmount)
     {
         foreach (var rune in runes)

@@ -1,0 +1,17 @@
+mundus.png
+size:156,94
+filter:Linear,Linear
+mundus1
+bounds:2,22,60,70
+mundus1_line
+bounds:112,41,42,51
+mundus2
+bounds:64,36,46,56
+mundus2_line
+bounds:112,3,41,36
+mundus3
+bounds:64,2,32,32
+mundus_side
+bounds:64,2,32,32
+mundus_side_line
+bounds:98,2,6,32

@@ -1,9 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://cj58dq0utoowu"]
+[gd_scene load_steps=6 format=3 uid="uid://cj58dq0utoowu"]
 
-[ext_resource type="Texture2D" uid="uid://cp1d5hob4cn3n" path="res://Runesmith2/images/runes/flamma_rune.png" id="1_eahpl"]
+[ext_resource type="Script" uid="uid://bxbdlpwg4t8n2" path="res://Runesmith2Code/Nodes/Runes/NRuneVisuals.cs" id="1_8vgu8"]
+[ext_resource type="PackedScene" uid="uid://qoq8amhbengs" path="res://Runesmith2/scenes/vfx/runes/rune_particles_glow.tscn" id="2_bjkb5"]
+[ext_resource type="PackedScene" uid="uid://dl3latx1txenn" path="res://Runesmith2/scenes/vfx/runes/rune_particles_spark.tscn" id="4_v5lte"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cvt2h3khcq3fe" path="res://Runesmith2/animations/runes/flamma/flamma_skel_data.tres" id="5_0wvfg"]
+[ext_resource type="PackedScene" uid="uid://bfudt51kp1y4d" path="res://Runesmith2/scenes/vfx/runes/rune_break_particles.tscn" id="5_bjkb5"]
 
 [node name="FlammaRune" type="Node2D"]
+script = ExtResource("1_8vgu8")
 
-[node name="Flamma" type="Sprite2D" parent="."]
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_eahpl")
+[node name="BackParticles" parent="." instance=ExtResource("2_bjkb5")]
+unique_name_in_owner = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("5_0wvfg")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(0.4, 0.4)
+
+[node name="BreakParticles" parent="." instance=ExtResource("5_bjkb5")]
+unique_name_in_owner = true
+position = Vector2(3, -4)
+
+[node name="FrontParticles" parent="." instance=ExtResource("4_v5lte")]
+unique_name_in_owner = true
+
+[editable path="BackParticles"]

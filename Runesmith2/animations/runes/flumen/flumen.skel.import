@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cf278fpwtms1l"
+path="res://.godot/imported/flumen.skel-033f40cb8fbb31f395ac77beabe0b390.spskel"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/flumen/flumen.skel"
+dest_files=["res://.godot/imported/flumen.skel-033f40cb8fbb31f395ac77beabe0b390.spskel"]
+
+[params]
+

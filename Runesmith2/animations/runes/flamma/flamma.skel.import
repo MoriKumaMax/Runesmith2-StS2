@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://d0dph3ivkit6x"
+path="res://.godot/imported/flamma.skel-6d4f6b1315f9e885d53a338b929a7732.spskel"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/flamma/flamma.skel"
+dest_files=["res://.godot/imported/flamma.skel-6d4f6b1315f9e885d53a338b929a7732.spskel"]
+
+[params]
+

@@ -8,26 +8,26 @@
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_hqkpq"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wcy0q"]
 gradient = SubResource("Gradient_k0c8p")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_laqtv"]
 shader = ExtResource("1_5lio4")
 shader_parameter/pivot_offset = Vector2(0, 0)
-shader_parameter/lut = SubResource("GradientTexture1D_hqkpq")
+shader_parameter/lut = SubResource("GradientTexture1D_wcy0q")
 
 [sub_resource type="Curve" id="Curve_w6aoy"]
 _data = [Vector2(0, 0.353), 0.0, -0.753, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_i8kmb"]
+[sub_resource type="CurveTexture" id="CurveTexture_rjv64"]
 curve = SubResource("Curve_w6aoy")
 
 [sub_resource type="Curve" id="Curve_l7p7p"]
 _data = [Vector2(0, 0), 0.0, 11.542, 0, 0, Vector2(0.203, 0.842), 0.0, 0.211, 0, 0, Vector2(1, 1), 0.198, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_s0ho2"]
+[sub_resource type="CurveTexture" id="CurveTexture_pecef"]
 curve = SubResource("Curve_l7p7p")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tumjn"]
@@ -35,8 +35,8 @@ particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 scale_min = 3.5
 scale_max = 3.5
-scale_curve = SubResource("CurveTexture_s0ho2")
-alpha_curve = SubResource("CurveTexture_i8kmb")
+scale_curve = SubResource("CurveTexture_pecef")
+alpha_curve = SubResource("CurveTexture_rjv64")
 
 [node name="runesmith_energy_vfx_back" type="Node2D"]
 script = ExtResource("1_wcy0q")

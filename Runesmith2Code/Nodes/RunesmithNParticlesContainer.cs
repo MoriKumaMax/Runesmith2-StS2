@@ -15,6 +15,6 @@ public partial class RunesmithNParticlesContainer : NParticlesContainer
         base._Ready();
         if (_particles != null && _particles.Count != 0) return;
         _particles = [];
-        _particles.AddRange(GetChildren().Where(n => n is GpuParticles2D).Cast<GpuParticles2D>());
+        _particles.AddRange(GetChildren().OfType<GpuParticles2D>());
     }
 }

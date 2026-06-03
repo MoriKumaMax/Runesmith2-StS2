@@ -1,5 +1,6 @@
 #region
 
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using Runesmith2.Runesmith2Code.Cards;
@@ -48,13 +49,13 @@ public class AlbusRune : RuneModel
         await ChargeRunes(choiceContext, 2);
     }
 
-    private Task ChargeRunes(PlayerChoiceContext choiceContext, decimal amount)
+    private async Task ChargeRunes(PlayerChoiceContext choiceContext, decimal amount)
     {
         var runeQueue = Owner.PlayerCombatState?.RuneQueue();
-        if (runeQueue == null) return Task.CompletedTask;
+        if (runeQueue == null) return;
 
         PlayPassiveSfx();
         RuneCmd.Charge(choiceContext, runeQueue.Runes.Where(r => r is not AlbusRune), (int)amount);
-        return Task.CompletedTask;
+        await Cmd.CustomScaledWait(0.2f, 0.3f);
     }
 }

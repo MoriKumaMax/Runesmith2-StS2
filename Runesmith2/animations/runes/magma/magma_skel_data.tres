@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://rjajb81g1s47"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cyyn3iq28ctl7" path="res://Runesmith2/animations/runes/magma/magma.atlas" id="1_xpbf5"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bdppcp4k2qubb" path="res://Runesmith2/animations/runes/magma/magma.skel" id="2_0vuko"]
+
+[resource]
+atlas_res = ExtResource("1_xpbf5")
+skeleton_file_res = ExtResource("2_0vuko")
+default_mix = 0.1

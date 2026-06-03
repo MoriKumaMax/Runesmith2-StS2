@@ -1,0 +1,20 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=5 format=3 uid="uid://cxs86s0whrwpm"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://br0agm3lkyge1" path="res://Runesmith2/animations/runes/flumen/flumen.atlas" id="1_antcr"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cf278fpwtms1l" path="res://Runesmith2/animations/runes/flumen/flumen.skel" id="2_3luqr"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_antcr"]
+from = "idle_loop"
+to = "trigger"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_3luqr"]
+from = "trigger"
+to = "idle_loop"
+mix = 0.1
+
+[resource]
+atlas_res = ExtResource("1_antcr")
+skeleton_file_res = ExtResource("2_3luqr")
+default_mix = 0.1
+animation_mixes = [SubResource("SpineAnimationMix_antcr"), SubResource("SpineAnimationMix_3luqr")]

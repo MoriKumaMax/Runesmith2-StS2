@@ -44,6 +44,7 @@ public class Overload : Runesmith2Card
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         var rune = RuneCmd.ChargeOldest(choiceContext, Owner, DynamicVars[ChargeGainVar.defaultName].IntValue);
 
         if (rune != null && rune.ChargeVal >= DynamicVars[ThresholdVarKey].IntValue)

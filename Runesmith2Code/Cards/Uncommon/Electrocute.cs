@@ -35,7 +35,7 @@ public class Electrocute : Runesmith2Card
 
         // RuneCmd.ChargeNewest(choiceContext, Owner, DynamicVars[ChargeGainVar.defaultName].IntValue);
 
-        var prefs = new CardSelectorPrefs(RunesmithCardSelectorPrefs.StasisSelectionPrompt, DynamicVars.Cards.IntValue);
+        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, DynamicVars.Cards.IntValue);
         var pile = PileType.Draw.GetPile(Owner);
         var cards = (await CardSelectCmd.FromSimpleGrid(choiceContext,
             pile.Cards.Where(c => c.CanStasis()).ToList(), Owner, prefs)).ToList();

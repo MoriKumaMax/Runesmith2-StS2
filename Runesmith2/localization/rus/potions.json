@@ -1,0 +1,8 @@
+{
+  "RUNESMITH2-RGB_POTION.description": "Дает [blue]{Elements}[/blue] {Elements:rs2Icon(0)}.",
+  "RUNESMITH2-RGB_POTION.title": "Трехцветное зелье",
+  "RUNESMITH2-ICE_IN_A_BOTTLE.description": "Накладывает [blue]{IceColdPower}[/blue] [gold]Обледенения[/gold].",
+  "RUNESMITH2-ICE_IN_A_BOTTLE.title": "Лед в бутылке",
+  "RUNESMITH2-IRON_SUPPLEMENT.description": "[gold]Полирует[/gold] [blue]1[/blue] карту на [blue]+{EnhanceBy}[/blue].",
+  "RUNESMITH2-IRON_SUPPLEMENT.title": "Примесь железа"
+}

@@ -21,6 +21,11 @@ public class AssemblerPower : Runesmith2Power
     
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
+    private class Data
+    {
+        public CardModel? PickedCard;
+    }
+    
     private CardModel? PickedCard { get; set; }
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips
@@ -37,17 +42,19 @@ public class AssemblerPower : Runesmith2Power
 
     public void PickCard(CardModel card)
     {
-        PickedCard = card;
+        GetInternalData<Data>().PickedCard = card;
     }
 
     public override async Task AfterAutoPrePlayPhaseEntered(PlayerChoiceContext choiceContext, Player player)
     {
         if (player != Owner.Player) return;
 
-        if (PickedCard != null)
+        var internalData = GetInternalData<Data>();
+
+        if (internalData.PickedCard != null)
         {
             Flash();
-            await CardCmd.AutoPlay(choiceContext, PickedCard.CreateDupe(), null);
+            await CardCmd.AutoPlay(choiceContext, internalData.PickedCard.CreateDupe(), null);
         }
     }
 }

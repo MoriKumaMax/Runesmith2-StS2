@@ -1,0 +1,16 @@
+magma.png
+size:68,176
+filter:Linear,Linear
+magma1
+bounds:2,68,64,64
+magma1_line
+bounds:2,2,64,64
+magma2
+bounds:2,134,32,32
+magma_side
+bounds:2,134,32,32
+magma2_line
+bounds:36,146,28,28
+magma_side_line
+bounds:2,168,6,32
+rotate:90

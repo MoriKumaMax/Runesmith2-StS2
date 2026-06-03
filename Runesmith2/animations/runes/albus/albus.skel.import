@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://indqs5tap77n"
+path="res://.godot/imported/albus.skel-adfddca983093dd61800a41caaefa277.spskel"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/albus/albus.skel"
+dest_files=["res://.godot/imported/albus.skel-adfddca983093dd61800a41caaefa277.spskel"]
+
+[params]
+

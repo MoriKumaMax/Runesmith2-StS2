@@ -1,9 +1,91 @@
-[gd_scene load_steps=2 format=3 uid="uid://b045fovckefqe"]
+[gd_scene load_steps=18 format=3 uid="uid://b045fovckefqe"]
 
-[ext_resource type="Texture2D" uid="uid://c3ynt2cpl7yka" path="res://Runesmith2/images/runes/flumen_rune.png" id="1_62l7i"]
+[ext_resource type="Script" uid="uid://bxbdlpwg4t8n2" path="res://Runesmith2Code/Nodes/Runes/NRuneVisuals.cs" id="1_xdfkq"]
+[ext_resource type="PackedScene" uid="uid://qoq8amhbengs" path="res://Runesmith2/scenes/vfx/runes/rune_particles_glow.tscn" id="2_ri5j6"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cxs86s0whrwpm" path="res://Runesmith2/animations/runes/flumen/flumen_skel_data.tres" id="3_5rq7y"]
+[ext_resource type="Script" uid="uid://c0nvyc7bf102m" path="res://Runesmith2Code/Nodes/NRuneParticlesContainer.cs" id="4_5rq7y"]
+[ext_resource type="PackedScene" uid="uid://bfudt51kp1y4d" path="res://Runesmith2/scenes/vfx/runes/rune_break_particles.tscn" id="4_xdfkq"]
+[ext_resource type="Shader" uid="uid://by16n3xxe7n36" path="res://Runesmith2/shaders/vfx_scrolling_particle_noise_shader.gdshader" id="5_fh10g"]
+[ext_resource type="Texture2D" uid="uid://cse0wb677wsj5" path="res://Runesmith2/images/vfx/square_mask.png" id="6_8ow4g"]
+[ext_resource type="Texture2D" uid="uid://3afdilsl7gmu" path="res://Runesmith2/images/vfx/noises.png" id="7_xdfkq"]
+[ext_resource type="Texture2D" uid="uid://xd6krkbks8ug" path="res://Runesmith2/images/vfx/waves_vfx.png" id="8_l1dpd"]
+
+[sub_resource type="Curve" id="Curve_h2nll"]
+_data = [Vector2(0, 1), 0.0, -3.177476, 0, 0, Vector2(0.41809672, 0.21370012), 0.05109096, 0.05109096, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_38k87"]
+curve = SubResource("Curve_h2nll")
+
+[sub_resource type="Gradient" id="Gradient_ojrk2"]
+offsets = PackedFloat32Array(0.11608624, 0.2172471, 0.5936982, 0.88557214, 0.9701493)
+colors = PackedColorArray(1, 1, 1, 1, 0.6830302, 0.97210836, 1, 1, 0.46942738, 0.785907, 0.94166666, 1, 0.6830302, 0.97210836, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8ow4g"]
+gradient = SubResource("Gradient_ojrk2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xdfkq"]
+shader = ExtResource("5_fh10g")
+shader_parameter/tex_scroll_speed = Vector2(-0.92, 0)
+shader_parameter/lut_scroll_speed = 1.3
+shader_parameter/lut = SubResource("GradientTexture1D_8ow4g")
+shader_parameter/pivot_offset = Vector2(0, 0)
+shader_parameter/erosion_curve = SubResource("CurveTexture_38k87")
+shader_parameter/erosion_offset = 0.25
+shader_parameter/noise = ExtResource("7_xdfkq")
+shader_parameter/noise_offset_scale = Vector2(0.1, 0.1)
+shader_parameter/mask = ExtResource("6_8ow4g")
+
+[sub_resource type="Curve" id="Curve_8ow4g"]
+_data = [Vector2(0, 0), 0.0, 6.347874, 0, 0, Vector2(0.16372392, 0.8555292), 0.06278675, 0.06278675, 0, 0, Vector2(0.7576244, 0.54364556), -1.0417334, -1.0417334, 0, 0, Vector2(1, 0), -3.365602, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_xdfkq"]
+curve = SubResource("Curve_8ow4g")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l1dpd"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_xdfkq")
 
 [node name="FlumenRune" type="Node2D"]
+script = ExtResource("1_xdfkq")
 
-[node name="Flumen" type="Sprite2D" parent="."]
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_62l7i")
+[node name="BackParticles" parent="." instance=ExtResource("2_ri5j6")]
+unique_name_in_owner = true
+
+[node name="vfx_common_glow" parent="BackParticles" index="0"]
+self_modulate = Color(0.10782356, 0.83497894, 1.298, 1)
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("3_5rq7y")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(0.4, 0.4)
+
+[node name="BreakParticles" parent="." instance=ExtResource("4_xdfkq")]
+unique_name_in_owner = true
+position = Vector2(4, -4)
+
+[node name="FrontParticles" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_5rq7y")
+
+[node name="waves_vfx" type="GPUParticles2D" parent="FrontParticles"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_xdfkq")
+position = Vector2(3.9999998, -4)
+scale = Vector2(0.345, 0.44)
+skew = -0.34906584
+emitting = false
+amount = 1
+texture = ExtResource("8_l1dpd")
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_l1dpd")
+
+[editable path="BackParticles"]

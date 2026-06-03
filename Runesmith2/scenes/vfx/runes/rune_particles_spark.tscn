@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://dl3latx1txenn"]
+
+[ext_resource type="Script" uid="uid://c0nvyc7bf102m" path="res://Runesmith2Code/Nodes/NRuneParticlesContainer.cs" id="1_g0354"]
+[ext_resource type="Texture2D" uid="uid://d24oe0vhv65g2" path="res://Runesmith2/images/vfx/spark_particle.png" id="2_33k8x"]
+
+[sub_resource type="Curve" id="Curve_0wvfg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7608347, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.6303725, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_y4vq5"]
+curve = SubResource("Curve_0wvfg")
+
+[sub_resource type="Gradient" id="Gradient_jbjmk"]
+offsets = PackedFloat32Array(0.052991454, 0.25128207)
+colors = PackedColorArray(3.770309, 3.770309, 3.770309, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_plcpn"]
+gradient = SubResource("Gradient_jbjmk")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_ry7wn"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.03792), 0.0, 0.0, 0, 0, Vector2(0.4141252, 0.008635044), 0.0, 0.0, 0, 0, Vector2(0.5537721, -0.1280272), 0.0, 0.0, 0, 0, Vector2(0.72873193, 0.11601257), 0.0, 0.0, 0, 0, Vector2(0.8828251, -0.088980675), 0.0, 0.0, 0, 0, Vector2(1, 0.04768157), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_wrl2l"]
+curve = SubResource("Curve_ry7wn")
+
+[sub_resource type="Curve" id="Curve_vxrg0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.262338, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_w8b2h"]
+curve = SubResource("Curve_vxrg0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tymr2"]
+lifetime_randomness = 0.8
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector3(0.1, -1, 0)
+spread = 35.0
+initial_velocity_min = 150.0
+initial_velocity_max = 300.0
+orbit_velocity_min = -0.6499999
+orbit_velocity_max = 0.65000015
+orbit_velocity_curve = SubResource("CurveTexture_wrl2l")
+gravity = Vector3(0, 650, 0)
+scale_min = 0.29999998
+scale_max = 0.79999995
+scale_curve = SubResource("CurveTexture_w8b2h")
+color_ramp = SubResource("GradientTexture1D_plcpn")
+alpha_curve = SubResource("CurveTexture_y4vq5")
+
+[node name="rune_particles_spark" type="Node2D"]
+script = ExtResource("1_g0354")
+
+[node name="vfx_spark" type="GPUParticles2D" parent="."]
+position = Vector2(7, 4)
+emitting = false
+amount = 20
+texture = ExtResource("2_33k8x")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_tymr2")

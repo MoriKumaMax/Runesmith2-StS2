@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dlbn4ttl3d5ef"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://4hxlo8dui4k1" path="res://Runesmith2/animations/runes/mundus/mundus.atlas" id="1_vm5nr"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cmscpjqbp58l7" path="res://Runesmith2/animations/runes/mundus/mundus.skel" id="2_5s6ae"]
+
+[resource]
+atlas_res = ExtResource("1_vm5nr")
+skeleton_file_res = ExtResource("2_5s6ae")
+default_mix = 0.1

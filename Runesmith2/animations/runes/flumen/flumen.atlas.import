@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://br0agm3lkyge1"
+path="res://.godot/imported/flumen.atlas-66fc5e5e95c2c8b26d93e988f91bfca3.spatlas"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/flumen/flumen.atlas"
+dest_files=["res://.godot/imported/flumen.atlas-66fc5e5e95c2c8b26d93e988f91bfca3.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

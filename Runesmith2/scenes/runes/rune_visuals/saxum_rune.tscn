@@ -1,9 +1,80 @@
-[gd_scene load_steps=2 format=3 uid="uid://o0ksrv564b8c"]
+[gd_scene load_steps=14 format=3 uid="uid://o0ksrv564b8c"]
 
-[ext_resource type="Texture2D" uid="uid://phl5vrhvq3ik" path="res://Runesmith2/images/runes/icons/saxum_rune.png" id="1_0b3an"]
+[ext_resource type="Script" uid="uid://7wp8phd4gsr3" path="res://Runesmith2Code/Nodes/Runes/NRuneVisualsOneTrack.cs" id="1_kva6q"]
+[ext_resource type="PackedScene" uid="uid://qoq8amhbengs" path="res://Runesmith2/scenes/vfx/runes/rune_particles_glow.tscn" id="1_ygwr0"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cdpwigv0w8wks" path="res://Runesmith2/animations/runes/saxum/saxum_skel_data.tres" id="2_tfjkt"]
+[ext_resource type="PackedScene" uid="uid://bfudt51kp1y4d" path="res://Runesmith2/scenes/vfx/runes/rune_break_particles.tscn" id="3_tfjkt"]
+[ext_resource type="Texture2D" uid="uid://cvohpj6sugrfj" path="res://Runesmith2/images/vfx/hexagon_ring.png" id="5_e6hro"]
+[ext_resource type="Script" uid="uid://c0nvyc7bf102m" path="res://Runesmith2Code/Nodes/NRuneParticlesContainer.cs" id="5_kva6q"]
+
+[sub_resource type="Curve" id="Curve_kva6q"]
+_data = [Vector2(0, 0), 0.0, 6.549277, 0, 0, Vector2(0.18138042, 0.6241787), 1.3303218, 1.3303218, 0, 0, Vector2(0.64526486, 0.8120893), -0.41230306, -0.41230306, 0, 0, Vector2(1, 0), -6.288389, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_fnvfa"]
+curve = SubResource("Curve_kva6q")
+
+[sub_resource type="Gradient" id="Gradient_qpwpt"]
+offsets = PackedFloat32Array(0.3025641, 0.61367524, 0.9008547, 1)
+colors = PackedColorArray(0.9275139, 2.4218268, 0.8488657, 1, 0.3647059, 1, 0.32941177, 1, 0.35862073, 0.9833149, 0.3239155, 1, 0.29594362, 0.81145835, 0.2673039, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8imv2"]
+gradient = SubResource("Gradient_qpwpt")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_uiey0"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0.4815092), 0.0, 3.748941, 0, 0, Vector2(1, 2.3410926), 1.243939, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_etuaf"]
+curve = SubResource("Curve_uiey0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j4ou5"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.39999998
+scale_max = 0.39999998
+scale_curve = SubResource("CurveTexture_etuaf")
+color_ramp = SubResource("GradientTexture1D_8imv2")
+alpha_curve = SubResource("CurveTexture_fnvfa")
 
 [node name="SaxumRune" type="Node2D"]
+script = ExtResource("1_kva6q")
 
-[node name="Saxum" type="Sprite2D" parent="."]
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_0b3an")
+[node name="BackParticles" parent="." instance=ExtResource("1_ygwr0")]
+unique_name_in_owner = true
+
+[node name="vfx_common_glow" parent="BackParticles" index="0"]
+self_modulate = Color(0.16615519, 1.298, 0, 1)
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_tfjkt")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(0.4, 0.4)
+
+[node name="BreakParticles" parent="." instance=ExtResource("3_tfjkt")]
+unique_name_in_owner = true
+position = Vector2(2, -6)
+
+[node name="FrontParticles" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_kva6q")
+
+[node name="vfx_hexagon_ring" type="GPUParticles2D" parent="FrontParticles"]
+position = Vector2(2, -6)
+emitting = false
+amount = 3
+texture = ExtResource("5_e6hro")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.45
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_j4ou5")
+
+[editable path="BackParticles"]

@@ -9,23 +9,8 @@ using Runesmith2.Runesmith2Code.Field;
 
 namespace Runesmith2.Runesmith2Code.Patches;
 
-// Ties the RuneQueue start and end turn triggers to the OrbQueue's triggers
-[HarmonyPatch(typeof(OrbQueue), nameof(OrbQueue.AfterTurnStart))]
-internal class OrbQueueAfterTurnStartPatch
-{
-    [HarmonyPostfix]
-    private static async Task Postfix(Task results, PlayerChoiceContext choiceContext, OrbQueue __instance)
-    {
-        await results;
-        var playerCombatState = __instance._owner.PlayerCombatState;
-        if (playerCombatState == null) return;
-        var runeQueue = RunesmithField.RunesmithCombatState[playerCombatState]?.RuneQueue;
-        if (runeQueue == null) return;
-
-        await runeQueue.AfterTurnStart(choiceContext);
-    }
-}
-
+// Ties the RuneQueue end turn triggers to the OrbQueue's triggers
+// Start of turn trigger is done at Hook.BeforeHandDraw using SingletonModel
 [HarmonyPatch(typeof(OrbQueue), nameof(OrbQueue.BeforeTurnEnd))]
 internal class OrbQueueBeforeTurnEndPatch
 {
@@ -34,8 +19,7 @@ internal class OrbQueueBeforeTurnEndPatch
     {
         await results;
         var playerCombatState = __instance._owner.PlayerCombatState;
-        if (playerCombatState == null) return;
-        var runeQueue = RunesmithField.RunesmithCombatState[playerCombatState]?.RuneQueue;
+        var runeQueue = playerCombatState != null ? RunesmithField.RunesmithCombatState[playerCombatState]?.RuneQueue : null;
         if (runeQueue == null) return;
 
         await runeQueue.BeforeTurnEnd(choiceContext);

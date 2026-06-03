@@ -18,22 +18,31 @@ public class GrindstonePower : Runesmith2Power
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
+    
+    private class Data
+    {
+        public CardModel? OwnerCard;
+    }
 
-    private CardModel? _ownerCard;
-
+    protected override object InitInternalData()
+    {
+        return new Data();
+    }
+    
     public void SetOwnerCard(CardModel card)
     {
-        _ownerCard = card;
+        GetInternalData<Data>().OwnerCard = card;
     }
 
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (Owner.Player == null) return;
         var card = cardPlay.Card;
-        if (card == _ownerCard)
+        var internalData = GetInternalData<Data>();
+        if (card == internalData.OwnerCard)
         {
             // Prevent Grindstone from upgrading itself immediately after play.
-            _ownerCard = null;
+            internalData.OwnerCard = null;
             return;
         }
 
