@@ -107,6 +107,7 @@ public partial class NRuneManager : Control
         var nRune = NRune.Create(LocalContext.IsMe(Player));
         var count = _runes.Count;
         _runeContainer?.AddChildSafely(nRune);
+        _runeContainer?.MoveChildSafely(nRune, 0);
         _runes.Add(nRune);
         nRune.Position = GetRunePosition(count);
 

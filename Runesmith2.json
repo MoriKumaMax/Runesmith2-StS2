@@ -3,7 +3,7 @@
   "name": "Runesmith2",
   "author": "Blizzarre",
   "description": "Adds a new character called \"The Runesmith\". She's a character centered around Enhancing cards and Crafting Runes.\n\nRussian translation by NitaBlade.",
-  "version": "v0.4.0",
+  "version": "v0.4.1",
   "min_game_version": "0.107.0",
   "has_pck": true,
   "has_dll": true,

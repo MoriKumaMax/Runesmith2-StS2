@@ -26,6 +26,11 @@ public class AssemblerPower : Runesmith2Power
         public CardModel? PickedCard;
     }
     
+    protected override object InitInternalData()
+    {
+        return new Data();
+    }
+    
     private CardModel? PickedCard { get; set; }
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips
