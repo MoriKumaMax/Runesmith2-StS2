@@ -38,6 +38,7 @@ public class GrindstonePower : Runesmith2Power
     {
         if (Owner.Player == null) return;
         var card = cardPlay.Card;
+        if (card.Owner != Owner.Player) return;
         var internalData = GetInternalData<Data>();
         if (card == internalData.OwnerCard)
         {
@@ -60,6 +61,7 @@ public class GrindstonePower : Runesmith2Power
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        await PowerCmd.Decrement(this);
+        if (player == Owner.Player)
+            await PowerCmd.Decrement(this);
     }
 }

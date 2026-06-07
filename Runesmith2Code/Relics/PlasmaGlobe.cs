@@ -39,7 +39,7 @@ public class PlasmaGlobe : Runesmith2Relic, IModifyPotencyAdditive, IModifyCharg
     {
         if (cardSource != null)
         {
-            if (cardSource.Owner.Creature != Owner.Creature) return 0m;
+            if (cardSource.Owner != Owner) return 0m;
         }
         else if (Owner != player)
         {

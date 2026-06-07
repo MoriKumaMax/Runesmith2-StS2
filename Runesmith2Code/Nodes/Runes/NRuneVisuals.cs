@@ -225,7 +225,7 @@ public partial class NRuneVisuals : Node2D
         if (isDepleted == _currChargeDepleted) return;
         
         _targetModulate = isDepleted ? darkenedColor : Colors.White;
-        _targetTimeScale = isDepleted ? 0 : 1;
+        _targetTimeScale = isDepleted ? 0.35f : 1;
         _currChargeDepleted = isDepleted;
         
         UpdateChargeVisualAfterAnimationFinished();

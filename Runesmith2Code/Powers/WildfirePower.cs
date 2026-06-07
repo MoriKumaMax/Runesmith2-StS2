@@ -18,6 +18,10 @@ public class WildfirePower : Runesmith2Power
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        await RunesmithPlayerCmd.GainElements(new Elements(Amount, Amount, 0), player);
+        if (player == Owner.Player)
+        {
+            Flash();
+            await RunesmithPlayerCmd.GainElements(new Elements(Amount, Amount, 0), player);
+        }
     }
 }
