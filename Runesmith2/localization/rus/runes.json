@@ -1,5 +1,5 @@
 {
-  "RUNESMITH2-AETUS_RUNE.description": "[gold]Руна[/gold]: дает {energyPrefix:energyIcons(1)}.",
+  "RUNESMITH2-AETUS_RUNE.description": "[gold]Руна[/gold]: дает энергию.",
   "RUNESMITH2-AETUS_RUNE.smartDescription": "[gold]Пассивный эффект:[/gold] дает {energyPrefix:energyIcons(1)} в начале хода.\n[gold]Разрушение:[/gold] дает {energyPrefix:energyIcons(2)}.",
   "RUNESMITH2-AETUS_RUNE.title": "Аэтус",  
   "RUNESMITH2-ALBUS_RUNE.description": "[gold]Руна[/gold]: дает [gold]Заряд[/gold] ВСЕМ [gold]Рунам[/gold], кроме [gold]Альбуса[/gold].",
@@ -15,7 +15,7 @@
   "RUNESMITH2-FLUMEN_RUNE.title": "Флюмен",
   "RUNESMITH2-FULGOR_RUNE.description": "[gold]Руна[/gold]: наносит урон случайному врагу дважды.",
   "RUNESMITH2-FULGOR_RUNE.smartDescription": "[gold]Пассивный эффект:[/gold] наносит [blue]{Passive}[/blue] урона случайному врагу дважды.\n[gold]Разрушение:[/gold] наносит [blue]{Break}[/blue] урона случайному врагу [blue]4[/blue] раза.",
-  "RUNESMITH2-FULGOR_RUNE.title": "Фульгор",
+  "RUNESMITH2-FULGOR_RUNE.title": "Фульгор",  
   "RUNESMITH2-GLACIES_RUNE.description": "[gold]Руна[/gold]: накладывает [blue]2[/blue] [gold]Обледенения[/gold] на ВСЕХ врагов.",
   "RUNESMITH2-GLACIES_RUNE.smartDescription": "[gold]Пассивный эффект:[/gold] накладывает [blue]{CalculatedPassive}[/blue] [gold]Обледенения[/gold] на ВСЕХ врагов.\n[gold]Разрушение:[/gold] накладывает [blue]{CalculatedBreak}[/blue] [gold]Обледенения[/gold] на ВСЕХ врагов.",
   "RUNESMITH2-GLACIES_RUNE.title": "Глациес",  

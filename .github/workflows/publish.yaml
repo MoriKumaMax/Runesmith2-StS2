@@ -12,6 +12,7 @@ concurrency:
 env:
   MEGADOT_VERSION: 4.5.1-m.11
   MEGADOT_BIN_VERSION: 4.5.1
+  SPINE_GODOT_VERSION: 4.2-4.5.1-stable
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -38,6 +39,20 @@ jobs:
       - name: Set Godot path
         run: |
           echo "GODOT_PATH=$(pwd)/megadot/MegaDot_v${MEGADOT_BIN_VERSION}-stable_mono_linux.x86_64" >> "$GITHUB_ENV"
+      - name: Cache spine-godot extension
+        id: cache-spine
+        uses: actions/cache@v4
+        with:
+          path: spine-godot.zip
+          key: spine-godot-${{ env.SPINE_GODOT_VERSION }}
+      - name: Download spine-godot extension
+        if: steps.cache-spine.outputs.cache-hit != 'true'
+        run: |
+          curl -fL --retry 3 -o spine-godot.zip \
+            "https://spine-godot.s3.eu-central-1.amazonaws.com/4.2/${MEGADOT_BIN_VERSION}-stable/spine-godot-extension-${SPINE_GODOT_VERSION}.zip"
+      - name: Install spine-godot extension
+        run: |
+          unzip -oq spine-godot.zip -d "${{ github.workspace }}"
       - name: Import Godot resources
         run: |
           "$GODOT_PATH" --headless --import || true
