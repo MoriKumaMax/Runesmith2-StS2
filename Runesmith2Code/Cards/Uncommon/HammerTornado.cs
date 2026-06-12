@@ -19,7 +19,7 @@ public class HammerTornado : Runesmith2Card
 
     public HammerTornado() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
-        WithDamage(10, 3);
+        WithDamage(10, 4);
         WithVar(new CardsVar(1));
         WithCalculatedVar(CalculatedHitsKey, 1, (card, _) =>
         {
