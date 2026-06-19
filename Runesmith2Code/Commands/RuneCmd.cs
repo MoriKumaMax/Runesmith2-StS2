@@ -129,7 +129,10 @@ public static class RuneCmd
                 cardPlay?.Card, cardPlay, out var potencyModifiers);
             await RunesmithHook.AfterModifyingPotency(combatState, potencyModifiers);
 
-            foreach (var rune in runes) rune.PassiveVal = (int)Math.Max(0, rune.PassiveVal + modifiedPotency);
+            foreach (var rune in runes)
+            {
+                if (rune.IsUsingPotency) rune.PassiveVal = (int)Math.Max(0, rune.PassiveVal + modifiedPotency);
+            }
         }
     }
 

@@ -14,7 +14,7 @@ using Runesmith2.Runesmith2Code.Models;
 
 namespace Runesmith2.Runesmith2Code.Powers;
 
-public class AmpPower : Runesmith2Power, IModifyPotencyAdditive, IAfterRuneCrafted
+public class AmpPower : Runesmith2Power, IModifyPotencyAdditive, IAfterModifyingPotency
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -35,9 +35,8 @@ public class AmpPower : Runesmith2Power, IModifyPotencyAdditive, IAfterRuneCraft
         return Amount;
     }
     
-    public async Task AfterRuneCrafted(PlayerChoiceContext choiceContext, Player player, RuneModel rune)
+    public async Task AfterModifyingPotency()
     {
-        if (Owner.Player != player) return;
-        await PowerCmd.ModifyAmount(choiceContext, this, -Amount, null, null);
+        await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, -Amount, null, null);
     }
 }

@@ -20,7 +20,7 @@ public class Overload : Runesmith2Card
 
     public Overload() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
-        WithVar(new ChargeGainVar(3).WithUpgrade(1));
+        WithVar(new ChargeGainVar(2).WithUpgrade(1));
         WithVar(new DynamicVar(ThresholdVarKey, 5));
         WithTip(RunesmithHoverTip.Charge);
         WithTip(RunesmithHoverTip.Break);
