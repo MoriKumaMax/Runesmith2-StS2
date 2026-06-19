@@ -29,8 +29,9 @@ public class MetalForming : Runesmith2Card
                            ValueProp.Move, card, out var _).Terra;
             },
             ValueProp.Move, 0, 1);
-        WithVars(new TerraVar(1));
+        WithVars(new TerraVar(3));
         WithTip(RunesmithHoverTip.Elements);
+        WithKeyword(CardKeyword.Exhaust);
     }
 
     protected override async Task OnPlay(

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rvribmeiildt"
-path="res://.godot/imported/underposition.png-69f8129d3bb4309253d5b64718cc5f0f.ctex"
+uid="uid://d11uitxs64qir"
+path="res://.godot/imported/lithium_ion.png-a1259a80ff6dbde6980ae49df07edf32.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Runesmith2/images/card_portraits/underposition.png"
-dest_files=["res://.godot/imported/underposition.png-69f8129d3bb4309253d5b64718cc5f0f.ctex"]
+source_file="res://Runesmith2/images/card_portraits/lithium_ion.png"
+dest_files=["res://.godot/imported/lithium_ion.png-a1259a80ff6dbde6980ae49df07edf32.ctex"]
 
 [params]
 

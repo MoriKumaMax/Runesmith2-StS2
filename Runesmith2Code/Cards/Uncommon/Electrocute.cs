@@ -32,13 +32,14 @@ public class Electrocute : Runesmith2Card
             .Targeting(play.Target)
             .Execute(choiceContext);
 
-        // RuneCmd.ChargeNewest(choiceContext, Owner, DynamicVars[ChargeGainVar.defaultName].IntValue);
-
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, DynamicVars.Cards.IntValue);
         var pile = PileType.Draw.GetPile(Owner);
         var cards = (await CardSelectCmd.FromSimpleGrid(choiceContext,
-            pile.Cards.Where(c => c.CanStasis()).ToList(), Owner, prefs)).ToList();
-        foreach (var card in cards) RunesmithCardCmd.Stasis(card);
+            pile.Cards, Owner, prefs)).ToList();
+        foreach (var card in cards.Where(card => card.CanStasis()))
+        {
+            RunesmithCardCmd.Stasis(card);
+        }
         await CardPileCmd.Add(cards, PileType.Draw, CardPilePosition.Top, null, true);
     }
 }

@@ -12,30 +12,24 @@ using Runesmith2.Runesmith2Code.Structs;
 
 #endregion
 
-namespace Runesmith2.Runesmith2Code.Cards.Common;
+namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
 
-public class HitAndRun : Runesmith2Card
+public class LithiumIon : Runesmith2Card
 {
-    public HitAndRun() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    public LithiumIon() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
-        WithDamage(8, 3);
-        WithPower<BracePower>(2, 1);
-        WithVar(new TerraVar(1));
+        WithVar("Amount", 3, 1);
+        WithVar(new AquaVar(1));
         WithTip(RunesmithHoverTip.Elements);
+        WithTip(typeof(AmpPower));
     }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(play.Target);
-        
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target)
-            .WithHitFx("vfx/vfx_attack_blunt")
-            .Execute(choiceContext);
-
-        await CommonActions.ApplySelf<BracePower>(choiceContext, this);
-
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await RunesmithPlayerCmd.GainElements(new Elements(this), Owner, play);
+        await CommonActions.ApplySelf<LithiumIonPower>(choiceContext, this, DynamicVars["Amount"].IntValue);
     }
 }

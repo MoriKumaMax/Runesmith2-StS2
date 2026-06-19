@@ -16,6 +16,7 @@ public class HammerAndChisel : Runesmith2Card
 {
     public HammerAndChisel() : base(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
+        WithEnergy(1);
         WithKeyword(CardKeyword.Exhaust);
     }
 

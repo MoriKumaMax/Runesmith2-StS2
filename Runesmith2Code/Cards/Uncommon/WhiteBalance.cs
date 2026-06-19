@@ -23,7 +23,7 @@ public class WhiteBalance : Runesmith2Card
 {
     public WhiteBalance() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
     {
-        WithDamage(9, 3);
+        WithDamage(10, 3);
         WithEnergy(1);
         WithTip(RunesmithHoverTip.Elements);
         WithEnergyTip();

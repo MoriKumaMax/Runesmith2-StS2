@@ -11,12 +11,13 @@ using Runesmith2.Runesmith2Code.Powers;
 
 namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
 
-public class LaserTurret : Runesmith2Card
+public class SearchEngine : Runesmith2Card
 {
-    public LaserTurret() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+    public SearchEngine() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
-        WithVar("Amount", 3, 1);
-        WithTip(RunesmithHoverTip.Elements);
+        WithKeyword(CardKeyword.Innate, UpgradeType.Add);
+        WithVar("Amount", 1);
+        WithTip(RunesmithHoverTip.Craft);
     }
 
     protected override async Task OnPlay(
@@ -24,6 +25,6 @@ public class LaserTurret : Runesmith2Card
         CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        await CommonActions.ApplySelf<LaserTurretPower>(choiceContext, this, DynamicVars["Amount"].IntValue);
+        await CommonActions.ApplySelf<SearchEnginePower>(choiceContext, this, DynamicVars["Amount"].IntValue);
     }
 }

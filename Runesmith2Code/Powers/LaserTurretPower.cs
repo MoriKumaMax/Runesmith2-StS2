@@ -24,11 +24,12 @@ public class LaserTurretPower : Runesmith2Power, IAfterElementsGained
         CardPlay? cardPlay = null)
     {
         if (player != Owner.Player) return;
+        if (amount.Ignis <= 0) return;
         Flash();
         await Cmd.CustomScaledWait(0.12f, 0.24f);
         foreach (var hittableEnemy in CombatState.HittableEnemies)
             VfxCmd.PlayOnCreatureCenter(hittableEnemy, "vfx/vfx_attack_blunt");
         await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), CombatState.HittableEnemies,
-            amount.Total * Amount, ValueProp.Unpowered, Owner);
+            amount.Ignis * Amount, ValueProp.Unpowered, Owner);
     }
 }

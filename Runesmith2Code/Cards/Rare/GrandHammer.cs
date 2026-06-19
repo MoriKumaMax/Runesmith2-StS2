@@ -7,16 +7,18 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
+using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 
 namespace Runesmith2.Runesmith2Code.Cards.Rare;
 
-public class GrandSlam : Runesmith2Card
+public class GrandHammer : Runesmith2Card
 {
-    public GrandSlam() : base(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
+    public GrandHammer() : base(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
     {
         WithDamage(10);
+        WithTags(RunesmithTags.Hammer);
         WithVar(new EnhanceByVar(1).WithUpgrade(1));
     }
 

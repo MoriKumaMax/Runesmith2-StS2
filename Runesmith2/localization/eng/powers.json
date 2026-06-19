@@ -41,10 +41,16 @@
   "RUNESMITH2-SCRAPPER_POWER.description": "When a Rune is [gold]Broken[/gold], all Runes gain [blue]1[/blue] [gold]Charge[/gold].",
   "RUNESMITH2-SCRAPPER_POWER.smartDescription": "When a Rune is [gold]Broken[/gold], all Runes gain [blue]{Amount}[/blue] [gold]Charge{Amount:plural:|s}.[/gold]",
   "RUNESMITH2-SCRAPPER_POWER.title": "Scrapper",
-  "RUNESMITH2-SYNTHETIC_BLOOD_POWER.description": "For 2 turns, you lose [gold]Elements[/gold] before losing HP.",
-  "RUNESMITH2-SYNTHETIC_BLOOD_POWER.smartDescription": "{Amount:plural:This turn|For [blue]{}[/blue] turns}, you lose {elements:rs2Icon(all)} before losing HP.",
+  "RUNESMITH2-SYNTHETIC_BLOOD_POWER.description": "For [blue]2[/blue] turns, you lose [gold]Ignis[/gold], [gold]Terra[/gold], [gold]Aqua[/gold] before losing HP.",
+  "RUNESMITH2-SYNTHETIC_BLOOD_POWER.smartDescription": "{Amount:plural:This turn|For [blue]{}[/blue] turns}, you lose[br]{elements:rs2Icon(ignis)} {elements:rs2Icon(terra)} {elements:rs2Icon(aqua)} before losing HP.",
   "RUNESMITH2-SYNTHETIC_BLOOD_POWER.title": "Synthetic Blood",
   "RUNESMITH2-WILDFIRE_POWER.description": "At the start of turn, gain {elements:rs2Icon(ignis)} and {elements:rs2Icon(terra)}.",
   "RUNESMITH2-WILDFIRE_POWER.smartDescription": "At the start of turn, gain [blue]{Amount}[/blue] {elements:rs2Icon(ignis)} and [blue]{Amount}[/blue] {elements:rs2Icon(terra)}.",
-  "RUNESMITH2-WILDFIRE_POWER.title": "Wildfire"
+  "RUNESMITH2-WILDFIRE_POWER.title": "Wildfire",
+  "RUNESMITH2-LITHIUM_ION_POWER.description": "At the start of turn, lose {elements:rs2Icon(aqua)} to gain [gold]Amp[/gold].",
+  "RUNESMITH2-LITHIUM_ION_POWER.smartDescription": "At the start of turn, lose [blue]{Aqua}[/blue] {Aqua:rs2Icon(0)} to gain [blue]{Amount}[/blue] [gold]Amp[/gold].",
+  "RUNESMITH2-LITHIUM_ION_POWER.title": "Lithium Ion",
+  "RUNESMITH2-SEARCH_ENGINE_POWER.description": "Whenever you [gold]Craft[/gold] a Rune, draw [blue]1[/blue] card.",
+  "RUNESMITH2-SEARCH_ENGINE_POWER.smartDescription": "Whenever you [gold]Craft[/gold] a Rune, draw [blue]{Amount}[/blue] card{Amount:plural:|s}.",
+  "RUNESMITH2-SEARCH_ENGINE_POWER.title": "Search Engine"
 }
