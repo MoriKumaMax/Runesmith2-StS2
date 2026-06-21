@@ -8,7 +8,7 @@
   "RUNESMITH2-CORE_CRYSTAL.description": "At the start of each combat, gain [blue]{Elements}[/blue] {Elements:rs2Icon(0)} and [gold]Enhance[/gold] ALL cards in your [gold]Hand[/gold].",
   "RUNESMITH2-CORE_CRYSTAL.flavor": "",
   "RUNESMITH2-CORE_CRYSTAL.title": "Core Crystal",
-  "RUNESMITH2-CRAFTING_MANUAL.description": "At the start of each combat, you may select a [gold]Recipe[/gold] card from your [gold]Draw Pile[/gold] to put in your [gold]Hand[/gold]. It's free to play this turn.",
+  "RUNESMITH2-CRAFTING_MANUAL.description": "At the start of each combat, put a random [gold]Recipe[/gold] card from your [gold]Draw Pile[/gold] into your [gold]Hand[/gold]. It's free to play this turn.",
   "RUNESMITH2-CRAFTING_MANUAL.flavor": "",
   "RUNESMITH2-CRAFTING_MANUAL.selectionScreenPrompt": "Put a [gold]Recipe[/gold] card from your [gold]Draw Pile[/gold] into your [gold]Hand[/gold].",
   "RUNESMITH2-CRAFTING_MANUAL.title": "Crafting Manual",

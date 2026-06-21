@@ -8,11 +8,11 @@ using Runesmith2.Runesmith2Code.Powers;
 
 #endregion
 
-namespace Runesmith2.Runesmith2Code.Cards.Rare;
+namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
 
 public class DuctTape : Runesmith2Card
 {
-    public DuctTape() : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
+    public DuctTape() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
         WithTip(RunesmithHoverTip.Stasis);
         WithTip(RunesmithHoverTip.Enhance);

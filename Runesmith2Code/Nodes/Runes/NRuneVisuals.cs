@@ -181,7 +181,7 @@ public partial class NRuneVisuals : Node2D
         _frontParticles?.PlayOneShot();
         _timeScaleTween?.Kill();
         _depletedTween?.Kill();
-        _visual?.Modulate = Colors.Transparent;
+        _visual?.Visible = false;
     }
 
     protected void SetAnimTimeScaleTween(Tween tween)

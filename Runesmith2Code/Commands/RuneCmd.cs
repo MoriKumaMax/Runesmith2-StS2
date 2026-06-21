@@ -226,6 +226,10 @@ public static class RuneCmd
             removed = runeQueue.Remove(brokenRune);
             NCombatRoom.Instance?.GetCreatureNode(player.Creature)?.RuneManager()?.BreakRuneAnim(brokenRune);
         }
+        else
+        {
+            brokenRune.Trigger();
+        }
 
         choiceContext.PushModel(brokenRune);
         await brokenRune.Break(choiceContext);

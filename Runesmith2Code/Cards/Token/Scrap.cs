@@ -40,7 +40,7 @@ public class Scrap : Runesmith2Card
             for (var i = 0; i < count - 1; i++)
             {
                 await RuneCmd.BreakOldest(choiceContext, Owner, false);
-                await Cmd.CustomScaledWait(0.1f, 0.2f);
+                await Cmd.CustomScaledWait(0.15f, 0.25f);
             }
             await RuneCmd.BreakOldest(choiceContext, Owner);
         }

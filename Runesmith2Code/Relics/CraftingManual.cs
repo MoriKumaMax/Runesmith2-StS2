@@ -1,6 +1,7 @@
 #region
 
 using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -16,21 +17,19 @@ public class CraftingManual : Runesmith2Relic
 {
     public override RelicRarity Rarity => RelicRarity.Uncommon;
 
-    public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
-        if (player != Owner || player.Creature.CombatState is { RoundNumber: > 1 }) return;
+        if (player != Owner || Owner.PlayerCombatState is { TurnNumber: > 1 }) return;
 
-        Flash();
-        var prefs = new CardSelectorPrefs(L10NLookup("RUNESMITH2-CRAFTING_MANUAL.selectionScreenPrompt"), 0, 1)
-        {
-            Cancelable = true
-        };
+        var recipes = PileType.Draw.GetPile(player).Cards.Where(c => c.Tags.Contains(RunesmithTags.Recipe)).ToList();
+        if (recipes.Count == 0) return;
 
-        var card = (await CardSelectCmd.FromCombatPile(choiceContext, PileType.Draw.GetPile(Owner), Owner, prefs,
-            c => c.Tags.Contains(RunesmithTags.Recipe))).FirstOrDefault();
+        var card = player.RunState.Rng.CombatCardSelection.NextItem(recipes);
         if (card == null)
             return;
-        _ = await CardPileCmd.Add(card, PileType.Hand);
+        
+        Flash();
         card.SetToFreeThisTurn();
+        await CardPileCmd.Add(card, PileType.Hand);
     }
 }

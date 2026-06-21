@@ -11,11 +11,11 @@ using Runesmith2.Runesmith2Code.Powers;
 
 #endregion
 
-namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
+namespace Runesmith2.Runesmith2Code.Cards.Rare;
 
 public class Scrapper : Runesmith2Card
 {
-    public Scrapper() : base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+    public Scrapper() : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
         WithVar("Amount", 1);
         WithCostUpgradeBy(-1);

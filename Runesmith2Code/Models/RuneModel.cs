@@ -211,7 +211,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
         return orbModel;
     }
 
-    protected void Trigger()
+    public void Trigger()
     {
         Triggered?.Invoke();
     }
