@@ -37,13 +37,16 @@ public class Teleport : Runesmith2Card
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(play.Target?.Player);
+        var targetPlayer = play.Target?.Player;
+        ArgumentNullException.ThrowIfNull(targetPlayer);
         if (HasRune())
         {
+            
             var runes = Owner.PlayerCombatState?.GetRuneQueue()?.Runes;
             var runeOrig = runes?[^1];
             if (runeOrig == null) return;
             var runeCopy = (RuneModel)runeOrig.MutableClone();
+            runeCopy.TransferOwner(targetPlayer);
 
             await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
@@ -51,7 +54,7 @@ public class Teleport : Runesmith2Card
 
             runeCopy.ChargeVal += DynamicVars[ChargeGainVar.defaultName].IntValue;
 
-            await RuneCmd.AddRune(choiceContext, runeCopy, play.Target.Player, play);
+            await RuneCmd.AddRune(choiceContext, runeCopy, targetPlayer, play);
         }
     }
 }

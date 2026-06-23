@@ -158,21 +158,29 @@ public abstract class RuneModel : AbstractModel, ICustomModel
         }
     }
 
+    private Player? _owner;
+    
     public Player Owner
     {
         get
         {
             AssertMutable();
-            return field ?? throw new Exception("Rune " + Id.Entry + " does not have an owner.");
+            return _owner ?? throw new Exception("Rune " + Id.Entry + " does not have an owner.");
         }
         set
         {
             AssertMutable();
-            if (field != null && value != null && value != field)
+            if (_owner != null && value != null && value != _owner)
                 throw new InvalidOperationException("Rune " + Id.Entry + " already has an owner.");
 
-            field = value;
+            _owner = value;
         }
+    }
+
+    public void TransferOwner(Player newOwner)
+    {
+        AssertMutable();
+        _owner = newOwner;
     }
 
     protected ICombatState? CombatState => Owner.Creature.CombatState;
