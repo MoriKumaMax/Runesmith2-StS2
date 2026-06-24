@@ -51,7 +51,7 @@ public class AlbusRune : RuneModel
         if (runeQueue == null) return;
 
         PlayPassiveSfx();
-        RuneCmd.Charge(choiceContext,
+        RuneCmd.ChargeRunes(choiceContext,
             chargeAll ? runeQueue.Runes.Where(r => r != this) : runeQueue.Runes.Where(r => r is not AlbusRune),
             (int)amount);
         await Cmd.CustomScaledWait(0.2f, 0.3f);

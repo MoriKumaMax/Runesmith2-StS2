@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Hooks;
 using Runesmith2.Runesmith2Code.Structs;
+using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 
@@ -24,8 +25,10 @@ public static class RunesmithPlayerCmd
                 cardPlay?.Card, out var modifiers);
             await RunesmithHook.AfterModifyingElementsGain(combatState, modifiers);
             if (finalAmount.Total > 0)
-                // TODO play sfx
+            {
+                RunesmithModSounds.PlayElementsGainSfx();
                 runesmithCombatState?.GainElements(finalAmount);
+            }
 
             await RunesmithHook.AfterElementsGained(combatState, finalAmount, player, cardPlay);
         }

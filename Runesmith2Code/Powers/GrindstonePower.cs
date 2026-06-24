@@ -51,33 +51,35 @@ public class GrindstonePower : Runesmith2Power
             internalData.OwnerCard = null;
             return;
         }
-
-        var hasActivated = false;
+        
+        NCardGrindstoneVfx? vfx = null;
         if (card.IsUpgradable)
         {
+            vfx = CreateVfx(card, cardPlay);
             CardCmd.Upgrade(card);
             Flash();
-            hasActivated = true;
         }
         else if (card.CanEnhance())
         {
+            vfx = CreateVfx(card, cardPlay);
             await RunesmithCardCmd.Enhance(choiceContext, Owner.Player, card, cardPlay, 1, true);
             Flash();
-            hasActivated = true;
+
         }
 
-        if (RunesmithConfig.EnableGrindstoneVfx && hasActivated && cardPlay.ResultPile != PileType.None)
+        if (vfx != null )
         {
-            var cardNode = NCard.FindOnTable(card);
-            if (cardNode == null) return;
-
-            var vfx = NCardGrindstoneVfx.Create(cardNode, card);
-            if (vfx == null) return;
-            
             RunesmithModSounds.PlayGrindStoneSfx();
             await vfx.PlayAnimation(true);
             await Cmd.CustomScaledWait(0.25f, 0.4f);
         }
+    }
+
+    private static NCardGrindstoneVfx? CreateVfx(CardModel card, CardPlay cardPlay)
+    {
+        if (!RunesmithConfig.EnableGrindstoneVfx || cardPlay.ResultPile == PileType.None) return null;
+        var cardNode = NCard.FindOnTable(card);
+        return cardNode != null ? NCardGrindstoneVfx.Create(cardNode, card) : null;
     }
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)

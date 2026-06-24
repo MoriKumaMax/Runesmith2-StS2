@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://baxtoeb3p4qk1"]
+[gd_scene load_steps=19 format=3 uid="uid://baxtoeb3p4qk1"]
 
 [ext_resource type="Shader" uid="uid://badwhyucvwyha" path="res://Runesmith2/shaders/hsv.gdshader" id="1_2d0lk"]
 [ext_resource type="Script" uid="uid://cdux02e1cac2r" path="res://Runesmith2Code/Nodes/NEnhanceTabContainer.cs" id="1_8ael8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://c8ln3ymr7xp43" path="res://Runesmith2/shaders/displacement_shader.gdshader" id="4_8ael8"]
 [ext_resource type="Texture2D" uid="uid://3afdilsl7gmu" path="res://Runesmith2/images/vfx/noises.png" id="5_17dnw"]
 [ext_resource type="Texture2D" uid="uid://v7qrsa67muen" path="res://Runesmith2/images/cardui/stasis_overlay.png" id="6_jk5k3"]
+[ext_resource type="Texture2D" uid="uid://q4r2fsn7vpy" path="res://Runesmith2/images/vfx/star_particle.png" id="7_8ael8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ugspq"]
 resource_local_to_scene = true
@@ -24,6 +25,55 @@ shader_parameter/noise_speed_x = 0.448
 shader_parameter/noise_scale_y = 1.925
 shader_parameter/noise_speed_y = 0.88
 shader_parameter/noise = ExtResource("5_17dnw")
+
+[sub_resource type="Curve" id="Curve_17dnw"]
+_data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.23916532, 1), 0.0, 0.0, 0, 0, Vector2(0.5040129, 0.30204612), 0.0, 0.0, 0, 0, Vector2(0.74959874, 0.6144171), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_jk5k3"]
+curve = SubResource("Curve_17dnw")
+
+[sub_resource type="Curve" id="Curve_ugspq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.27447832, 0.64126146), 0.0, 0.0, 0, 0, Vector2(0.5024077, 0), 0.0, 0.0, 0, 0, Vector2(0.74157304, 0.4435892), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_sjq2u"]
+curve = SubResource("Curve_ugspq")
+
+[sub_resource type="Curve" id="Curve_j8m40"]
+_data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.2199037, 1), 0.0, 0.0, 0, 0, Vector2(0.28089887, 1), 0.0, 0.0, 0, 0, Vector2(0.51524884, 0), 0.0, 0.0, 0, 0, Vector2(0.74959874, 0.6144171), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_27b3b"]
+curve = SubResource("Curve_j8m40")
+
+[sub_resource type="Curve" id="Curve_0o7q5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_bu8ly"]
+curve = SubResource("Curve_0o7q5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_plg00"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(130, 80, 1)
+angle_min = -4.9999895
+angle_max = 5.000011
+gravity = Vector3(0, 0, 0)
+scale_min = 0.26999998
+scale_max = 0.26999998
+scale_curve = SubResource("CurveTexture_27b3b")
+color = Color(0.99486136, 1, 0.7781153, 1)
+alpha_curve = SubResource("CurveTexture_jk5k3")
+emission_curve = SubResource("CurveTexture_sjq2u")
+turbulence_noise_strength = 2.89
+turbulence_noise_scale = 9.359
+turbulence_noise_speed_random = 1.0
+turbulence_influence_min = 0.65000004
+turbulence_influence_max = 0.85
+turbulence_influence_over_life = SubResource("CurveTexture_bu8ly")
 
 [node name="EnhanceTabContainer" type="Control"]
 layout_mode = 3
@@ -67,3 +117,17 @@ mouse_filter = 2
 texture = ExtResource("6_jk5k3")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="StarsParticles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(81, 109)
+emitting = false
+amount = 6
+texture = ExtResource("7_8ael8")
+lifetime = 2.5999999999999996
+explosiveness = 0.28
+visibility_rect = Rect2(-210, -200, 420, 400)
+local_coords = true
+trail_lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_plg00")

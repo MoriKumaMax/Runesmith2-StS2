@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Nodes.Cards.Holders;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.TestSupport;
 using Runesmith2.Runesmith2Code.Extensions;
 
@@ -25,11 +26,11 @@ public partial class NCardGrindstoneVfx : Control
     
     private Node2D _scrollingParticles = null!;
     
-    private GpuParticles2D _vfxSparkParticles = null!;
+    private Node2D _particles = null!;
 
     private Sprite2D _lineGlow = null!;
 
-    private Material _dissolveMaterial = null!;
+    private ShaderMaterial _dissolveMaterial = null!;
 
     private Tween? _tween;
     
@@ -44,15 +45,25 @@ public partial class NCardGrindstoneVfx : Control
         _dissolve = GetNode<TextureRect>("%Dissolve");
         _cardGlowContainer = GetNode<TextureRect>("%CardGlowContainer");
         _scrollingParticles = GetNode<Node2D>("%ScrollingParticles");
-        _vfxSparkParticles = GetNode<GpuParticles2D>("%VfxSparkParticles");
+        _particles = GetNode<Node2D>("%Particles");
         _lineGlow = GetNode<Sprite2D>("%LineGlow");
 
         _dissolve.Visible = false;
         _cardGlowContainer.Visible = false;
         _scrollingParticles.Visible = false;
-        _vfxSparkParticles.Emitting = false;
+        SetParticlesEmitting(false);
 
-        _dissolveMaterial = _dissolve.Material;
+        _dissolveMaterial = (ShaderMaterial) _dissolve.Material;
+        _dissolveMaterial.SetShaderParameter("erosion_tex_offset", new Vector2(Rng.Chaotic.NextFloat(), Rng.Chaotic.NextFloat()));
+    }
+
+    private void SetParticlesEmitting(bool emitting)
+    {
+        _particles.GetChildren();
+        foreach (var node in _particles.GetChildren())
+        {
+            if (node is GpuParticles2D particles) particles.Emitting = emitting;
+        }
     }
     
     public static NCardGrindstoneVfx? Create(
@@ -111,7 +122,7 @@ public partial class NCardGrindstoneVfx : Control
         _dissolve.Visible = true;
         _cardGlowContainer.Visible = true;
         _scrollingParticles.Visible = true;
-        _vfxSparkParticles.Emitting = true;
+        SetParticlesEmitting(true);
         
         var coverDuration = shortVersion ? _coverShortDuration : _coverDuration;
         var idleDuration = shortVersion ? _idleShortDuration : _idleDuration;
@@ -127,7 +138,7 @@ public partial class NCardGrindstoneVfx : Control
             .FromCurrent().SetDelay(coverDuration * 0.9)
             .SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Quad);
         _tween.SetParallel(false);
-        _tween.TweenCallback(Callable.From(() => _vfxSparkParticles.Emitting = false));
+        _tween.TweenCallback(Callable.From(() => SetParticlesEmitting(false)));
         
         if (!(await WaitAndInterruptIfNecessary(coverDuration + idleDuration, _cardNode)))
         {
@@ -138,8 +149,7 @@ public partial class NCardGrindstoneVfx : Control
         UpdateCard(_cardNode, _endCard);
         
         _tween = CreateTween().SetParallel();
-        _tween.TweenProperty(_dissolveMaterial, "shader_parameter/erosion_time", 1f, revealDuration).From(0f)
-            .SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Quad);
+        _tween.TweenProperty(_dissolveMaterial, "shader_parameter/erosion_time", 1f, revealDuration).From(0f);
         _tween.TweenProperty(_cardGlowContainer, "modulate", Colors.Transparent, revealDuration).From(Colors.White);
         
         if (!(await WaitAndInterruptIfNecessary(revealDuration, _cardNode)))

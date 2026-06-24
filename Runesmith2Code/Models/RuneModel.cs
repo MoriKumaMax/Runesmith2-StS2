@@ -1,6 +1,7 @@
 ﻿#region
 
 using BaseLib.Abstracts;
+using BaseLib.Audio;
 using BaseLib.Extensions;
 using Godot;
 using MegaCrit.Sts2.Core.Assets;
@@ -19,6 +20,7 @@ using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Hooks;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Nodes.Runes;
+using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 
@@ -85,11 +87,9 @@ public abstract class RuneModel : AbstractModel, ICustomModel
 
     public virtual bool CanPassive => ChargeVal > 0;
 
-    protected virtual string PassiveSfx => "";
+    protected virtual ModSound? EffectSfx => null;
 
-    protected virtual string BreakSfx => "";
-
-    protected virtual string CraftSfx => "";
+    protected virtual ModSound? CraftSfx => RunesmithModSounds.RuneCraftSfx;
 
     public static HoverTip EmptySlotHoverTipHoverTip => new(new LocString("runes", "RUNESMITH2-EMPTY_SLOT.title"),
         new LocString("runes", "RUNESMITH2-EMPTY_SLOT.description"));
@@ -193,17 +193,12 @@ public abstract class RuneModel : AbstractModel, ICustomModel
 
     protected void PlayPassiveSfx()
     {
-        if (PassiveSfx != "") SfxCmd.Play(PassiveSfx);
-    }
-
-    protected void PlayBreakSfx()
-    {
-        if (BreakSfx != "") SfxCmd.Play(BreakSfx);
+        EffectSfx?.Play();
     }
 
     public void PlayCraftedSfx()
     {
-        if (CraftSfx != "") SfxCmd.Play(CraftSfx);
+        CraftSfx?.Play(pitchVariation: 0.08f);
     }
 
     public NRuneVisuals CreateSprite()

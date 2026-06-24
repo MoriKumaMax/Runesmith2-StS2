@@ -46,7 +46,7 @@ public class Runesonance : Runesmith2Card
         if (runeQueue is { Runes.Count: > 0 })
         {
             var amount = runeQueue.Runes[^1].ChargeVal + DynamicVars[ChargeGainVar.defaultName].IntValue;
-            foreach (var rune in runeQueue.Runes) RuneCmd.SetCharge(choiceContext, rune, amount);
+            RuneCmd.SetCharge(choiceContext, runeQueue.Runes, amount);
         }
     }
 }

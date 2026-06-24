@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b11h1fodxwbq"]
+[gd_scene load_steps=24 format=3 uid="uid://b11h1fodxwbq"]
 
 [ext_resource type="Texture2D" uid="uid://d3hl8rb1t2d14" path="res://Runesmith2/images/cardui/ui_card_mask.png" id="1_02c6j"]
 [ext_resource type="Script" uid="uid://bnhrg2y7kb2va" path="res://Runesmith2Code/Nodes/Vfx/NCardGrindstoneVfx.cs" id="1_51k0h"]
@@ -12,22 +12,25 @@
 _data = [Vector2(0, 0), 0.0, 1.0, 0, 0, Vector2(1, 1), 1.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_oxk7n"]
+[sub_resource type="CurveTexture" id="CurveTexture_51k0h"]
 curve = SubResource("Curve_p5ss6")
 
 [sub_resource type="Gradient" id="Gradient_jg8ep"]
 offsets = PackedFloat32Array(0.0016583748, 1)
 colors = PackedColorArray(0.9534215, 1, 0.6374941, 1, 1, 0.62336385, 0.26262218, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_qw8wh"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hvmo2"]
 gradient = SubResource("Gradient_jg8ep")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qbqd6"]
 resource_local_to_scene = true
 shader = ExtResource("2_51k0h")
-shader_parameter/lut = SubResource("GradientTexture1D_qw8wh")
+shader_parameter/lut = SubResource("GradientTexture1D_hvmo2")
 shader_parameter/pivot_offset = Vector2(0, 0)
-shader_parameter/erosion_curve = SubResource("CurveTexture_oxk7n")
+shader_parameter/tex_speed1 = Vector2(0.13, -0.08)
+shader_parameter/tex_speed2 = Vector2(-0.095, -0.115)
+shader_parameter/erosion_tex_offset = Vector2(0, 0)
+shader_parameter/erosion_curve = SubResource("CurveTexture_51k0h")
 shader_parameter/erosion_offset = 0.1
 shader_parameter/erosion_time = 0.0
 shader_parameter/v_mask = 0.5
@@ -51,6 +54,13 @@ colors = PackedColorArray(8.180328, 8.0346155, 6.9313693, 1, 1.8112725, 1.728720
 gradient = SubResource("Gradient_3ggrx")
 use_hdr = true
 
+[sub_resource type="Curve" id="Curve_51k0h"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.61298084, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hvmo2"]
+curve = SubResource("Curve_51k0h")
+
 [sub_resource type="Curve" id="Curve_1nd4h"]
 _data = [Vector2(0, 0.8584569), 0.0, 1.9675353, 0, 0, Vector2(0.16051364, 1), 0.0, 0.0, 0, 0, Vector2(0.74638844, 0.8682185), -0.6244366, -0.6244366, 0, 0, Vector2(1, 0.27276134), -6.159435, 0.0, 0, 0]
 point_count = 4
@@ -62,10 +72,30 @@ curve = SubResource("Curve_1nd4h")
 lifetime_randomness = 0.25
 particle_flag_align_y = true
 particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 15.0
+direction = Vector3(-0.68, -0.89, 0)
+spread = 25.479
+initial_velocity_min = 284.38
+initial_velocity_max = 511.99
+gravity = Vector3(0, 450, 0)
+damping_min = 16.085001
+damping_max = 23.617
+damping_curve = SubResource("CurveTexture_hvmo2")
+scale_min = 0.79999995
+scale_max = 0.93
+scale_curve = SubResource("CurveTexture_v1f8p")
+color_ramp = SubResource("GradientTexture1D_k05xv")
+alpha_curve = SubResource("CurveTexture_dvbs0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t7uyl"]
+lifetime_randomness = 0.25
+particle_flag_align_y = true
+particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(140, 1, 1)
-direction = Vector3(0, -1, 0)
-spread = 180.0
+emission_box_extents = Vector3(150, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 103.879
 initial_velocity_min = 196.26999
 initial_velocity_max = 423.88
 gravity = Vector3(0, 450, 0)
@@ -89,12 +119,14 @@ offset_left = -150.0
 offset_top = -211.0
 offset_right = 150.0
 offset_bottom = 211.0
+mouse_filter = 2
 texture = ExtResource("1_02c6j")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="Dissolve" type="TextureRect" parent="CardMask"]
 unique_name_in_owner = true
+texture_repeat = 2
 material = SubResource("ShaderMaterial_qbqd6")
 layout_mode = 1
 anchors_preset = 15
@@ -102,30 +134,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("3_hvmo2")
 expand_mode = 1
-
-[node name="ScrollingParticles" type="Node2D" parent="."]
-unique_name_in_owner = true
-
-[node name="LineGlow" type="Sprite2D" parent="ScrollingParticles"]
-unique_name_in_owner = true
-self_modulate = Color(0.9927287, 1, 0.8574477, 1)
-material = SubResource("CanvasItemMaterial_gix77")
-scale = Vector2(1.4062499, 0.12499999)
-texture = ExtResource("4_t7uyl")
-
-[node name="VfxSparkParticles" type="GPUParticles2D" parent="ScrollingParticles"]
-unique_name_in_owner = true
-amount = 360
-texture = ExtResource("5_dvwwu")
-lifetime = 0.8
-fixed_fps = 60
-visibility_rect = Rect2(-150, -200, 300, 400)
-trail_lifetime = 0.68
-trail_sections = 6
-trail_section_subdivisions = 2
-process_material = SubResource("ParticleProcessMaterial_sl47j")
 
 [node name="CardGlowContainer" type="TextureRect" parent="."]
 unique_name_in_owner = true
@@ -136,6 +147,7 @@ offset_left = -150.0
 offset_top = -211.0
 offset_right = 150.0
 offset_bottom = 211.0
+mouse_filter = 2
 texture = ExtResource("1_02c6j")
 expand_mode = 1
 stretch_mode = 4
@@ -148,5 +160,57 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("6_c633u")
 expand_mode = 1
+
+[node name="ScrollingParticles" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="LineGlow" type="Sprite2D" parent="ScrollingParticles"]
+unique_name_in_owner = true
+self_modulate = Color(0.9927287, 1, 0.8574477, 1)
+material = SubResource("CanvasItemMaterial_gix77")
+scale = Vector2(1.4062499, 0.12499999)
+texture = ExtResource("4_t7uyl")
+
+[node name="Particles" type="Node2D" parent="ScrollingParticles"]
+unique_name_in_owner = true
+
+[node name="VfxSparkParticles" type="GPUParticles2D" parent="ScrollingParticles/Particles"]
+position = Vector2(-145, 0)
+amount = 150
+texture = ExtResource("5_dvwwu")
+lifetime = 0.8
+fixed_fps = 60
+visibility_rect = Rect2(-150, -200, 300, 400)
+trail_lifetime = 0.68
+trail_sections = 6
+trail_section_subdivisions = 2
+process_material = SubResource("ParticleProcessMaterial_sl47j")
+
+[node name="VfxSparkParticles2" type="GPUParticles2D" parent="ScrollingParticles/Particles"]
+position = Vector2(145, 0)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+amount = 150
+texture = ExtResource("5_dvwwu")
+lifetime = 0.8
+fixed_fps = 60
+visibility_rect = Rect2(-150, -200, 300, 400)
+trail_lifetime = 0.68
+trail_sections = 6
+trail_section_subdivisions = 2
+process_material = SubResource("ParticleProcessMaterial_sl47j")
+
+[node name="VfxSparkParticles3" type="GPUParticles2D" parent="ScrollingParticles/Particles"]
+rotation = 3.1415927
+amount = 175
+texture = ExtResource("5_dvwwu")
+lifetime = 0.8
+fixed_fps = 60
+visibility_rect = Rect2(-150, -200, 300, 400)
+trail_lifetime = 0.68
+trail_sections = 6
+trail_section_subdivisions = 2
+process_material = SubResource("ParticleProcessMaterial_t7uyl")

@@ -34,5 +34,8 @@ public partial class Runesmith2Mod : Node
         RunesmithSubscriber.Subscribe();
         
         ModConfigRegistry.Register(ModId, new RunesmithConfig());
+        
+        ModSound.SetSoundDefaultVolumeOffset("res://Runesmith2/audio/runesmith_character_transition.ogg", 25f);
+        ModSound.SetSoundDefaultVolumeOffset("res://Runesmith2/audio/runesmith_character_select.ogg", 25f);
     }
 }

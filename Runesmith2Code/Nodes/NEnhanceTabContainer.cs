@@ -29,6 +29,8 @@ public partial class NEnhanceTabContainer : Control
     private TextureRect? _enhanceTab;
 
     private TextureRect? _stasisOverlay;
+    
+    private GpuParticles2D? _starsParticles;
 
     private MegaLabel? _enhanceLabel;
 
@@ -53,6 +55,8 @@ public partial class NEnhanceTabContainer : Control
 
         _stasisOverlay = GetNode<TextureRect>("%StasisOverlay");
         _stasisOverlay.Visible = false;
+        
+        _starsParticles = GetNode<GpuParticles2D>("%StarsParticles");
 
         if (_enhanceLabel != null) return;
         _enhanceLabel = new MegaLabel();
@@ -93,12 +97,14 @@ public partial class NEnhanceTabContainer : Control
             if (modifier.Enhanced > 0)
             {
                 if (_enhanceTab is not { Visible: true }) _enhanceTab?.Visible = true;
+                _starsParticles?.Emitting = true;
                 var locString = RunesmithHoverTipFactory.StaticBanner(RunesmithHoverTip.Enhanced,
                     new DynamicVar("Amount", modifier.Enhanced));
                 _enhanceLabel?.SetTextAutoSize(locString.GetFormattedText());
             }
             else
             {
+                _starsParticles?.Emitting = false;
                 _enhanceTab?.Visible = false;
                 _enhanceLabel?.Text = "";
             }

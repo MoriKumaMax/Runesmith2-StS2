@@ -16,6 +16,7 @@ using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Field;
 using Runesmith2.Runesmith2Code.Hooks;
 using Runesmith2.Runesmith2Code.Models;
+using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 
@@ -153,6 +154,7 @@ public static class RuneCmd
         var runeQueue = player.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null || runeQueue.Runes.Count <= 0) return null;
         var oldestRune = runeQueue.Runes[0];
+        RunesmithModSounds.PlayRuneChargeSfx();
         oldestRune.ModifyCharge(chargeAmount);
         return oldestRune;
     }
@@ -163,33 +165,60 @@ public static class RuneCmd
         if (CombatManager.Instance.IsOverOrEnding) return null;
         var runeQueue = player.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null || runeQueue.Runes.Count <= 0) return null;
-        var oldestRune = runeQueue.Runes[^1];
-        oldestRune.ModifyCharge(chargeAmount);
-        return oldestRune;
+        var newestRune = runeQueue.Runes[^1];
+        RunesmithModSounds.PlayRuneChargeSfx();
+        newestRune.ModifyCharge(chargeAmount);
+        return newestRune;
     }
 
     public static void ChargeAll(PlayerChoiceContext choiceContext, Player player, int chargeAmount)
     {
         var runeQueue = player.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null || runeQueue.Runes.Count <= 0) return;
-        Charge(choiceContext, runeQueue.Runes, chargeAmount);
+        ChargeRunes(choiceContext, runeQueue.Runes, chargeAmount);
     }
 
-    public static void Charge(PlayerChoiceContext choiceContext, IEnumerable<RuneModel> runes, int chargeAmount)
+    public static void ChargeRunes(PlayerChoiceContext choiceContext, IEnumerable<RuneModel> runes, int chargeAmount)
     {
-        foreach (var rune in runes)
-            if (!CombatManager.Instance.IsOverOrEnding)
+        if (!CombatManager.Instance.IsOverOrEnding)
+        {
+            var runesList = runes.ToList();
+            if (chargeAmount > 0 && runesList.Count != 0)
+            {
+                RunesmithModSounds.PlayRuneChargeSfx();
+            }
+            
+            foreach (var rune in runesList)
+            {
                 rune.ModifyCharge(chargeAmount);
+            }
+        }
     }
 
     public static void Charge(PlayerChoiceContext choiceContext, RuneModel rune, int chargeAmount)
     {
-        if (!CombatManager.Instance.IsOverOrEnding) rune.ModifyCharge(chargeAmount);
+        if (!CombatManager.Instance.IsOverOrEnding)
+        {
+            RunesmithModSounds.PlayRuneChargeSfx();
+            rune.ModifyCharge(chargeAmount);
+        }
     }
 
-    public static void SetCharge(PlayerChoiceContext choiceContext, RuneModel rune, int chargeAmount)
+    public static void SetCharge(PlayerChoiceContext choiceContext, IEnumerable<RuneModel> runes, int chargeAmount)
     {
-        if (!CombatManager.Instance.IsOverOrEnding) rune.SetCharge(chargeAmount);
+        if (!CombatManager.Instance.IsOverOrEnding)
+        {
+            var runesList = runes.ToList();
+            if (chargeAmount > 0 && runesList.Count != 0)
+            {
+                RunesmithModSounds.PlayRuneChargeSfx();
+            }
+
+            foreach (var rune in runesList)
+            {
+                rune.SetCharge(chargeAmount);
+            }
+        }
     }
 
     public static async Task Passive(PlayerChoiceContext choiceContext, RuneModel? rune)
@@ -237,6 +266,7 @@ public static class RuneCmd
         if (dequeue)
         {
             removed = runeQueue.Remove(brokenRune);
+            RunesmithModSounds.PlayRuneBreakSfx();
             NCombatRoom.Instance?.GetCreatureNode(player.Creature)?.RuneManager()?.BreakRuneAnim(brokenRune);
         }
         else

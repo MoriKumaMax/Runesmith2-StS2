@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.ValueProps;
 using Runesmith2.Runesmith2Code.Hooks;
 using Runesmith2.Runesmith2Code.Structs;
+using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 
@@ -26,9 +27,11 @@ public class LaserTurretPower : Runesmith2Power, IAfterElementsGained
         if (player != Owner.Player) return;
         if (amount.Total <= 0) return;
         Flash();
+        //TODO add vfx
         await Cmd.CustomScaledWait(0.12f, 0.24f);
         foreach (var hittableEnemy in CombatState.HittableEnemies)
             VfxCmd.PlayOnCreatureCenter(hittableEnemy, "vfx/vfx_attack_blunt");
+        RunesmithModSounds.PlayLaserTurretSfx();
         await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), CombatState.HittableEnemies,
             amount.Total * Amount, ValueProp.Unpowered, Owner);
     }

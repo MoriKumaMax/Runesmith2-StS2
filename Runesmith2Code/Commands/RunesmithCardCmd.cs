@@ -6,11 +6,14 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Random;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Hooks;
+using Runesmith2.Runesmith2Code.Nodes.Vfx;
 
 #endregion
 
@@ -46,11 +49,17 @@ public static class RunesmithCardCmd
                 if (!targetCard.CanEnhance()) throw new InvalidOperationException($"Cannot enhance {targetCard.Id}.");
 
                 targetCard.AddEnhance(modifiedEnhance);
-                await RunesmithHook.AfterCardEnhanced(combatState, choiceContext, targetCard, modifiedEnhance);
                 if (!skipVisuals)
                 {
-                    // TODO Enhance vfx
+                    var cardNode = NCard.FindOnTable(targetCard);
+                    if (cardNode == null) return;
+
+                    var vfx = NCardEnhanceVfx.Create(cardNode);
+                    if (vfx == null) return;
+
+                    _ = TaskHelper.RunSafely(vfx.PlayAnimation());
                 }
+                await RunesmithHook.AfterCardEnhanced(combatState, choiceContext, targetCard, modifiedEnhance);
             }
         }
     }
@@ -70,6 +79,14 @@ public static class RunesmithCardCmd
         if (targetCard.IsStasis()) return;
 
         targetCard.SetStasis(true);
+        
+        var cardNode = NCard.FindOnTable(targetCard);
+        if (cardNode == null) return;
+
+        var vfx = NCardStasisVfx.Create(cardNode);
+        if (vfx == null) return;
+
+        TaskHelper.RunSafely(vfx.PlayAnimation());
     }
 
     // Code taken from https://github.com/lamali292/Downfall/blob/develop-2/DownfallCode/Commands/DownfallCardCmd.cs

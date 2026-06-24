@@ -5,6 +5,11 @@ uniform sampler2D lut;
 
 uniform vec2 pivot_offset = vec2(0.0, 0.0);
 
+uniform vec2 tex_speed1 = vec2(0.0, 0.0);
+uniform vec2 tex_speed2 = vec2(0.0, 0.0);
+
+uniform vec2 erosion_tex_offset = vec2(0.0, 0.0);
+
 uniform sampler2D erosion_curve;
 uniform float erosion_offset = 0.25;
 
@@ -23,12 +28,14 @@ void vertex() {
 }
 
 void fragment() {
-	vec4 texture_color =  texture(TEXTURE, UV);
+	float texture_color_r =  texture(TEXTURE, UV + TIME * tex_speed1).r;
+	float texture_color_g =  texture(TEXTURE, UV + TIME * tex_speed2).g;
+	float texture_color_b =  texture(TEXTURE, UV + erosion_tex_offset).b;
 
-	vec4 lut_color = texture(lut, texture_color.rr);
+	vec4 lut_color = texture(lut, vec2((texture_color_r + texture_color_g) * 0.5));
 
 	float erosion_curve_val = texture(erosion_curve, vec2(erosion_time)).r;
-	float erosion_val = smoothstep(erosion_curve_val, erosion_curve_val + erosion_offset, texture_color.g);
+	float erosion_val = smoothstep(erosion_curve_val, erosion_curve_val + erosion_offset, texture_color_b);
 	
 	float v_mask_val = 1.0 - smoothstep(UV.y, UV.y + v_mask_offset, 1.0 - v_mask);
 

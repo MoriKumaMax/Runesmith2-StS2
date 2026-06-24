@@ -1,0 +1,109 @@
+[gd_scene load_steps=15 format=3 uid="uid://blj1vg2mxdpad"]
+
+[ext_resource type="Texture2D" uid="uid://d3hl8rb1t2d14" path="res://Runesmith2/images/cardui/ui_card_mask.png" id="1_o6kum"]
+[ext_resource type="Script" uid="uid://dn8np16bak450" path="res://Runesmith2Code/Nodes/Vfx/NCardEnhanceVfx.cs" id="1_rd580"]
+[ext_resource type="Texture2D" uid="uid://dlqj8ojanf27q" path="res://Runesmith2/images/vfx/square_glow.png" id="2_rd580"]
+[ext_resource type="Texture2D" uid="uid://q4r2fsn7vpy" path="res://Runesmith2/images/vfx/star_particle.png" id="3_iijw4"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jgskm"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_gbuok"]
+_data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.23916532, 1), 0.0, 0.0, 0, 0, Vector2(0.5040129, 0.30204612), 0.0, 0.0, 0, 0, Vector2(0.74959874, 0.6144171), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_rd580"]
+curve = SubResource("Curve_gbuok")
+
+[sub_resource type="Curve" id="Curve_e4v8t"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.27447832, 0.64126146), 0.0, 0.0, 0, 0, Vector2(0.5024077, 0), 0.0, 0.0, 0, 0, Vector2(0.74157304, 0.4435892), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_iijw4"]
+curve = SubResource("Curve_e4v8t")
+
+[sub_resource type="Curve" id="Curve_sc3fa"]
+_data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.2199037, 1), 0.0, 0.0, 0, 0, Vector2(0.28089887, 1), 0.0, 0.0, 0, 0, Vector2(0.51524884, 0), 0.0, 0.0, 0, 0, Vector2(0.74959874, 0.6144171), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_jgskm"]
+curve = SubResource("Curve_sc3fa")
+
+[sub_resource type="Curve" id="Curve_eixnp"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gbuok"]
+curve = SubResource("Curve_eixnp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dn0gw"]
+lifetime_randomness = 0.42
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(150, 211, 1)
+angle_min = -4.9999895
+angle_max = 5.000011
+gravity = Vector3(0, 0, 0)
+scale_min = 0.26999998
+scale_max = 0.26999998
+scale_curve = SubResource("CurveTexture_jgskm")
+color = Color(0.99486136, 1, 0.7781153, 1)
+alpha_curve = SubResource("CurveTexture_rd580")
+emission_curve = SubResource("CurveTexture_iijw4")
+turbulence_noise_strength = 2.89
+turbulence_noise_scale = 9.359
+turbulence_noise_speed_random = 1.0
+turbulence_influence_min = 0.65000004
+turbulence_influence_max = 0.85
+turbulence_influence_over_life = SubResource("CurveTexture_gbuok")
+
+[node name="VfxCardEnhance" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_rd580")
+
+[node name="CardMask" type="TextureRect" parent="."]
+clip_children = 1
+custom_minimum_size = Vector2(300, 422)
+layout_mode = 0
+offset_left = -150.0
+offset_top = -211.0
+offset_right = 150.0
+offset_bottom = 211.0
+mouse_filter = 2
+texture = ExtResource("1_o6kum")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Shine" type="Node2D" parent="CardMask"]
+unique_name_in_owner = true
+position = Vector2(150, 211)
+
+[node name="Line1" type="Sprite2D" parent="CardMask/Shine"]
+self_modulate = Color(0.9927287, 1, 0.8574477, 1)
+material = SubResource("CanvasItemMaterial_jgskm")
+position = Vector2(0, -31.185898)
+rotation = -0.3868731
+scale = Vector2(3.246094, 0.5234375)
+texture = ExtResource("2_rd580")
+
+[node name="Line2" type="Sprite2D" parent="CardMask/Shine"]
+self_modulate = Color(0.9927287, 1, 0.8574477, 1)
+material = SubResource("CanvasItemMaterial_jgskm")
+position = Vector2(0, 60.814148)
+rotation = -0.3868731
+scale = Vector2(3.246094, 0.17495117)
+texture = ExtResource("2_rd580")
+
+[node name="StarsParticles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 16
+texture = ExtResource("3_iijw4")
+lifetime = 0.88
+one_shot = true
+explosiveness = 0.85
+local_coords = true
+trail_lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_dn0gw")
