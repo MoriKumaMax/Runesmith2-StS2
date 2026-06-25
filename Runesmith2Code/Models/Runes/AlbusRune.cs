@@ -28,14 +28,16 @@ public class AlbusRune : RuneModel
 
     public override bool CanPassive => HasAnyValidRune() && base.CanPassive;
 
-    public override async Task BeforeTurnEndEarlyRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task<bool> BeforeTurnEndEarlyRuneTrigger(PlayerChoiceContext choiceContext)
     {
         await Passive(choiceContext);
+        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
         Trigger();
+        PlayPassiveSfx();
         await ChargeRunes(choiceContext, 1);
         UseCharge();
     }
@@ -49,8 +51,7 @@ public class AlbusRune : RuneModel
     {
         var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null) return;
-
-        PlayPassiveSfx();
+        
         RuneCmd.ChargeRunes(choiceContext,
             chargeAll ? runeQueue.Runes.Where(r => r != this) : runeQueue.Runes.Where(r => r is not AlbusRune),
             (int)amount);

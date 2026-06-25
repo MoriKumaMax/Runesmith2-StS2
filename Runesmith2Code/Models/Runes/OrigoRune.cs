@@ -41,14 +41,16 @@ public class OrigoRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Origo>();
 
-    public override async Task SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task<bool> SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
     {
         await Passive(choiceContext);
+        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
         Trigger();
+        PlayPassiveSfx();
         await CreateCard(choiceContext, 1);
         UseCharge();
     }
@@ -63,8 +65,7 @@ public class OrigoRune : RuneModel
         var cardModels = CardFactory.GetForCombat(Owner,
             Owner.Character.CardPool.GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint),
             amount, Owner.RunState.Rng.CombatCardGeneration);
-
-        PlayPassiveSfx();
+        
         foreach (var card in cardModels)
         {
             if (Upgraded)

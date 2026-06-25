@@ -67,7 +67,7 @@ public class GrindstonePower : Runesmith2Power
 
         }
 
-        if (vfx != null )
+        if (vfx != null)
         {
             RunesmithModSounds.PlayGrindStoneSfx();
             await vfx.PlayAnimation(true);

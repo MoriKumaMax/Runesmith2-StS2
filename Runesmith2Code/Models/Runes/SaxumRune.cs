@@ -23,14 +23,16 @@ public class SaxumRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Saxum>();
 
-    public override async Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
         await Passive(choiceContext);
+        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
         Trigger();
+        PlayPassiveSfx();
         await GainBlock(choiceContext, PassiveVal);
         UseCharge();
     }
@@ -42,7 +44,6 @@ public class SaxumRune : RuneModel
 
     private async Task GainBlock(PlayerChoiceContext _, decimal amount)
     {
-        PlayPassiveSfx();
         await CreatureCmd.GainBlock(Owner.Creature, amount, ValueProp.Unpowered, null);
     }
 }

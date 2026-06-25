@@ -25,14 +25,16 @@ public class IncendiumRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Incendium>();
 
-    public override async Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
         await Passive(choiceContext);
+        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
         Trigger();
+        PlayPassiveSfx();
         await ApplyAoeFireDamage(choiceContext, PassiveVal);
         UseCharge();
     }
@@ -49,7 +51,6 @@ public class IncendiumRune : RuneModel
 
         foreach (var target in targets)
             NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(target));
-        PlayPassiveSfx();
         await CreatureCmd.Damage(choiceContext, targets, amount, ValueProp.Unpowered, Owner.Creature);
     }
 }

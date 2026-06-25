@@ -87,7 +87,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
 
     public virtual bool CanPassive => ChargeVal > 0;
 
-    protected virtual ModSound? EffectSfx => null;
+    protected virtual ModSound? EffectSfx => RunesmithModSounds.RunePassiveSfx;
 
     protected virtual ModSound? CraftSfx => RunesmithModSounds.RuneCraftSfx;
 
@@ -193,12 +193,12 @@ public abstract class RuneModel : AbstractModel, ICustomModel
 
     protected void PlayPassiveSfx()
     {
-        EffectSfx?.Play();
+        EffectSfx?.Play(pitchVariation: 0.07f);
     }
 
     public void PlayCraftedSfx()
     {
-        CraftSfx?.Play(pitchVariation: 0.08f);
+        CraftSfx?.Play(pitchVariation: 0.07f);
     }
 
     public NRuneVisuals CreateSprite()
@@ -222,19 +222,19 @@ public abstract class RuneModel : AbstractModel, ICustomModel
     }
 
     // These triggers should return if it was triggerred or not
-    public virtual Task BeforeTurnEndEarlyRuneTrigger(PlayerChoiceContext choiceContext)
+    public virtual Task<bool> BeforeTurnEndEarlyRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        return Task.CompletedTask;
+        return Task.FromResult(false);
     }
 
-    public virtual Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public virtual Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        return Task.CompletedTask;
+        return Task.FromResult(false);
     }
 
-    public virtual Task SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
+    public virtual Task<bool> SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        return Task.CompletedTask;
+        return Task.FromResult(false);
     }
 
     public virtual Task Passive(PlayerChoiceContext choiceContext)
