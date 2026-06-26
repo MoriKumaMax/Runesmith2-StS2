@@ -16,7 +16,7 @@ public class MundusRune : RuneModel
     public override decimal PassiveVal { get; set; } = 4;
     public override int ChargeVal { get; set; } = 3;
 
-    public override bool IsUsingPotency => true;
+    public override bool UsePotency => true;
 
     public override bool CanPassive => false;
 

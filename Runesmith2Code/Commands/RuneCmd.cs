@@ -58,7 +58,7 @@ public static class RuneCmd
             }
 
             var modifiedPotency = potency;
-            if (rune.IsUsingPotency)
+            if (rune.UsePotency)
             {
                 modifiedPotency = RunesmithHook.ModifyPotency(combatState, player, modifiedPotency, ValueProp.Move,
                     cardPlay?.Card, cardPlay, out var potencyModifiers);
@@ -133,7 +133,7 @@ public static class RuneCmd
 
             foreach (var rune in runes)
             {
-                if (rune.IsUsingPotency) rune.PassiveVal = (int)Math.Max(0, rune.PassiveVal + modifiedPotency);
+                if (rune.UsePotency) rune.PassiveVal = (int)Math.Max(0, rune.PassiveVal + modifiedPotency);
             }
         }
     }

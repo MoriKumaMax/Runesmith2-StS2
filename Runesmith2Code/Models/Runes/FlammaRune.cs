@@ -20,7 +20,7 @@ public class FlammaRune : RuneModel
     public override decimal PassiveVal { get; set; } = 4;
     public override int ChargeVal { get; set; } = 2;
 
-    public override bool IsUsingPotency => true;
+    public override bool UsePotency => true;
 
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;
 

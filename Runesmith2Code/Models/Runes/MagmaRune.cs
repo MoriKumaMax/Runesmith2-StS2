@@ -22,7 +22,7 @@ public class MagmaRune : RuneModel
     public override decimal PassiveVal { get; set; } = 5;
     public override int ChargeVal { get; set; } = 2;
 
-    public override bool IsUsingPotency => true;
+    public override bool UsePotency => true;
 
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;
     public override (bool, bool) ShowTopLabel => (true, true);

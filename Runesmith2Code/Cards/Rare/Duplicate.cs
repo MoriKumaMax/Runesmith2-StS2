@@ -15,10 +15,10 @@ namespace Runesmith2.Runesmith2Code.Cards.Rare;
 
 public class Duplicate : Runesmith2Card
 {
-    public Duplicate() : base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
+    public Duplicate() : base(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
     {
         WithTip(RunesmithHoverTip.Craft);
-        WithCostUpgradeBy(-1);
+        WithKeyword(CardKeyword.Exhaust, UpgradeType.Remove);
     }
     
     protected override void AddExtraArgsToDescription(LocString description)

@@ -32,7 +32,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
 
     public virtual decimal PassiveVal { get; set; }
 
-    public virtual bool IsUsingPotency => false;
+    public virtual bool UsePotency => false;
 
     public virtual decimal CalculatedPassiveVal => PassiveVal;
 

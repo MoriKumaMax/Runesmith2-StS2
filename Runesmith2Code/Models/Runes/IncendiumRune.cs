@@ -19,7 +19,7 @@ public class IncendiumRune : RuneModel
     public override decimal PassiveVal { get; set; } = 5;
     public override int ChargeVal { get; set; } = 3;
 
-    public override bool IsUsingPotency => true;
+    public override bool UsePotency => true;
 
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;
 
