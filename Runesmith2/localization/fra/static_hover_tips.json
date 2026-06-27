@@ -13,7 +13,7 @@
   "RUNESMITH2-CRAFT.title": "Forger",
   "RUNESMITH2-ELEMENTS.description": "Les Éléments ([gold]Ignis[/gold] {elements:rs2Icon(ignis)}, [gold]Terra[/gold] {elements:rs2Icon(terra)} et [gold]Aqua[/gold] {elements:rs2Icon(aqua)}) servent à jouer les cartes [gold]Recette[/gold] ou à améliorer certains effets de carte.",
   "RUNESMITH2-ELEMENTS.title": "Éléments",
-  "RUNESMITH2-ELEMENTS_COUNT.description": "Votre nombre actuel d'Éléments, composé d'[gold]Ignis[/gold] ({elements:rs2Icon(ignis)}), de [gold]Terra[/gold] ({elements:rs2Icon(terra)}) et d'[gold]Aqua[/gold] ({elements:rs2Icon(aqua)}).\nLes Éléments servent à jouer certaines cartes ou à améliorer des effets de carte.\n[i]Cliquez ici pour rendre l'affichage translucide.[/i]",
+  "RUNESMITH2-ELEMENTS_COUNT.description": "Votre nombre actuel d'Éléments, composé d'[gold]Ignis[/gold] ({elements:rs2Icon(ignis)}), de [gold]Terra[/gold] ({elements:rs2Icon(terra)}) et d'[gold]Aqua[/gold] ({elements:rs2Icon(aqua)}).\nLes Éléments servent à jouer certaines cartes ou à améliorer des effets de carte.\n[color=gray][font_size=16]Cliquez ici pour rendre l'affichage translucide.[/font_size][/color]",
   "RUNESMITH2-ELEMENTS_COUNT.title": "Éléments",
   "RUNESMITH2-ENHANCE.description": "Augmente les dégâts, l'[gold]Armure[/gold] et la [gold]Puissance[/gold] d'une carte de [blue]50 %[/blue]. Les cumuls sont additifs. L'effet [gold]Renforcer[/gold] est retiré après que la carte a été jouée.",
   "RUNESMITH2-ENHANCE.title": "Renforcer",
