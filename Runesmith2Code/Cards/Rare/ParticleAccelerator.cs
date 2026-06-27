@@ -24,6 +24,7 @@ public class ParticleAccelerator : Runesmith2Card
         CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        Owner.Creature.GetPower<ParticleAcceleratorPower>()?.IncrementTriggerCount();
         await CommonActions.ApplySelf<ParticleAcceleratorPower>(choiceContext, this, DynamicVars["Amount"].IntValue);
     }
 }

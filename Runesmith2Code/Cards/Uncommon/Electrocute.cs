@@ -33,9 +33,8 @@ public class Electrocute : Runesmith2Card
             .Execute(choiceContext);
 
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, DynamicVars.Cards.IntValue);
-        var pile = PileType.Draw.GetPile(Owner);
-        var cards = (await CardSelectCmd.FromSimpleGrid(choiceContext,
-            pile.Cards, Owner, prefs)).ToList();
+        var cards = (await CardSelectCmd.FromCombatPile(choiceContext,
+            PileType.Draw.GetPile(Owner), Owner, prefs)).ToList();
         foreach (var card in cards.Where(card => card.CanStasis()))
         {
             RunesmithCardCmd.Stasis(card);

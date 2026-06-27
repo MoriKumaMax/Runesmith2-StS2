@@ -28,9 +28,8 @@ public class Assembler : Runesmith2Card
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
-        var pile = PileType.Discard.GetPile(Owner);
-        var cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext,
-                pile.Cards.Where(c => c.Tags.Contains(RunesmithTags.Recipe)).ToList(), Owner, prefs))
+        var cardModel = (await CardSelectCmd.FromCombatPile(choiceContext,
+                PileType.Discard.GetPile(Owner), Owner, prefs, c => c.Tags.Contains(RunesmithTags.Recipe)))
             .FirstOrDefault();
 
         if (cardModel != null)

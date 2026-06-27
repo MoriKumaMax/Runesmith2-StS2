@@ -23,7 +23,7 @@ public partial class NRuneManager : Control
 {
     private Control? _runeContainer;
 
-    private readonly List<NRune> _runes = new();
+    private readonly List<NRune> _runes = [];
 
     private NCreature? _creatureNode;
 
@@ -98,11 +98,13 @@ public partial class NRuneManager : Control
 
     private void AddSlotAnim()
     {
+        var queue = Player.PlayerCombatState?.GetRuneQueue();
+        
         var emptyRune = _runes.FirstOrDefault(n => n.Model == null);
         if (emptyRune != null) return; // There's empty slot already
 
         var nonEmptyCount = _runes.Count(n => n.Model != null);
-        if (nonEmptyCount >= RuneQueue.MaxCapacity) return; // Full of non-empty slot already
+        if (nonEmptyCount >= (queue?.Capacity ?? RuneQueue.MaxCapacity)) return; // Full of non-empty slot already
 
         var nRune = NRune.Create(LocalContext.IsMe(Player));
         var count = _runes.Count;
@@ -120,7 +122,7 @@ public partial class NRuneManager : Control
         var queue = Player.PlayerCombatState?.GetRuneQueue();
         if (queue == null) return;
         var runeModel = queue.Runes.Count > 0 ? queue.Runes[^1] : null; // Get last (should be the newly added one)
-        if (_runes.Count(r => r.Model != null) >= RuneQueue.MaxCapacity) return; // cannot add rune to full RuneQueue
+        if (_runes.Count(r => r.Model != null) >= queue.Capacity) return; // cannot add rune to full RuneQueue
         var emptyRune = _runes.FirstOrDefault(n => n.Model == null);
         var newRune = NRune.Create(LocalContext.IsMe(Player), runeModel);
         if (emptyRune == null)

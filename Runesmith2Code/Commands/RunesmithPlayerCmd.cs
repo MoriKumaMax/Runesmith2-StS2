@@ -23,7 +23,7 @@ public static class RunesmithPlayerCmd
             var runesmithCombatState = player.PlayerCombatState?.Runesmith();
             var finalAmount = RunesmithHook.ModifyElementsGain(combatState, player, amount, ValueProp.Move,
                 cardPlay?.Card, out var modifiers);
-            await RunesmithHook.AfterModifyingElementsGain(combatState, modifiers);
+            await RunesmithHook.AfterModifyingElementsGain(modifiers);
             if (finalAmount.Total > 0)
             {
                 RunesmithModSounds.PlayElementsGainSfx();

@@ -217,7 +217,7 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
             return;
         var baseElementsCost = BaseElementsCost;
         BaseElementsCost += addend;
-        WasElementsCostJustUpgraded = false;
+        WasElementsCostJustUpgraded = true;
         if (BaseElementsCost.Total >= baseElementsCost.Total)
             return;
         TemporaryElementsCosts.RemoveAll((Predicate<TemporaryCardCost>)(c => c.Cost > BaseElementsCost.Total));

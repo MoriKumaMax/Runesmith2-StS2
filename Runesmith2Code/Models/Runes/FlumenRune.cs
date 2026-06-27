@@ -34,17 +34,19 @@ public class FlumenRune : RuneModel
         return ret;
     }
 
-    public override Task SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
+    public override Task<bool> SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
     {
         Trigger();
+        PlayPassiveSfx();
         CardToDraw += 1;
         UseCharge();
-        return Task.CompletedTask;
+        return Task.FromResult(true);
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
         Trigger();
+        PlayPassiveSfx();
         await DrawCard(choiceContext, 1);
         UseCharge();
     }
@@ -56,7 +58,6 @@ public class FlumenRune : RuneModel
 
     private async Task DrawCard(PlayerChoiceContext choiceContext, decimal amount)
     {
-        PlayPassiveSfx();
         await CardPileCmd.Draw(choiceContext, amount, Owner);
     }
 }

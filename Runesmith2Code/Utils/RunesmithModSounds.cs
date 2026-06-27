@@ -9,6 +9,7 @@ public static class RunesmithModSounds
     public static readonly ModSound StasisSfx = new("res://Runesmith2/audio/stasis_another.ogg");
     public static readonly ModSound RuneCraftSfx = new("res://Runesmith2/audio/rune_craft.ogg");
     public static readonly ModSound RuneChargeSfx = new("res://Runesmith2/audio/rune_charge.ogg");
+    public static readonly ModSound RunePassiveSfx = new("res://Runesmith2/audio/rune_passive.ogg");
     public static readonly ModSound RuneBreakSfx = new("res://Runesmith2/audio/rune_break.ogg");
     public static readonly ModSound LaserTurretSfx = new("res://Runesmith2/audio/laser_turret.ogg");
     public static readonly ModSound EnhanceSfx = new("res://Runesmith2/audio/enhance.ogg");
@@ -32,9 +33,14 @@ public static class RunesmithModSounds
     
     public static void PlayRuneCraftSfx()
     {
-        RuneCraftSfx.Play(pitchVariation: 0.1f);
+        RuneCraftSfx.Play(pitchVariation: 0.07f);
     }
     
+    public static void PlayRunePassiveSfx()
+    {
+        RunePassiveSfx.Play(pitchVariation: 0.07f);
+    }
+
     public static void PlayRuneChargeSfx()
     {
         RuneChargeSfx.Play(pitchVariation: 0.05f);

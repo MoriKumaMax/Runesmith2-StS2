@@ -29,14 +29,16 @@ public class GlaciesRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Glacies>();
 
-    public override async Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
         await Passive(choiceContext);
+        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
         Trigger();
+        PlayPassiveSfx();
         await ApplyIceCold(choiceContext, CalculatedPassiveVal);
         UseCharge();
     }
@@ -50,8 +52,7 @@ public class GlaciesRune : RuneModel
     {
         var targets = GetHittableCreatures();
         if (targets.Count == 0) return;
-
-        PlayPassiveSfx();
+        
         await PowerCmd.Apply<IceColdPower>(choiceContext, targets, amount, Owner.Creature, null);
     }
 }

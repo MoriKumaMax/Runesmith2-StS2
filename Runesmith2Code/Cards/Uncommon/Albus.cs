@@ -18,7 +18,7 @@ public class Albus : Runesmith2RecipeCard
 {
     public Albus() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
-        WithVars(new ChargeVar(3).WithUpgrade(1));
+        WithVars(new ChargeVar(2).WithUpgrade(1));
         WithTip(RunesmithHoverTip.Craft);
         WithRuneTip<AlbusRune>();
     }

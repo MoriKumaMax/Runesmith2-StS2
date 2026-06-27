@@ -22,7 +22,7 @@ public class VulcanusRune : RuneModel
     public override decimal PassiveVal { get; set; } = 4;
     public override int ChargeVal { get; set; } = 3;
 
-    public override bool IsUsingPotency => true;
+    public override bool UsePotency => true;
 
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;
 
@@ -32,14 +32,16 @@ public class VulcanusRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Vulcanus>();
 
-    public override async Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
         await Passive(choiceContext);
+        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
         Trigger();
+        PlayPassiveSfx();
         await ApplyAoeFireDamage(choiceContext, PassiveVal);
         await GainBlock(choiceContext, PassiveVal);
         UseCharge();
@@ -58,13 +60,11 @@ public class VulcanusRune : RuneModel
 
         foreach (var target in targets)
             NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(target));
-        PlayPassiveSfx();
         await CreatureCmd.Damage(choiceContext, targets, amount, ValueProp.Unpowered, Owner.Creature);
     }
 
     private async Task GainBlock(PlayerChoiceContext _, decimal amount)
     {
-        PlayPassiveSfx();
         await CreatureCmd.GainBlock(Owner.Creature, amount, ValueProp.Unpowered, null);
     }
 }

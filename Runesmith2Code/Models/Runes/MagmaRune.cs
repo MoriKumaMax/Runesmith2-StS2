@@ -22,7 +22,7 @@ public class MagmaRune : RuneModel
     public override decimal PassiveVal { get; set; } = 5;
     public override int ChargeVal { get; set; } = 2;
 
-    public override bool IsUsingPotency => true;
+    public override bool UsePotency => true;
 
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;
     public override (bool, bool) ShowTopLabel => (true, true);
@@ -33,9 +33,10 @@ public class MagmaRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Magma>();
 
-    public override async Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
         await Passive(choiceContext);
+        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)

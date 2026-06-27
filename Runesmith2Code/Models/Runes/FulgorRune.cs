@@ -19,7 +19,7 @@ public class FulgorRune : RuneModel
     public override decimal PassiveVal { get; set; } = 5;
     public override int ChargeVal { get; set; } = 3;
 
-    public override bool IsUsingPotency => true;
+    public override bool UsePotency => true;
 
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;
 
@@ -37,14 +37,16 @@ public class FulgorRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Fulgor>();
 
-    public override async Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
         await Passive(choiceContext);
+        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
         Trigger();
+        PlayPassiveSfx();
         await ApplyLightningDamage(choiceContext, PassiveVal, 2);
         UseCharge();
     }
@@ -56,7 +58,6 @@ public class FulgorRune : RuneModel
 
     private async Task ApplyLightningDamage(PlayerChoiceContext choiceContext, decimal amount, int count)
     {
-        PlayPassiveSfx();
         for (var i = 0; i < count; i++)
         {
             var list = GetHittableCreatures();

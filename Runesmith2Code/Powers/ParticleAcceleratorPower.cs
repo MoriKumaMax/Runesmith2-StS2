@@ -1,9 +1,13 @@
 #region
 
+using BaseLib.Abstracts;
+using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Hooks;
 
 #endregion
@@ -11,13 +15,18 @@ using Runesmith2.Runesmith2Code.Hooks;
 namespace Runesmith2.Runesmith2Code.Powers;
 
 public class ParticleAcceleratorPower : Runesmith2Power, IModifyCharge, IAfterModifyingCharge,
-    IModifyRunePassiveTriggerCount, IAfterModifyingRunePassiveTriggerCount
+    IModifyRunePassiveTriggerCount, IAfterModifyingRunePassiveTriggerCount, IHasSecondAmount
 {
+    private const string TriggerCountKey = "TriggerCount";
+    
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new(TriggerCountKey, 1)
+    ];
 
     public decimal ModifyCharge(Player player, decimal charge, ValueProp props, CardModel? cardSource)
     {
@@ -34,7 +43,8 @@ public class ParticleAcceleratorPower : Runesmith2Power, IModifyCharge, IAfterMo
 
     public int ModifyRunePassiveTriggerCounts(int triggerCount, Player player)
     {
-        if (player == Owner.Player && triggerCount > 0) return triggerCount + 1;
+        if (player == Owner.Player && (player.PlayerCombatState?.GetRuneQueue()?.HasAny() ?? false) && triggerCount > 0)
+            return triggerCount + DynamicVars[TriggerCountKey].IntValue;
 
         return triggerCount;
     }
@@ -43,5 +53,16 @@ public class ParticleAcceleratorPower : Runesmith2Power, IModifyCharge, IAfterMo
     {
         Flash();
         return Task.CompletedTask;
+    }
+
+    public void IncrementTriggerCount()
+    {
+        AssertMutable();
+        ++DynamicVars[TriggerCountKey].BaseValue;
+    }
+
+    public string GetSecondAmount()
+    {
+        return DynamicVars[TriggerCountKey].IntValue.ToString();
     }
 }

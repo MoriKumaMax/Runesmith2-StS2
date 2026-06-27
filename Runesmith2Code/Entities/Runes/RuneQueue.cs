@@ -17,11 +17,11 @@ public class RuneQueue
 
     private readonly Player _owner;
 
-    private readonly List<RuneModel> _runes = new();
+    private readonly List<RuneModel> _runes = [];
 
     public IReadOnlyList<RuneModel> Runes => _runes;
 
-    public int Capacity => MaxCapacity;
+    public int Capacity { set; get; } = MaxCapacity;
 
     public RuneQueue(Player owner)
     {
@@ -72,15 +72,13 @@ public class RuneQueue
 
         var count = RunesmithHook.ModifyRunePassiveTriggerCount(_owner.Creature.CombatState, _owner, 1,
             out var modifyingModels);
-        await RunesmithHook.AfterModifyingRunePassiveTriggerCount(_owner.Creature.CombatState,
-            modifyingModels);
+        await RunesmithHook.AfterModifyingRunePassiveTriggerCount(modifyingModels);
 
         foreach (var rune in Runes)
             for (var i = 0; i < count; i++)
             {
                 if (!rune.CanPassive) continue;
-                await rune.BeforeTurnEndEarlyRuneTrigger(choiceContext);
-                await SmallWait();
+                if (await rune.BeforeTurnEndEarlyRuneTrigger(choiceContext)) await SmallWait();
             }
 
         await SmallWait();
@@ -89,8 +87,7 @@ public class RuneQueue
             for (var i = 0; i < count; i++)
             {
                 if (!rune.CanPassive) continue;
-                await rune.BeforeTurnEndRuneTrigger(choiceContext);
-                await SmallWait();
+                if (await rune.BeforeTurnEndRuneTrigger(choiceContext)) await SmallWait();
             }
     }
 
@@ -100,15 +97,13 @@ public class RuneQueue
 
         var count = RunesmithHook.ModifyRunePassiveTriggerCount(_owner.Creature.CombatState, _owner, 1,
             out var modifyingModels);
-        await RunesmithHook.AfterModifyingRunePassiveTriggerCount(_owner.Creature.CombatState,
-            modifyingModels);
+        await RunesmithHook.AfterModifyingRunePassiveTriggerCount(modifyingModels);
 
         foreach (var rune in Runes)
             for (var i = 0; i < count; i++)
             {
                 if (!rune.CanPassive) continue;
-                await rune.SetupTurnStartRuneTrigger(choiceContext);
-                await SmallWait();
+                if (await rune.SetupTurnStartRuneTrigger(choiceContext)) await SmallWait();
             }
     }
 

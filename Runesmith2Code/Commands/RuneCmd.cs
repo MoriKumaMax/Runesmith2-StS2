@@ -58,11 +58,11 @@ public static class RuneCmd
             }
 
             var modifiedPotency = potency;
-            if (rune.IsUsingPotency)
+            if (rune.UsePotency)
             {
                 modifiedPotency = RunesmithHook.ModifyPotency(combatState, player, modifiedPotency, ValueProp.Move,
                     cardPlay?.Card, cardPlay, out var potencyModifiers);
-                await RunesmithHook.AfterModifyingPotency(combatState, potencyModifiers);
+                await RunesmithHook.AfterModifyingPotency(potencyModifiers);
             }
 
             var modifiedCharge = charge;
@@ -129,11 +129,11 @@ public static class RuneCmd
             var modifiedPotency = potency;
             modifiedPotency = RunesmithHook.ModifyPotency(combatState, player, modifiedPotency, props,
                 cardPlay?.Card, cardPlay, out var potencyModifiers);
-            await RunesmithHook.AfterModifyingPotency(combatState, potencyModifiers);
+            await RunesmithHook.AfterModifyingPotency(potencyModifiers);
 
             foreach (var rune in runes)
             {
-                if (rune.IsUsingPotency) rune.PassiveVal = (int)Math.Max(0, rune.PassiveVal + modifiedPotency);
+                if (rune.UsePotency) rune.PassiveVal = (int)Math.Max(0, rune.PassiveVal + modifiedPotency);
             }
         }
     }

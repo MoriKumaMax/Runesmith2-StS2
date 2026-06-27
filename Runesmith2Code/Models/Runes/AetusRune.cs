@@ -14,7 +14,7 @@ namespace Runesmith2.Runesmith2Code.Models.Runes;
 public class AetusRune : RuneModel
 {
     public override decimal PassiveVal { get; set; } = 0;
-    public override int ChargeVal { get; set; } = 4;
+    public override int ChargeVal { get; set; } = 3;
 
     public override (bool, bool) ShowBottomLabel => (false, true);
 
@@ -24,14 +24,16 @@ public class AetusRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Aetus>();
 
-    public override async Task SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task<bool> SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
     {
         await Passive(choiceContext);
+        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
         Trigger();
+        PlayPassiveSfx();
         await GainEnergy(choiceContext, 1);
         UseCharge();
     }
@@ -43,7 +45,6 @@ public class AetusRune : RuneModel
 
     private async Task GainEnergy(PlayerChoiceContext choiceContext, decimal amount)
     {
-        PlayPassiveSfx();
         await PlayerCmd.GainEnergy(amount, Owner);
     }
 }

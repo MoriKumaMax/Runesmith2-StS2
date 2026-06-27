@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.TestSupport;
 using Runesmith2.Runesmith2Code.Extensions;
+using Runesmith2.Runesmith2Code.Utils;
 
 namespace Runesmith2.Runesmith2Code.Nodes.Vfx;
 
@@ -108,17 +109,19 @@ public partial class NCardGrindstoneVfx : Control
         }
     }
 
-    private float _coverShortDuration = 0.30f;
-    private float _coverDuration = 0.40f;
+    private float _coverShortDuration = 0.20f;
+    private float _coverDuration = 0.30f;
     
-    private float _idleShortDuration = 0.10f;
+    private float _idleShortDuration = 0.08f;
     private float _idleDuration = 0.15f;
     
-    private float _revealShortDuration = 0.25f;
-    private float _revealDuration = 0.40f;
+    private float _revealShortDuration = 0.20f;
+    private float _revealDuration = 0.30f;
 
     public async Task PlayAnimation(bool shortVersion = false)
     {
+        RunesmithModSounds.PlayGrindStoneSfx();
+        
         _dissolve.Visible = true;
         _cardGlowContainer.Visible = true;
         _scrollingParticles.Visible = true;

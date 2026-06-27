@@ -9,6 +9,8 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.Nodes.Vfx.Cards;
+using MegaCrit.Sts2.Core.Saves;
+using MegaCrit.Sts2.Core.Settings;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Nodes.Vfx;
@@ -67,11 +69,10 @@ public class GrindstonePower : Runesmith2Power
 
         }
 
-        if (vfx != null )
+        if (vfx != null)
         {
-            RunesmithModSounds.PlayGrindStoneSfx();
-            await vfx.PlayAnimation(true);
-            await Cmd.CustomScaledWait(0.25f, 0.4f);
+            await vfx.PlayAnimation(SaveManager.Instance.PrefsSave.FastMode != FastModeType.Normal);
+            await Cmd.CustomScaledWait(0.20f, 0.35f);
         }
     }
 

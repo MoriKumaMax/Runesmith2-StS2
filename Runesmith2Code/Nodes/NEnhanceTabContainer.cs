@@ -98,6 +98,7 @@ public partial class NEnhanceTabContainer : Control
             {
                 if (_enhanceTab is not { Visible: true }) _enhanceTab?.Visible = true;
                 _starsParticles?.Emitting = true;
+                _starsParticles?.Visible = true;
                 var locString = RunesmithHoverTipFactory.StaticBanner(RunesmithHoverTip.Enhanced,
                     new DynamicVar("Amount", modifier.Enhanced));
                 _enhanceLabel?.SetTextAutoSize(locString.GetFormattedText());
@@ -105,6 +106,7 @@ public partial class NEnhanceTabContainer : Control
             else
             {
                 _starsParticles?.Emitting = false;
+                _starsParticles?.Visible = false;
                 _enhanceTab?.Visible = false;
                 _enhanceLabel?.Text = "";
             }

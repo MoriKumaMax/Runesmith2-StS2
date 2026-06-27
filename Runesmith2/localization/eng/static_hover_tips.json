@@ -13,7 +13,7 @@
   "RUNESMITH2-CRAFT.title": "Craft",
   "RUNESMITH2-ELEMENTS.description": "Elements ([gold]Ignis[/gold] {elements:rs2Icon(ignis)}, [gold]Terra[/gold] {elements:rs2Icon(terra)}, and [gold]Aqua[/gold] {elements:rs2Icon(aqua)}) are used to play [gold]Recipe[/gold] cards or improve certain card effects.",
   "RUNESMITH2-ELEMENTS.title": "Elements",
-  "RUNESMITH2-ELEMENTS_COUNT.description": "Your current Elements count, consisting of [gold]Ignis[/gold] ({elements:rs2Icon(ignis)}), [gold]Terra[/gold] ({elements:rs2Icon(terra)}), and [gold]Aqua[/gold] ({elements:rs2Icon(aqua)}).\nElements are used to play certain cards or improve card effects.\n[i]Click on this to make it translucent.[/i]",
+  "RUNESMITH2-ELEMENTS_COUNT.description": "Your current Elements count, consisting of [gold]Ignis[/gold] ({elements:rs2Icon(ignis)}), [gold]Terra[/gold] ({elements:rs2Icon(terra)}), and [gold]Aqua[/gold] ({elements:rs2Icon(aqua)}).\nElements are used to play certain cards or improve card effects.\n[color=gray][font_size=16]Click on this to make it translucent.[/font_size][/color]",
   "RUNESMITH2-ELEMENTS_COUNT.title": "Elements",
   "RUNESMITH2-ENHANCE.description": "Increase damage, [gold]Block[/gold] and [gold]Potency[/gold] of a card by [blue]50%[/blue]. Can be stacked additively. [gold]Enhance[/gold] is removed after the card is played.",
   "RUNESMITH2-ENHANCE.title": "Enhance",
