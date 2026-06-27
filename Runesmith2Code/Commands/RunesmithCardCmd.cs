@@ -41,7 +41,7 @@ public static class RunesmithCardCmd
             var modifiedEnhance =
                 RunesmithHook.ModifyEnhanceAmount(combatState, player, enhanceAmount, cardPlay?.Card,
                     out var modifiers);
-            await RunesmithHook.AfterModifyingEnhanceAmount(combatState, modifiedEnhance, cardPlay?.Card, cardPlay,
+            await RunesmithHook.AfterModifyingEnhanceAmount(modifiedEnhance, cardPlay?.Card, cardPlay,
                 modifiers);
 
             foreach (var targetCard in cardList)

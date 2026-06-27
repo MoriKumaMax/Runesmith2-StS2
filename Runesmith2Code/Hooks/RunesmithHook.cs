@@ -28,10 +28,9 @@ public static class RunesmithHook
         }
     }
 
-    private static async Task Dispatch<T>(ICombatState combatState, Func<T, Task> action,
-        IEnumerable<AbstractModel> filter) where T : class
+    private static async Task Dispatch<T>(IEnumerable<AbstractModel> models, Func<T, Task> action) where T : class
     {
-        foreach (var model in combatState.IterateHookListeners().OfType<T>().Intersect(filter.OfType<T>()))
+        foreach (var model in models.OfType<T>())
         {
             var abstractModel = (AbstractModel)(object)model;
             await action(model);
@@ -76,11 +75,10 @@ public static class RunesmithHook
         return res;
     }
 
-    public static Task AfterModifyingEnhanceAmount(ICombatState combatState, int modifiedEnhance,
+    public static Task AfterModifyingEnhanceAmount(int modifiedEnhance,
         CardModel? cardSource, CardPlay? cardPlay, IEnumerable<AbstractModel> modifiers)
     {
-        return Dispatch<IAfterModifyingEnhanceAmount>(combatState,
-            model => model.AfterModifyingEnhanceAmount(modifiedEnhance, cardSource, cardPlay), modifiers);
+        return Dispatch<IAfterModifyingEnhanceAmount>(modifiers, model => model.AfterModifyingEnhanceAmount(modifiedEnhance, cardSource, cardPlay));
     }
 
     public static Task AfterCardEnhanced(ICombatState combatState, PlayerChoiceContext choiceContext,
@@ -104,11 +102,10 @@ public static class RunesmithHook
         return res;
     }
 
-    public static Task AfterModifyingRunePassiveTriggerCount(ICombatState combatState,
-        IEnumerable<AbstractModel> modifiers)
+    public static Task AfterModifyingRunePassiveTriggerCount(IEnumerable<AbstractModel> modifiers)
     {
-        return Dispatch<IAfterModifyingRunePassiveTriggerCount>(combatState,
-            model => model.AfterModifyingRunePassiveTriggerCount(), modifiers);
+        return Dispatch<IAfterModifyingRunePassiveTriggerCount>(modifiers,
+            model => model.AfterModifyingRunePassiveTriggerCount());
     }
 
     public static decimal ModifyRuneValue(ICombatState combatState, Player player, decimal amount)
@@ -132,9 +129,9 @@ public static class RunesmithHook
         return res;
     }
 
-    public static Task AfterModifyingElementsGain(ICombatState combatState, IEnumerable<AbstractModel> modifiers)
+    public static Task AfterModifyingElementsGain(IEnumerable<AbstractModel> modifiers)
     {
-        return Dispatch<IAfterModifyingElementsGain>(combatState,
+        return Dispatch<IAfterModifyingElementsGain>(modifiers,
             model => model.AfterModifyingElementsGain());
     }
 
@@ -220,9 +217,9 @@ public static class RunesmithHook
         return Math.Max(0, modifiedPotency);
     }
 
-    public static Task AfterModifyingPotency(ICombatState combatState, IEnumerable<AbstractModel> modifiers)
+    public static Task AfterModifyingPotency(IEnumerable<AbstractModel> modifiers)
     {
-        return Dispatch<IAfterModifyingPotency>(combatState,
+        return Dispatch<IAfterModifyingPotency>(modifiers,
             model => model.AfterModifyingPotency());
     }
 
