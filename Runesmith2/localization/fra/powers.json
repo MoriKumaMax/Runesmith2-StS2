@@ -28,7 +28,7 @@
   "RUNESMITH2-DUCT_TAPE_POWER.title": "Ruban adhésif",
   "RUNESMITH2-GRINDSTONE_POWER.description": "Ce tour-ci, chaque fois que vous jouez une carte, [gold]Améliorez[/gold]-la. Si la carte ne peut pas être [gold]Améliorée[/gold], [gold]Renforcez[/gold]-la à la place.",
   "RUNESMITH2-GRINDSTONE_POWER.smartDescription": "{Amount:plural:Ce tour-ci|Pendant [blue]{}[/blue] tours}, chaque fois que vous jouez une carte, [gold]Améliorez[/gold]-la. Si la carte ne peut pas être [gold]Améliorée[/gold], [gold]Renforcez[/gold]-la à la place.",
-  "RUNESMITH2-GRINDSTONE_POWER.title": "Grindstone",
+  "RUNESMITH2-GRINDSTONE_POWER.title": "Meule",
   "RUNESMITH2-ICE_COLD_POWER.description": "Les créatures avec [gold]Gel[/gold] infligent moins de dégâts d'attaque.\n[gold]Gel[/gold] est réduit de moitié à la fin du tour.",
   "RUNESMITH2-ICE_COLD_POWER.smartDescription": "{OnPlayer:Vos dégâts d'attaque|Les dégâts d'attaque de [gold]{OwnerName}[/gold]} sont réduits de [blue]{Amount}[/blue].\n[gold]Gel[/gold] est réduit de [blue]{Decrement}[/blue] à la fin {OnPlayer:de votre tour|du tour de [gold]{OwnerName}[/gold]}.",
   "RUNESMITH2-ICE_COLD_POWER.title": "Gel",
