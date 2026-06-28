@@ -22,10 +22,10 @@
   "RUNESMITH2-CATALYTIC_CONVERTER_POWER.title": "Pot catalytique",
   "RUNESMITH2-CREATOR_FORM_POWER.description": "Au début de votre tour, [gold]Renforcez[/gold] une carte.",
   "RUNESMITH2-CREATOR_FORM_POWER.smartDescription": "Au début de votre tour, [gold]Renforcez[/gold] une carte de [blue]{Amount}[/blue].",
-  "RUNESMITH2-CREATOR_FORM_POWER.title": "Forme de créateur",
+  "RUNESMITH2-CREATOR_FORM_POWER.title": "Forme du créateur",
   "RUNESMITH2-DUCT_TAPE_POWER.description": "Chaque tour, mettez en [gold]Stase[/gold] la première carte sans [gold]Stase[/gold] que vous [gold]Renforcez[/gold].",
   "RUNESMITH2-DUCT_TAPE_POWER.smartDescription": "Chaque tour, mettez en [gold]Stase[/gold] {Amount:plural:la première|les [blue]{}[/blue] premières} carte{Amount:plural:|s} sans [gold]Stase[/gold] que vous [gold]Renforcez[/gold].",
-  "RUNESMITH2-DUCT_TAPE_POWER.title": "Ruban adhésif",
+  "RUNESMITH2-DUCT_TAPE_POWER.title": "Scotch",
   "RUNESMITH2-GRINDSTONE_POWER.description": "Ce tour-ci, chaque fois que vous jouez une carte, [gold]Améliorez[/gold]-la. Si la carte ne peut pas être [gold]Améliorée[/gold], [gold]Renforcez[/gold]-la à la place.",
   "RUNESMITH2-GRINDSTONE_POWER.smartDescription": "{Amount:plural:Ce tour-ci|Pendant [blue]{}[/blue] tours}, chaque fois que vous jouez une carte, [gold]Améliorez[/gold]-la. Si la carte ne peut pas être [gold]Améliorée[/gold], [gold]Renforcez[/gold]-la à la place.",
   "RUNESMITH2-GRINDSTONE_POWER.title": "Meule",
@@ -55,5 +55,5 @@
   "RUNESMITH2-SYNTHETIC_BLOOD_POWER.title": "Sang synthétique",
   "RUNESMITH2-WILDFIRE_POWER.description": "Au début de votre tour, gagnez {elements:rs2Icon(ignis)} et {elements:rs2Icon(terra)}.",
   "RUNESMITH2-WILDFIRE_POWER.smartDescription": "Au début de votre tour, gagnez [blue]{Amount}[/blue] {elements:rs2Icon(ignis)} et [blue]{Amount}[/blue] {elements:rs2Icon(terra)}.",
-  "RUNESMITH2-WILDFIRE_POWER.title": "Feu incontrôlé"
+  "RUNESMITH2-WILDFIRE_POWER.title": "Feu sauvage"
 }
