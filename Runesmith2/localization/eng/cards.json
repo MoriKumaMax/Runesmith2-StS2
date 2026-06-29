@@ -92,7 +92,7 @@
   "RUNESMITH2-HAMMER_SWING.title": "Hammer Swing",
   "RUNESMITH2-HAMMER_TORNADO.description": "Deal {Damage:diff()} damage.\nHits an additional time for each Rune.{InCombat:\n(Hits {CalculatedHits:diff()} {CalculatedHits:plural:time|times})|}",
   "RUNESMITH2-HAMMER_TORNADO.title": "Hammer Tornado",
-  "RUNESMITH2-HEAT_EXCHANGE.description": "Gain {Ignis:rs2Icon()} for each enemy.\nDeal {Damage:diff()} damage to ALL enemies.",
+  "RUNESMITH2-HEAT_EXCHANGE.description": "Deal {Damage:diff()} damage to ALL enemies.\nGain {IceColdPower:diff()} [gold]Ice-Cold[/gold].",
   "RUNESMITH2-HEAT_EXCHANGE.title": "Heat Exchange",
   "RUNESMITH2-HIT_AND_RUN.description": "Deal {Damage:diff()} damage.\nGain {BracePower:diff()} [gold]Brace[/gold].\nGain {Terra:rs2Icon()}.",
   "RUNESMITH2-HIT_AND_RUN.title": "Hit and Run",
@@ -180,7 +180,7 @@
   "RUNESMITH2-VULCANUS.title": "Vulcanus",
   "RUNESMITH2-WATCH_OUT.description": "Another player gains {BracePower:diff()} [gold]Brace[/gold].\n[gold]Enhance[/gold] {Cards:diff()} card{Cards:plural:|s} in the player's hand{EnhanceBy:rs2Plural:| by {EnhanceBy:diff()}} at random.",
   "RUNESMITH2-WATCH_OUT.title": "Watch Out!",
-  "RUNESMITH2-WHITE_BALANCE.description": "Deal {Damage:diff()} damage.\nIf you have at least 1 of each {elements:rs2Icon(all)}, gain {Energy:energyIcons()}.",
+  "RUNESMITH2-WHITE_BALANCE.description": "Deal {Damage:diff()} damage to ALL enemies.\nIf you have at least 1 of each {elements:rs2Icon(all)}, gain {Energy:energyIcons()}.",
   "RUNESMITH2-WHITE_BALANCE.title": "White Balance",
   "RUNESMITH2-WILDFIRE.description": "Gain {Ignis:rs2Icon()} and {Terra:rs2Icon()}.\nAt the start of your turn, gain {Amount:diff()} {elements:rs2Icon(ignis)} and {Amount:diff()} {elements:rs2Icon(terra)}.",
   "RUNESMITH2-WILDFIRE.title": "Wildfire"

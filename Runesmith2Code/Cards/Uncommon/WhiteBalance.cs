@@ -1,17 +1,10 @@
 #region
 
-using BaseLib.Extensions;
-using MegaCrit.Sts2.Core.Combat;
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.ValueProps;
-using Runesmith2.Runesmith2Code.Combat;
-using Runesmith2.Runesmith2Code.Commands;
-using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
-using Runesmith2.Runesmith2Code.Hooks;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Structs;
 
@@ -21,9 +14,9 @@ namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
 
 public class WhiteBalance : Runesmith2Card
 {
-    public WhiteBalance() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    public WhiteBalance() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
     {
-        WithDamage(10, 3);
+        WithDamage(8, 3);
         WithEnergy(1);
         WithTip(RunesmithHoverTip.Elements);
         WithEnergyTip();
@@ -41,15 +34,16 @@ public class WhiteBalance : Runesmith2Card
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(play.Target);
+        if (CombatState == null) return;
 
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(play.Target)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+            .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_blunt")
             .Execute(choiceContext);
 
         if (HasAllElements())
+        {
             await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
+        }
     }
 }

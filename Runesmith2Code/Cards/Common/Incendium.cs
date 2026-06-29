@@ -12,18 +12,18 @@ using Runesmith2.Runesmith2Code.Structs;
 
 #endregion
 
-namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
+namespace Runesmith2.Runesmith2Code.Cards.Common;
 
 public class Incendium : Runesmith2RecipeCard
 {
-    public Incendium() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+    public Incendium() : base(0, CardType.Skill, CardRarity.Common, TargetType.Self)
     {
-        WithVars(new PotencyVar(5).WithUpgrade(2), new ChargeVar(3));
+        WithVars(new PotencyVar(4).WithUpgrade(2), new ChargeVar(3));
         WithTip(RunesmithHoverTip.Craft);
         WithRuneTip<IncendiumRune>();
     }
 
-    public override Elements CanonicalElementsCost => new(3, 0, 0);
+    public override Elements CanonicalElementsCost => new(2, 0, 0);
 
     protected override async Task RecipeOnPlayWrapper(PlayerChoiceContext choiceContext, CardPlay play)
     {

@@ -1,11 +1,13 @@
 #region
 
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Saves.Runs;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.HoverTips;
@@ -18,29 +20,83 @@ namespace Runesmith2.Runesmith2Code.Relics;
 public class CrystallizedRainbow : Runesmith2Relic
 {
     public override RelicRarity Rarity => RelicRarity.Rare;
+    
+    public override bool ShowCounter => true;
 
+    public override int DisplayAmount =>
+        IsActivating ? DynamicVars.Energy.IntValue : EnergySpent % DynamicVars.Energy.IntValue;    
+    
+    [SavedProperty]
+    private int EnergySpent
+    {
+        set
+        {
+            AssertMutable();
+            field = value;
+            UpdateDisplay();
+        }
+        get;
+    }
+
+    private bool IsActivating
+    {
+        set
+        {
+            AssertMutable();
+            field = value;
+            UpdateDisplay();
+        }
+        get;
+    }
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new ElementsVar(1)
+        new ElementsVar(1),
+        new EnergyVar(4)
     ];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         RunesmithHoverTipFactory.CreateElementsHoverTip()
     ];
-
-    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    
+    private void UpdateDisplay()
     {
-        if (cardPlay.Card.Owner != Owner || !CombatManager.Instance.IsInProgress)
+        if (IsActivating)
+        {
+            Status = RelicStatus.Normal;
+        }
+        else
+        {
+            var threshold = DynamicVars.Energy.IntValue;
+            Status = EnergySpent % threshold == threshold - 1 ? RelicStatus.Active : RelicStatus.Normal;
+        }
+
+        InvokeDisplayAmountChanged();
+    }
+    
+    public override async Task AfterEnergySpent(CardModel card, int amount)
+    {
+        if (card.Owner != Owner || !CombatManager.Instance.IsInProgress)
             return;
 
-        var amount = DynamicVars[ElementsVar.defaultName].IntValue;
-        // TODO: Using orb rng, consider custom rng or use another type. 
-        var elementGain = Owner.RunState.Rng.CombatOrbGeneration.NextItem([
-            Elements.WithIgnis(amount), Elements.WithTerra(amount), Elements.WithAqua(amount)
-        ]);
+        var threshold = DynamicVars.Energy.IntValue;
+        EnergySpent += amount;
+        (var triggers, EnergySpent) = Math.DivRem(EnergySpent, threshold);
 
+        if (triggers <= 0) return;
+        _ = TaskHelper.RunSafely(DoActivateVisuals());
+        for (var i = 0; i < triggers; i++)
+        {
+            await RunesmithPlayerCmd.GainElements(new Elements(DynamicVars[ElementsVar.defaultName].IntValue), Owner);
+        }
+    }
+    
+    private async Task DoActivateVisuals()
+    {
+        IsActivating = true;
         Flash();
-        await RunesmithPlayerCmd.GainElements(elementGain, Owner);
+        await Cmd.Wait(1f);
+        IsActivating = false;
     }
 }

@@ -10,13 +10,13 @@ using Runesmith2.Runesmith2Code.HoverTips;
 
 #endregion
 
-namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
+namespace Runesmith2.Runesmith2Code.Cards.Common;
 
 public class Electromagnet : Runesmith2Card
 {
-    public Electromagnet() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+    public Electromagnet() : base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
     {
-        WithBlock(2, 4);
+        WithBlock(2, 3);
         WithTip(RunesmithHoverTip.Improved);
     }
 

@@ -16,6 +16,7 @@ public class ParticleAccelerator : Runesmith2Card
     public ParticleAccelerator() : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
         WithVar("Amount", 2, 1);
+        WithTip(RunesmithHoverTip.Craft);
         WithTip(RunesmithHoverTip.Charge);
     }
 

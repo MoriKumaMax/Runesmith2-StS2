@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using Runesmith2.Runesmith2Code.Cards;
-using Runesmith2.Runesmith2Code.Cards.Uncommon;
+using Runesmith2.Runesmith2Code.Cards.Common;
 
 #endregion
 
@@ -16,7 +16,7 @@ namespace Runesmith2.Runesmith2Code.Models.Runes;
 
 public class IncendiumRune : RuneModel
 {
-    public override decimal PassiveVal { get; set; } = 5;
+    public override decimal PassiveVal { get; set; } = 4;
     public override int ChargeVal { get; set; } = 3;
 
     public override bool UsePotency => true;

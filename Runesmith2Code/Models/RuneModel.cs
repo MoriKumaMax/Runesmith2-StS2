@@ -44,7 +44,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
 
     public virtual bool IsUpgradeable => false;
 
-    public bool Upgraded { get; set; }
+    public bool Upgraded { get; private set; }
 
     public abstract ChargeDepletionType ChargeDepletion { get; }
 
@@ -52,9 +52,9 @@ public abstract class RuneModel : AbstractModel, ICustomModel
 
     public virtual int RemainingCharge => ChargeVal;
 
-    public LocString Title => new(LocTable, Id.Entry + ".title");
+    public LocString Title => Upgraded ? new LocString(LocTable, Id.Entry + ".titleUpgraded") : new LocString(LocTable, Id.Entry + ".title");
 
-    public LocString Description => new(LocTable, Id.Entry + ".description");
+    public LocString Description => Upgraded ? new LocString(LocTable, Id.Entry + ".descriptionUpgraded") : new LocString(LocTable, Id.Entry + ".description");
 
     public bool HasSmartDescription => LocString.Exists(LocTable, SmartDescriptionLocKey);
 

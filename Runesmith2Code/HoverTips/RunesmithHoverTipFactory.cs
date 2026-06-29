@@ -64,9 +64,13 @@ public static class RunesmithHoverTipFactory
         return new LocString("static_hover_tips", entry);
     }
 
-    public static IHoverTip FromRune<T>() where T : RuneModel
+    public static IHoverTip FromRune<T>(bool isUpgraded = false) where T : RuneModel
     {
-        return ModelDb.Get<T>().DumbHoverTip;
+        RuneModel model = ModelDb.Get<T>();
+        if (!isUpgraded) return model.DumbHoverTip;
+        model = model.ToMutable();
+        model.Upgrade();
+        return model.DumbHoverTip;
     }
 
     public static HoverTip CreateRuneHoverTip(RuneModel rune, LocString description)

@@ -1,5 +1,6 @@
 #region
 
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -20,6 +21,7 @@ public class Origo : Runesmith2RecipeCard
         WithVars(new ChargeVar(3));
         WithTip(RunesmithHoverTip.Craft);
         WithRuneTip<OrigoRune>();
+        WithTip(new TooltipSource(c => RunesmithHoverTipFactory.FromRune<OrigoRune>(c.IsUpgraded)));
     }
 
     public override Elements CanonicalElementsCost => new(2, 2, 2);

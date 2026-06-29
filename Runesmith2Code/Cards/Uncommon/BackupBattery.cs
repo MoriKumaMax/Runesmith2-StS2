@@ -1,7 +1,6 @@
 #region
 
 using BaseLib.Extensions;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -13,7 +12,7 @@ using Runesmith2.Runesmith2Code.Structs;
 
 #endregion
 
-namespace Runesmith2.Runesmith2Code.Cards.Common;
+namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
 
 public class BackupBattery : Runesmith2Card
 {
@@ -30,7 +29,6 @@ public class BackupBattery : Runesmith2Card
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
         await RunesmithPlayerCmd.GainElements(new Elements(this), Owner, play);
     }
