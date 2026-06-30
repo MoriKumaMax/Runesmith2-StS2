@@ -68,8 +68,8 @@ public class BallPeenHammer : Runesmith2Relic
         }
         else
         {
-            var intValue = DynamicVars.Cards.IntValue;
-            Status = SkillsPlayedThisTurn % intValue == intValue - 1 ? RelicStatus.Active : RelicStatus.Normal;
+            var threshold = DynamicVars.Cards.IntValue;
+            Status = SkillsPlayedThisTurn % threshold == threshold - 1 ? RelicStatus.Active : RelicStatus.Normal;
         }
 
         InvokeDisplayAmountChanged();

@@ -13,11 +13,11 @@ using Runesmith2.Runesmith2Code.Structs;
 
 #endregion
 
-namespace Runesmith2.Runesmith2Code.Cards.Common;
+namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
 
 public class Magma : Runesmith2RecipeCard
 {
-    public Magma() : base(0, CardType.Skill, CardRarity.Common, TargetType.Self)
+    public Magma() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
         WithVars(new PotencyVar(5).WithUpgrade(2), new ChargeVar(2));
         WithTip(RunesmithHoverTip.Craft);
