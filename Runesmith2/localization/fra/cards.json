@@ -166,7 +166,7 @@
   "RUNESMITH2-STABILIZE.title": "Stabilisation",
   "RUNESMITH2-STATIC_CAGE.description": "Gagnez {Block:diff()} [gold]Armure[/gold].\nMettez {Cards:diff()} carte{Cards:plural:|s} en [gold]Stase[/gold]. ",
   "RUNESMITH2-STATIC_CAGE.title": "Cage de Faraday",
-  "RUNESMITH2-STEAMING_CHISEL.description": "Infligez {Damage:diff()} dégâts.\nGagnez {Block:diff()} [gold]Armure[/gold].\nAppliquez {WeakPower:diff()} [gold]Faiblesse[/gold].\nGagnez {Ignis:rs2Icon()} et {Aqua:rs2Icon()}.",
+  "RUNESMITH2-STEAMING_CHISEL.description": "Infligez {Damage:diff()} dégâts.\nGagnez {Block:diff()} [gold]Armure[/gold].\nAppliquez {WeakPower:diff()} [gold]Affaibli[/gold].\nGagnez {Ignis:rs2Icon()} et {Aqua:rs2Icon()}.",
   "RUNESMITH2-STEAMING_CHISEL.title": "Burin à vapeur",
   "RUNESMITH2-STRIKE_RUNESMITH.description": "Infligez {Damage:diff()} dégâts.",
   "RUNESMITH2-STRIKE_RUNESMITH.title": "Frappe",
