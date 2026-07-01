@@ -1,0 +1,5 @@
+{
+  "RUNESMITH2-TO_ENHANCE": "选择{Amount:plural:一张|[blue]{}[/blue]张牌}[gold]增幅[/gold].",
+  "RUNESMITH2-TO_ENHANCE_AND_UPGRADE": "选择{Amount:plural:一张|[blue]{}[/blue]张牌}  [gold]升级[/gold]并[gold]增幅[/gold]",
+  "RUNESMITH2-TO_STASIS": "选择{Amount:plural:一张牌|[blue]{}[/blue]张牌}施加[gold]凝滞[/gold]"
+}
