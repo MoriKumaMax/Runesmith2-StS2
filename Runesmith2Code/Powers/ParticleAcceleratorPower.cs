@@ -1,7 +1,6 @@
 #region
 
 using BaseLib.Abstracts;
-using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -61,8 +60,5 @@ public class ParticleAcceleratorPower : Runesmith2Power, IModifyCharge, IAfterMo
         ++DynamicVars[TriggerCountKey].BaseValue;
     }
 
-    public string GetSecondAmount()
-    {
-        return DynamicVars[TriggerCountKey].IntValue.ToString();
-    }
+    public string GetSecondAmount() => DynamicVars[TriggerCountKey].IntValue.ToString();
 }

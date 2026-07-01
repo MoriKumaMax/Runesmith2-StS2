@@ -54,6 +54,9 @@ public class GrindstonePower : Runesmith2Power
             return;
         }
         
+        // Skip enhance effect for card played that won't go into your combat piles, only for the last replay.
+        if (!cardPlay.ResultPile.IsCombatPile() && cardPlay.IsLastInSeries) return;
+        
         NCardGrindstoneVfx? vfx = null;
         if (card.IsUpgradable)
         {
@@ -78,7 +81,8 @@ public class GrindstonePower : Runesmith2Power
 
     private static NCardGrindstoneVfx? CreateVfx(CardModel card, CardPlay cardPlay)
     {
-        if (!RunesmithConfig.EnableGrindstoneVfx || cardPlay.ResultPile == PileType.None) return null;
+        // TEMP skip vfx for power since effect plays while card is flying to player
+        if (!RunesmithConfig.EnableGrindstoneVfx || card.Type == CardType.Power) return null;
         var cardNode = NCard.FindOnTable(card);
         return cardNode != null ? NCardGrindstoneVfx.Create(cardNode, card) : null;
     }
