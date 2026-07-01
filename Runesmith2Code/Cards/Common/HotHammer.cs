@@ -17,8 +17,8 @@ public class HotHammer : Runesmith2Card
 {
     public HotHammer() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
     {
-        WithDamage(8, 2);
-        WithVar(new CardsVar(1).WithUpgrade(1));
+        WithDamage(6, 3);
+        WithVar(new CardsVar(2));
         WithVar(new EnhanceByVar(1));
         WithTags(RunesmithTags.Hammer);
     }

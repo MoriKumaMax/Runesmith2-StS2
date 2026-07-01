@@ -56,7 +56,7 @@ public static class RunesmithCardCmd
                     if (cardNode != null) vfx = NCardEnhanceVfx.Create(cardNode);
                     if (vfx != null) _ = TaskHelper.RunSafely(vfx.PlayAnimation());
                 }
-                await RunesmithHook.AfterCardEnhanced(combatState, choiceContext, targetCard, modifiedEnhance);
+                await RunesmithHook.AfterCardEnhanced(combatState, choiceContext, targetCard, cardPlay, modifiedEnhance);
             }
         }
     }
