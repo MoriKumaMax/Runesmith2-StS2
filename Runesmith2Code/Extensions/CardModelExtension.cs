@@ -1,6 +1,9 @@
 ﻿#region
 
+using BaseLib.Abstracts;
+using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.DynamicVars;
@@ -155,9 +158,23 @@ public static class CardModelExtension
             if (cardModel.Type == CardType.Attack) return true;
 
             if (cardModel.GainsBlock) return true;
-
+            
             if (cardModel.HasPotency())
                 return true;
+
+            // Probably not fool-proof but should help cover cases where Block is added as enchantment or card modifier 
+            var cardVarNames = new HashSet<string>([]);
+            if(cardModel.Enchantment != null)
+            {
+                cardVarNames.UnionWith(cardModel.Enchantment.DynamicVars.Values.Where(v => v.BaseValue > 0).Select(v => v.Name));
+            }
+            foreach (var cardModifier in cardModel.GetModifiers())
+            {
+                cardVarNames.UnionWith(cardModifier.DynamicVars.Values.Where(v => v.BaseValue > 0).Select(v => v.Name));
+            }
+            // Consider checking for damage var too?
+            HashSet<string> dynamicVarFilter = [BlockVar.defaultName, CalculatedBlockVar.defaultName];
+            if (cardVarNames.Any(name => dynamicVarFilter.Contains(name))) return true;
 
             return false;
         }

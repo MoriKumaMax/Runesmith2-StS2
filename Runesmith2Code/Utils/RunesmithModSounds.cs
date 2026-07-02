@@ -7,6 +7,7 @@ public static class RunesmithModSounds
 {
     public static readonly ModSound GrindstoneSfx = new("res://Runesmith2/audio/grindstone_sharpen.ogg");
     public static readonly ModSound StasisSfx = new("res://Runesmith2/audio/stasis_another.ogg");
+    public static readonly ModSound StasisUseSfx = new("res://Runesmith2/audio/stasis_use.ogg");
     public static readonly ModSound RuneCraftSfx = new("res://Runesmith2/audio/rune_craft.ogg");
     public static readonly ModSound RuneChargeSfx = new("res://Runesmith2/audio/rune_charge.ogg");
     public static readonly ModSound RunePassiveSfx = new("res://Runesmith2/audio/rune_passive.ogg");
@@ -24,6 +25,11 @@ public static class RunesmithModSounds
     public static void PlayStasisSfx()
     {
         StasisSfx.Play(pitchVariation: 0.05f);
+    }
+    
+    public static void PlayStasisUseSfx()
+    {
+        StasisUseSfx.Play(pitchVariation: 0.05f);
     }
     
     public static void PlayRuneBreakSfx()

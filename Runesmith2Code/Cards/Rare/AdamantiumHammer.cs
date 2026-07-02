@@ -36,7 +36,7 @@ public class AdamantiumHammer : Runesmith2Card, IAfterCardEnhanced
     }
 
 
-    public Task AfterCardEnhanced(PlayerChoiceContext choiceContext, CardModel card, int enhanceAmount)
+    public Task AfterCardEnhanced(PlayerChoiceContext choiceContext, CardModel card, CardPlay? cardPlay, int enhanceAmount)
     {
         if (card.Owner != Owner || enhanceAmount <= 0 || card == this) return Task.CompletedTask;
 

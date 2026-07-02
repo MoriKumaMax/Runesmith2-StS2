@@ -3,11 +3,11 @@
 using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Hooks;
@@ -42,9 +42,11 @@ public class DuctTapePower : Runesmith2Power, IAfterCardEnhanced, IHasSecondAmou
         return Task.CompletedTask;
     }
 
-    public Task AfterCardEnhanced(PlayerChoiceContext choiceContext, CardModel card, int enhanceAmount)
+    public Task AfterCardEnhanced(PlayerChoiceContext choiceContext, CardModel card, CardPlay? cardPlay, int enhanceAmount)
     {
         if (card.Owner != Owner.Player || card.IsStasis() || enhanceAmount <= 0) return Task.CompletedTask;
+        // Skip stasis if it's a card that's enhancing itself and won't go into your combat piles
+        if (cardPlay != null && card == cardPlay.Card && !cardPlay.ResultPile.IsCombatPile()) return Task.CompletedTask;
         var data = GetInternalData<Data>();
         if (data.CardsStasisThisTurn >= Amount) return Task.CompletedTask;
         ++data.CardsStasisThisTurn;
