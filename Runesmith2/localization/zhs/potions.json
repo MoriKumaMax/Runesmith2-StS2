@@ -3,6 +3,6 @@
   "RUNESMITH2-ICE_IN_A_BOTTLE.title": "瓶装寒霜",
   "RUNESMITH2-IRON_SUPPLEMENT.description": "为[blue]1[/blue]张牌[blue][gold]附魔[/gold]{EnhanceBy}[/blue]次",
   "RUNESMITH2-IRON_SUPPLEMENT.title": "钢铁补剂",
-  "RUNESMITH2-RGB_POTION.description": "获得[blue]{Elements}[/blue] {Elements:rs2Icon(0)}",
+  "RUNESMITH2-RGB_POTION.description": "获得[blue]{Elements}[/blue]{Elements:rs2Icon(0)}",
   "RUNESMITH2-RGB_POTION.title": "原色药水"
 }
