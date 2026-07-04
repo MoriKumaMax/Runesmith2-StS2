@@ -70,9 +70,9 @@ public class ElementsIconsFormatter : IFormatter
         if (amount <= 0)
             finalText = iconText;
         else if (formattingInfo.CurrentValue is DynamicVar dynamicVar)
-            finalText = dynamicVar.ToHighlightedString(false) + " " + iconText;
+            finalText = dynamicVar.ToHighlightedString(false) + iconText;
         else
-            finalText = $"{amount} {iconText}";
+            finalText = $"{amount}{iconText}";
 
         formattingInfo.Write(finalText);
 
