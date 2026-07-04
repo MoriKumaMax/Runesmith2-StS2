@@ -1,4 +1,4 @@
 {
-  "RUNESMITH2-FORGED.description": "在战斗开始时, [gold]增幅[/gold]指定卡牌{Amount:plura(en)l:|[blue]{}[/blue]次}",
+  "RUNESMITH2-FORGED.description": "在战斗开始时, [gold]增幅[/gold]指定卡牌{Amount:plura(en):|[blue]{}[/blue]次}",
   "RUNESMITH2-FORGED.title": "淬炼"
 }
